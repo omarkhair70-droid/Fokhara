@@ -5,19 +5,17 @@ export function ObjectMakerBridge({ product }: { product: Product }) {
   return (
     <section className="objectMakerBridge">
       <div>
-        <p className="eyebrow">Object → participation</p>
+        <p className="eyebrow">From object to making</p>
         <h2>Own the form. Or enter the process.</h2>
       </div>
       <div className="objectMakerBridge__copy">
         <p>
-          This finished object belongs to Fokhara’s shop. The studio also teaches
-          the two core making paths it currently offers publicly: handbuilding
-          and wheelthrowing.
+          Take a finished piece home, or move from looking at clay to working
+          with it yourself. Fokhara offers both handbuilding and wheelthrowing
+          workshops.
         </p>
         <p>
-          This bridge does not claim that this exact {product.name} was formed by
-          either method. It gives you a truthful way to move from admiring a
-          ceramic object to working with clay yourself.
+          Choose the process you want to try and start with your own hands.
         </p>
         <div className="objectMakerBridge__actions">
           <TrackedLink
