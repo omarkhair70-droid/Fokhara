@@ -13,6 +13,7 @@ import {
 } from "react";
 import type { Product } from "@/lib/products";
 import { ProductVisual } from "@/components/ProductVisual";
+import type { ProductVisualRole } from "@/lib/visual/image-choreography";
 
 type Rect = { x: number; y: number; width: number; height: number };
 type Phase =
@@ -35,6 +36,7 @@ type CarrySnapshot = {
   destinationRoute: string;
   sourceRect: Rect;
   composition: ProductComposition;
+  sourceVisualRole: ProductVisualRole;
   targetRect?: Rect;
 };
 
@@ -44,7 +46,8 @@ type CarryContextValue = {
     product: Product,
     source: HTMLElement,
     destinationRoute: string,
-    returnState?: Record<string, unknown>
+    returnState?: Record<string, unknown>,
+    sourceVisualRole?: ProductVisualRole
   ) => void;
   registerProductTarget: (productId: string, element: HTMLElement | null) => void;
   isCarrying: (productId: string) => boolean;
@@ -120,7 +123,8 @@ export function CarryProvider({ children }: { children: React.ReactNode }) {
       product: Product,
       source: HTMLElement,
       destinationRoute: string,
-      returnState?: Record<string, unknown>
+      returnState?: Record<string, unknown>,
+      sourceVisualRole: ProductVisualRole = "browse"
     ) => {
       if (returnState) {
         sessionStorage.setItem("fokhara:shop-return", JSON.stringify(returnState));
@@ -132,7 +136,8 @@ export function CarryProvider({ children }: { children: React.ReactNode }) {
         sourceRoute: pathname,
         destinationRoute,
         sourceRect,
-        composition: chooseComposition(product, sourceRect)
+        composition: chooseComposition(product, sourceRect),
+        sourceVisualRole
       };
 
       setSnapshot(next);
@@ -223,8 +228,22 @@ export function CarryProvider({ children }: { children: React.ReactNode }) {
               damping: 24,
               mass: 0.82
             }}
+            data-recomposing={
+              phase === "target-ready" || phase === "recomposing"
+            }
           >
-            <ProductVisual product={snapshot.product} />
+            <div className="carryOverlayVisual">
+              <ProductVisual
+                product={snapshot.product}
+                visualRole={snapshot.sourceVisualRole}
+                className="carryOverlayVisual__source"
+              />
+              <ProductVisual
+                product={snapshot.product}
+                visualRole="detail"
+                className="carryOverlayVisual__destination"
+              />
+            </div>
           </motion.div>
         ) : null}
       </AnimatePresence>

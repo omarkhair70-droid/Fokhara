@@ -3,6 +3,7 @@ import { TrackedLink } from "@/components/TrackedLink";
 import type { Product } from "@/lib/products";
 import { formatEgp } from "@/lib/products";
 import { collectionToSlug } from "@/lib/collections";
+import { ProductVisual } from "@/components/ProductVisual";
 
 export function WorkshopObjectBridge({
   products
@@ -38,15 +39,13 @@ export function WorkshopObjectBridge({
               productSlug: product.slug
             }}
           >
-            {product.image ? (
-              <img
-                src={product.image.src}
-                alt={product.image.alt}
-                loading="lazy"
+            <div className="workshopObjectBridge__visual">
+              <ProductVisual
+                product={product}
+                visualRole="bridge"
+                label
               />
-            ) : (
-              <span className="workshopObjectBridge__imageFallback" />
-            )}
+            </div>
             <div>
               <span>
                 {product.collection

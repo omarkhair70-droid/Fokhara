@@ -2895,3 +2895,146 @@ button {
     transition: none;
   }
 }
+
+
+/* VP5 — IMAGE CHOREOGRAPHY & CROP AUTHORSHIP
+   Crop communicates information priority; it is never a generic effect. */
+.productVisual,
+.workshopVisual {
+  --image-fit: contain;
+  --image-position: 50% 50%;
+  --image-scale: 1;
+  --image-origin: 50% 50%;
+}
+
+.productVisual__image,
+.workshopVisual__image {
+  object-fit: var(--image-fit);
+  object-position: var(--image-position);
+  transform: scale(var(--image-scale));
+  transform-origin: var(--image-origin);
+}
+
+/* Current product shoot: larger object presence in discovery/browse,
+   silhouette preservation at evaluation. */
+.productVisual[data-visual-role="home"] .productVisual__image {
+  transition: transform 520ms cubic-bezier(.2,.65,.25,1);
+}
+
+.productVisual[data-visual-role="detail"] .productVisual__image,
+.productVisual[data-visual-role="cart"] .productVisual__image {
+  background: var(--field-raised);
+}
+
+/* Carry keeps the source crop during lift/navigation, then crossfades to the
+   factual detail crop as the destination geometry resolves. */
+.carryOverlayVisual {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.carryOverlayVisual > .productVisual {
+  position: absolute;
+  inset: 0;
+  min-height: 100%;
+}
+
+.carryOverlayVisual__source {
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 280ms ease;
+}
+
+.carryOverlayVisual__destination {
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 320ms ease;
+}
+
+.carryOverlay[data-recomposing="true"] .carryOverlayVisual__source {
+  opacity: 0;
+}
+
+.carryOverlay[data-recomposing="true"] .carryOverlayVisual__destination {
+  opacity: 1;
+}
+
+/* Collection routes now use ProductVisual too, so the same crop contract
+   governs Shop → Collection → Detail rather than raw <img> exceptions. */
+.collectionIndex__image .productVisual,
+.collectionDetail__lead .productVisual,
+.collectionProduct .carrySource,
+.collectionProduct .productVisual {
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+}
+
+.collectionProduct .carrySource {
+  min-height: 48svh;
+  overflow: hidden;
+}
+
+/* Workshop images use their own factual focus anchors.
+   The image truth attribute documents what the source actually depicts. */
+.workshopVisual__image {
+  transition: transform 420ms cubic-bezier(.2,.65,.25,1);
+}
+
+.workshopVisual[data-image-truth="action"] .workshopVisual__actions,
+.workshopVisual[data-image-truth="process-context"] .workshopVisual__actions {
+  opacity: 1;
+}
+
+.workshopVisual[data-image-truth="outcome"] .workshopVisual__actions,
+.workshopVisual[data-image-truth="human-context"] .workshopVisual__actions {
+  opacity: .82;
+}
+
+/* The workshop→object bridge now follows the same object crop grammar. */
+.workshopObjectBridge__visual {
+  min-height: 24rem;
+  overflow: hidden;
+  background: var(--field-raised);
+}
+
+.workshopObjectBridge__visual .productVisual {
+  min-height: 24rem;
+}
+
+/* Compact mode opens the crop slightly. We recompose rather than merely
+   shrinking desktop framing. */
+@media (max-width: 820px) {
+  .productVisual[data-visual-role="home"] {
+    --image-scale: 1.025 !important;
+  }
+
+  .productVisual[data-visual-role="browse"],
+  .productVisual[data-visual-role="collection"],
+  .productVisual[data-visual-role="bridge"] {
+    --image-scale: 1.01 !important;
+  }
+
+  .productVisual[data-visual-role="detail"] {
+    --image-scale: 1 !important;
+    --image-fit: contain !important;
+  }
+
+  .workshopVisual[data-visual-role="detail"] {
+    --image-scale: 1 !important;
+  }
+
+  .collectionProduct .carrySource {
+    min-height: 46svh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .productVisual__image,
+  .workshopVisual__image,
+  .carryOverlayVisual__source,
+  .carryOverlayVisual__destination {
+    transition: none;
+  }
+}

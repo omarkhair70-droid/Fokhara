@@ -7,7 +7,7 @@ export function HomeMakerEntry({ workshop }: { workshop: Workshop }) {
   return (
     <section className="homeMaker">
       <div className="homeMaker__visual">
-        <WorkshopVisual workshop={workshop} />
+        <WorkshopVisual workshop={workshop} visualRole="home" />
       </div>
       <div className="homeMaker__copy">
         <p className="eyebrow">Become the maker / P1</p>

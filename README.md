@@ -24,7 +24,8 @@ This repository tests a research-led creative workflow where the visual and inte
 - [x] VP2 — Asset Production / Missing Visuals
 - [x] VP3 — Typography Lab
 - [x] VP4 — Material State System
-- [ ] VP5 — Image Choreography & Crop Authorship
+- [x] VP5 — Image Choreography & Crop Authorship
+- [ ] VP6 — Carry / Recompose Visual Refinement
 - [ ] Visual Production
 - [ ] Visual Review + Subtraction
 - [ ] Final Production QA
@@ -185,7 +186,7 @@ Commerce BFF:
 
 ## Next
 
-**VP5 — Image Choreography & Crop Authorship**
+**VP6 — Carry / Recompose Visual Refinement**
 
 The structural system is now the canvas, not the finished artwork.
 
