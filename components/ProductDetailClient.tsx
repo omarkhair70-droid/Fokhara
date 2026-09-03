@@ -62,11 +62,6 @@ export function ProductDetailClient({ product }: { product: Product }) {
         >
           <ProductVisual product={product} visualRole="detail" />
         </div>
-        <p className="prototypeNote">
-          {product.image
-            ? "Current Fokhara product image · live Woo source."
-            : "No current Fokhara product image available · fallback visualization."}
-        </p>
       </div>
 
       <div className="productDetail__info">
@@ -81,7 +76,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
           ) : (
             "Ceramics"
           )}{" "}
-          / evaluate
+          / ceramic
         </p>
         <h1>{product.name}</h1>
         <p className="price">{formatEgp(product.priceEgp)}</p>
@@ -96,8 +91,8 @@ export function ProductDetailClient({ product }: { product: Product }) {
         <div className="purchaseBlock">
           <AddToCartButton product={product} />
           <span>
-            Live Woo cart is enabled for simple purchasable ceramics. Checkout
-            stays gated until payment compatibility is verified.
+            Add the piece to your cart. Online payment is not available on this
+            site yet.
           </span>
         </div>
 
@@ -112,21 +107,27 @@ export function ProductDetailClient({ product }: { product: Product }) {
         <dl className="productFacts">
           <div>
             <dt>Collection</dt>
-            <dd>{product.collection ?? "Not structured in Woo"}</dd>
+            <dd>{product.collection ?? "Ceramics"}</dd>
           </div>
           <div>
             <dt>Form</dt>
             <dd>{product.form}</dd>
           </div>
           <div>
-            <dt>Data</dt>
-            <dd>WooCommerce Store API</dd>
+            <dt>Availability</dt>
+            <dd>
+              {product.stock === "in_stock"
+                ? "Available"
+                : product.stock === "on_backorder"
+                  ? "On backorder"
+                  : "Currently unavailable"}
+            </dd>
           </div>
           <div>
-            <dt>Source</dt>
+            <dt>Original listing</dt>
             <dd>
               <a href={product.sourceUrl} target="_blank" rel="noreferrer">
-                Current Fokhara listing
+                View at Fokhara ↗
               </a>
             </dd>
           </div>
