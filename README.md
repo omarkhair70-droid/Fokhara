@@ -6,7 +6,7 @@ This repository is being used to test a research-led creative workflow where the
 
 ## Current Status
 
-**First authored Visual Thesis survived Web Reality Check. Product Architecture is next.**
+**Product Architecture closed. Original Synthesis / Implementation Blueprint is next.**
 
 - [x] Step 01 — Product Truth
 - [x] Step 02 — Non-Web Source Research / Source Atlas
@@ -14,8 +14,8 @@ This repository is being used to test a research-led creative workflow where the
 - [x] Step 04 — Digital Translation
 - [x] Step 05 — First Visual Thesis
 - [x] Step 06 — Web Reality Check
-- [ ] Step 07 — Product Architecture
-- [ ] Original Synthesis
+- [x] Step 07 — Product Architecture
+- [ ] Step 08 — Original Synthesis / Implementation Blueprint
 - [ ] Prototype / Implementation
 - [ ] Visual Review + Subtraction
 
@@ -35,29 +35,42 @@ The Web Reality Check was used to challenge originality and establish the implem
 - [Step 04 — Digital Translation](docs/research/04-digital-translation.md)
 - [Step 05 — First Visual Thesis](docs/research/05-first-visual-thesis.md)
 - [Step 06 — Web Reality Check](docs/research/06-web-reality-check.md)
+- [Step 07 — Product Architecture](docs/research/07-product-architecture.md)
 
 ## First Visual Thesis
 
 ### Internal Name
 **THE FORM REMEMBERS**
 
-## Refined Thesis After Web Reality Check
+## Refined Thesis
 
 > **A digital material system where actions leave trace, selected objects causally reform later states, people can cross from observer to maker, and the interface settles from expressive exploration into precise commitment.**
 
-## What the Reality Check Demoted
+## Product Architecture
 
-These remain useful craft, but are not signatures:
+Fokhara is treated as two first-class product systems:
 
-- mineral / neutral fields
-- oversized typography
-- editorial asymmetry
-- large material photography
-- generic scroll storytelling
-- product-driven color shifts
-- ambient premium motion
+### OWN
+**discover → evaluate → buy → use**
 
-## Current Signature System
+### MAKE
+**discover → choose → commit → participate → learn**
+
+Primary routes:
+
+- Home
+- Shop
+- Collection
+- Product Detail
+- Workshops
+- Workshop Detail
+- Booking
+- Studio
+- Visit
+- Cart
+- Checkout
+
+## Signature System
 
 ### 1. CARRY + RECOMPOSE
 The selected object persists and determines the next composition.
@@ -71,30 +84,29 @@ Workshops transform the user from observer to participant.
 ### 4. SETTLE WITH INTENT
 Expression contracts as the user approaches booking, cart, and checkout.
 
-## Current Visual / Digital Grammar
+## Current Business-Truth Guardrail
 
-- **Visual field:** quiet mineral base
-- **Composition:** weighted object mass + structured asymmetry
-- **Spatial rhythm:** open → pressure → release → re-form
-- **Imagery:** material → object → life
-- **Typography:** physical scale as counterweight, not ornament
-- **Motion:** finite, weighted, causal
-- **Interaction:** cause leaves consequence
-- **Navigation:** stable center
-- **Transitions:** carry, do not erase
-- **Color:** real material-derived state, not theme paint
-- **Commerce:** expression decreases as commitment increases
-- **Mobile:** recompose, never merely shrink
-- **3D/WebGL:** not required to prove thesis v1
+The redesign must not imply real-time workshop availability unless a real scheduling source is connected.
 
-## First Prototype Target
+Booking architecture therefore supports explicit availability modes such as:
 
-**Home object state → Shop focus → Product Detail via Carry + Recompose → return with retained context**
+- live
+- request
+- next available
+- contact
 
-The prototype must prove causal continuity, not merely show a beautiful transition.
+rather than visually faking a live calendar.
+
+## First Build Slice
+
+**Home object entry → Shop → Product Detail via Carry + Recompose → return with retained state → mobile + reduced-motion equivalents**
+
+Then:
+
+**Workshops → Workshop Detail → truthful booking commitment flow**
 
 ## Next Stage
 
-**Step 07 — Product Architecture**
+**Step 08 — Original Synthesis / Implementation Blueprint**
 
-Define the route, content, commerce, workshop, booking, and support system so the signature behaviors are structural rather than decorative.
+Translate the thesis and architecture into concrete technical structure, components, state contracts, transition architecture, responsive modes, and prototype acceptance gates.
