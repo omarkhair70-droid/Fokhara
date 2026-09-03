@@ -25,7 +25,8 @@ This repository tests a research-led creative workflow where the visual and inte
 - [x] VP3 — Typography Lab
 - [x] VP4 — Material State System
 - [x] VP5 — Image Choreography & Crop Authorship
-- [ ] VP6 — Carry / Recompose Visual Refinement
+- [x] VP6 — Carry / Recompose Visual Refinement
+- [ ] VP7 — Motion Physics & Interaction Restraint
 - [ ] Visual Production
 - [ ] Visual Review + Subtraction
 - [ ] Final Production QA
@@ -186,7 +187,7 @@ Commerce BFF:
 
 ## Next
 
-**VP6 — Carry / Recompose Visual Refinement**
+**VP7 — Motion Physics & Interaction Restraint**
 
 The structural system is now the canvas, not the finished artwork.
 
