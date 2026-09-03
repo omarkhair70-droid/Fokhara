@@ -105,14 +105,24 @@ for (const profile of profiles) {
         )
         .catch(() => {});
 
+      // Let client-only states such as Cart hydrate before visual evidence.
+      await page
+        .waitForFunction(
+          () => !document.body.innerText.includes("Loading your cart"),
+          undefined,
+          { timeout: 10_000 }
+        )
+        .catch(() => {});
+
+      // First-fold media only.
       await page
         .waitForFunction(
           () =>
-            Array.from(document.images).every(
-              (image) => image.complete && image.naturalWidth > 0
-            ),
+            Array.from(document.images)
+              .filter((image) => image.getBoundingClientRect().top < window.innerHeight * 1.2)
+              .every((image) => image.complete && image.naturalWidth > 0),
           undefined,
-          { timeout: 18_000 }
+          { timeout: 12_000 }
         )
         .catch(() => {});
 
@@ -149,6 +159,39 @@ for (const profile of profiles) {
         fullPage: false,
         animations: "disabled"
       });
+
+      // Sweep through the document so native lazy-loaded images actually enter
+      // the viewport before the full-page evidence is recorded.
+      await page.evaluate(async () => {
+        const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+        const maxY = Math.max(
+          document.documentElement.scrollHeight,
+          document.body?.scrollHeight || 0
+        );
+        const step = Math.max(320, Math.round(window.innerHeight * 0.72));
+
+        for (let y = 0; y < maxY; y += step) {
+          window.scrollTo(0, y);
+          await sleep(120);
+        }
+
+        window.scrollTo(0, maxY);
+        await sleep(500);
+      });
+
+      await page
+        .waitForFunction(
+          () =>
+            Array.from(document.images).every(
+              (image) => image.complete && image.naturalWidth > 0
+            ),
+          undefined,
+          { timeout: 20_000 }
+        )
+        .catch(() => {});
+
+      await page.evaluate(() => window.scrollTo(0, 0));
+      await page.waitForTimeout(500);
 
       await page.screenshot({
         path: fullPath,
