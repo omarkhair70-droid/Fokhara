@@ -120,8 +120,7 @@ export function CarryProvider({ children }: { children: React.ReactNode }) {
     if (pathname !== snapshot.destinationRoute) return;
 
     if (reducedMotion) {
-      setPhase("settled");
-      cleanupTimer.current = window.setTimeout(() => clearCarry(), 140);
+      clearCarry();
       return;
     }
 
@@ -187,8 +186,7 @@ export function CarryProvider({ children }: { children: React.ReactNode }) {
       targetRef.current = element;
 
       if (reducedMotion) {
-        setPhase("settled");
-        cleanupTimer.current = window.setTimeout(() => clearCarry(), 120);
+        clearCarry();
         return;
       }
 
