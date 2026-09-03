@@ -256,12 +256,47 @@ export async function getCeramicProducts(): Promise<ProductResult<Product[]>> {
       );
     }
 
+    if (process.env.VERCEL_ENV === "preview") {
+      console.info(
+        "[fokhara-commerce]",
+        JSON.stringify({
+          source: "live",
+          totalProducts: normalized.length,
+          ceramicProducts: ceramics.length,
+          categorySlugs: Array.from(
+            new Set(ceramics.flatMap((product) => product.categorySlugs ?? []))
+          ),
+          tagSlugs: Array.from(
+            new Set(ceramics.flatMap((product) => product.tagSlugs ?? []))
+          ),
+          collections: ceramics.map((product) => ({
+            slug: product.slug,
+            collection: product.collection ?? null,
+            source: product.collectionSource ?? null,
+            stock: product.stock,
+            priceEgp: product.priceEgp,
+            hasImage: Boolean(product.image)
+          }))
+        })
+      );
+    }
+
     return { data: ceramics, source: "live" };
   } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Unknown Store API error";
+
+    if (process.env.VERCEL_ENV === "preview") {
+      console.warn("[fokhara-commerce]", JSON.stringify({
+        source: "fixture",
+        error: message
+      }));
+    }
+
     return {
       data: fallbackProducts,
       source: "fixture",
-      error: error instanceof Error ? error.message : "Unknown Store API error"
+      error: message
     };
   }
 }
