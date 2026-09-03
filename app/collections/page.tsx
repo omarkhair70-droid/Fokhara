@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { getCeramicProducts } from "@/lib/commerce/woo";
 import { formatEgp } from "@/lib/products";
 import { groupProductsByCollection } from "@/lib/collections";
@@ -8,6 +7,7 @@ import {
   materialStateForCollection
 } from "@/lib/visual/material-state";
 import { ProductVisual } from "@/components/ProductVisual";
+import { CollectionMemoryLink } from "@/components/CollectionMemoryLink";
 
 export const metadata: Metadata = {
   title: "Collections",
@@ -49,15 +49,20 @@ export default async function CollectionsPage() {
             index === 0 ? "anchor" : index % 3 === 0 ? "release" : "scan";
 
           return (
-            <Link
+            <CollectionMemoryLink
               href={"/collections/" + collection.slug}
+              collectionSlug={collection.slug}
               className="collectionIndex__item"
               key={collection.slug}
-              data-material={material.id}
-              data-reflectivity={material.reflectivity}
-              data-rhythm={rhythm}
               style={materialStateCssVars(collection.name)}
             >
+              <span
+                className="collectionIndex__state"
+                data-material={material.id}
+                data-reflectivity={material.reflectivity}
+                data-rhythm={rhythm}
+                aria-hidden="true"
+              />
               <span className="collectionIndex__number">
                 {String(index + 1).padStart(2, "0")}
               </span>
@@ -89,7 +94,7 @@ export default async function CollectionsPage() {
                   </div>
                 </dl>
               </div>
-            </Link>
+            </CollectionMemoryLink>
           );
         })}
       </div>
