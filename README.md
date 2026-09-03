@@ -2,27 +2,30 @@
 
 An experimental redesign project for **Fokhara Studio & Shop**.
 
-This repository is being used to test a research-led creative workflow where the visual and interaction language is derived first from the **real product, material, craft, culture, physical processes, and meaning** — and only later checked against the current web craft landscape.
+This repository is being used to test a research-led creative workflow where the visual and interaction language is derived first from the **real product, material, craft, culture, physical processes, and meaning** — and only afterward checked against the current web craft landscape.
 
 ## Current Status
 
-**Digital grammar translated. First Visual Thesis has not started.**
+**First authored Visual Thesis complete. Ready for Web Reality Check.**
 
 - [x] Step 01 — Product Truth
 - [x] Step 02 — Non-Web Source Research / Source Atlas
 - [x] Step 03 — Meaning Extraction
 - [x] Step 04 — Digital Translation
-- [ ] Step 05 — First Visual Thesis
-- [ ] Product Architecture
+- [x] Step 05 — First Visual Thesis
 - [ ] Web Reality Check
+- [ ] Product Architecture
 - [ ] Original Synthesis
+- [ ] Prototype / Implementation
 - [ ] Visual Review + Subtraction
 
 ## Core Rule
 
 > The web is the medium of execution, not the source of the idea.
 
-Award websites, design galleries, Godly, Awwwards, SiteInspire, and similar web-design references remain excluded from creative sourcing until the first authored Visual Thesis exists.
+The first authored visual world was completed before consulting award-site references.
+
+Web references may now be used only to challenge, validate, and improve implementation — not to replace the project's source thesis.
 
 ## Research Foundation
 
@@ -30,10 +33,16 @@ Award websites, design galleries, Godly, Awwwards, SiteInspire, and similar web-
 - [Step 02 — Non-Web Source Atlas](docs/research/02-non-web-source-atlas.md)
 - [Step 03 — Meaning Extraction](docs/research/03-meaning-extraction.md)
 - [Step 04 — Digital Translation](docs/research/04-digital-translation.md)
+- [Step 05 — First Visual Thesis](docs/research/05-first-visual-thesis.md)
 
-## Working Creative Thesis — Not Website Copy
+## First Visual Thesis
 
-> **Fokhara is a choreography of becoming: matter takes memory under pressure, crosses thresholds through time, and carries the trace of making into everyday life.**
+### Internal Name
+**THE FORM REMEMBERS**
+
+### Thesis
+
+> **A quiet mineral interface in which real objects carry memory between states, compositions hold controlled pressure around a stable center, and color appears as evidence of material transformation rather than decoration.**
 
 ## Active Meaning System
 
@@ -44,24 +53,33 @@ Award websites, design galleries, Godly, Awwwards, SiteInspire, and similar web-
 5. **Material Agency**
 6. **Craft Enters Life**
 
-## Current Digital Grammar
+## Current Visual / Digital Grammar
 
-- **Space:** wide fields + concentrated pressure points
-- **Grid:** stable underlying system, visibly challenged but rarely broken
-- **Typography:** calm authority with moments of physical scale
-- **Imagery:** object + process + human use
-- **Motion:** state change with weight, resistance, and settling
-- **Interaction:** cause should leave consequence
+- **Visual field:** quiet mineral base
+- **Composition:** weighted object mass + structured asymmetry
+- **Spatial rhythm:** open → pressure → release → re-form
+- **Imagery:** material → object → life
+- **Typography:** physical scale as counterweight, not ornament
+- **Motion:** finite, weighted, causal
+- **Interaction:** cause leaves consequence
 - **Navigation:** stable center
 - **Transitions:** carry, do not erase
-- **Commerce:** direct and product-clear
+- **Color:** material event, not theme paint
+- **Commerce:** expression decreases as commitment increases
 - **Mobile:** recompose, never merely shrink
+- **3D/WebGL:** not required to prove thesis v1
+
+## First Prototype Target
+
+**Home object state → Shop focus → Product Detail via Carry → return with retained context**
+
+The first prototype should prove the thesis in one complete product loop before the entire site is built.
 
 ## Project Principle
 
 Nothing in this repository should become a visual motif merely because it “looks like pottery.”
 
-Every major aesthetic or interaction decision should eventually be traceable back to:
+Every major aesthetic or interaction decision should be traceable back to:
 
 1. product truth,
 2. material behavior,
@@ -69,20 +87,19 @@ Every major aesthetic or interaction decision should eventually be traceable bac
 4. cultural or historical evidence,
 5. extracted meaning,
 6. digital translation,
-7. or a deliberate product/usability requirement.
+7. authored visual thesis,
+8. or a deliberate product/usability requirement.
 
-## Current Guardrail
+## Next Stage
 
-No final decision has yet been made for:
+**Web Reality Check**
 
-- palette,
-- typefaces,
-- homepage composition,
-- exact grid,
-- final navigation model,
-- WebGL / 3D,
-- exact page transitions,
-- photography direction,
-- or final visual motifs.
+The job of web-reference research is now to:
 
-The next stage is **Step 05 — First Visual Thesis**: combine the digital grammar into the first coherent authored design world before looking at award-site references.
+- challenge originality,
+- find implementation precedents,
+- expose generic ideas,
+- establish usability/performance expectations,
+- and identify where the authored thesis can be pushed further.
+
+It is not allowed to redefine Fokhara by copying the visual language of award-winning sites.
