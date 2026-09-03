@@ -195,6 +195,10 @@ for (const profile of profiles) {
     );
 
     const trigger = page.getByRole("button", { name: "Carry this object" });
+    await trigger.evaluate((element) => {
+      element.scrollIntoView({ block: "center", inline: "center" });
+    });
+    await page.waitForTimeout(120);
     await trigger.click();
 
     await page.waitForTimeout(300);
