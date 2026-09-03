@@ -11,7 +11,10 @@ type EvidenceFrame = {
 };
 
 export async function StudioEvidence() {
-  const visualWorkshops = await withWorkshopMediaList(workshops);
+  const evidenceWorkshops = workshops.filter((workshop) =>
+    ["wheelthrowing", "short-course", "make-paint"].includes(workshop.id)
+  );
+  const visualWorkshops = await withWorkshopMediaList(evidenceWorkshops);
 
   const frames: EvidenceFrame[] = [
     {
@@ -30,7 +33,7 @@ export async function StudioEvidence() {
         label: workshop.name,
         note: workshop.process.join(" / ")
       }))
-  ].slice(0, 6);
+  ];
 
   return (
     <section className="studioEvidence studioEvidence--contact">
