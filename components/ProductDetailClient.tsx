@@ -1,15 +1,37 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import type { Product } from "@/lib/products";
 import { formatEgp } from "@/lib/products";
 import { ProductVisual } from "@/components/ProductVisual";
-import { useCarry } from "@/features/carry/CarryProvider";
+import {
+  type ProductComposition,
+  useCarry
+} from "@/features/carry/CarryProvider";
+
+function directEntryComposition(product: Product): ProductComposition {
+  if (product.form === "mug") return "mass-right";
+  if (product.form === "espresso") return "vertical-pressure";
+  return "mass-left";
+}
 
 export function ProductDetailClient({ product }: { product: Product }) {
   const targetRef = useRef<HTMLDivElement>(null);
-  const { registerProductTarget, isCarrying } = useCarry();
+  const {
+    registerProductTarget,
+    isCarrying,
+    getProductComposition
+  } = useCarry();
+
+  // Freeze the entry composition for this detail mount. Carry state may clear
+  // after the transition settles, but the page must not jump afterward.
+  const [composition] = useState<ProductComposition>(
+    () =>
+      getProductComposition(product.id) ??
+      directEntryComposition(product)
+  );
+
   const carrying = isCarrying(product.id);
 
   useEffect(() => {
@@ -20,6 +42,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
   return (
     <article
       className="productDetail"
+      data-composition={composition}
       style={
         {
           "--material-accent": product.accent,
@@ -80,6 +103,10 @@ export function ProductDetailClient({ product }: { product: Product }) {
           <div>
             <dt>Form</dt>
             <dd>{product.form}</dd>
+          </div>
+          <div>
+            <dt>Entry composition</dt>
+            <dd>{composition}</dd>
           </div>
           <div>
             <dt>Source</dt>
