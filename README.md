@@ -6,15 +6,15 @@ This repository is being used to test a research-led creative workflow where the
 
 ## Current Status
 
-**First authored Visual Thesis complete. Ready for Web Reality Check.**
+**First authored Visual Thesis survived Web Reality Check. Product Architecture is next.**
 
 - [x] Step 01 — Product Truth
 - [x] Step 02 — Non-Web Source Research / Source Atlas
 - [x] Step 03 — Meaning Extraction
 - [x] Step 04 — Digital Translation
 - [x] Step 05 — First Visual Thesis
-- [ ] Web Reality Check
-- [ ] Product Architecture
+- [x] Step 06 — Web Reality Check
+- [ ] Step 07 — Product Architecture
 - [ ] Original Synthesis
 - [ ] Prototype / Implementation
 - [ ] Visual Review + Subtraction
@@ -25,7 +25,7 @@ This repository is being used to test a research-led creative workflow where the
 
 The first authored visual world was completed before consulting award-site references.
 
-Web references may now be used only to challenge, validate, and improve implementation — not to replace the project's source thesis.
+The Web Reality Check was used to challenge originality and establish the implementation quality bar, not to replace the thesis.
 
 ## Research Foundation
 
@@ -34,24 +34,42 @@ Web references may now be used only to challenge, validate, and improve implemen
 - [Step 03 — Meaning Extraction](docs/research/03-meaning-extraction.md)
 - [Step 04 — Digital Translation](docs/research/04-digital-translation.md)
 - [Step 05 — First Visual Thesis](docs/research/05-first-visual-thesis.md)
+- [Step 06 — Web Reality Check](docs/research/06-web-reality-check.md)
 
 ## First Visual Thesis
 
 ### Internal Name
 **THE FORM REMEMBERS**
 
-### Thesis
+## Refined Thesis After Web Reality Check
 
-> **A quiet mineral interface in which real objects carry memory between states, compositions hold controlled pressure around a stable center, and color appears as evidence of material transformation rather than decoration.**
+> **A digital material system where actions leave trace, selected objects causally reform later states, people can cross from observer to maker, and the interface settles from expressive exploration into precise commitment.**
 
-## Active Meaning System
+## What the Reality Check Demoted
 
-1. **Becoming**
-2. **Retained Trace**
-3. **Centered Tension**
-4. **Time Is Material**
-5. **Material Agency**
-6. **Craft Enters Life**
+These remain useful craft, but are not signatures:
+
+- mineral / neutral fields
+- oversized typography
+- editorial asymmetry
+- large material photography
+- generic scroll storytelling
+- product-driven color shifts
+- ambient premium motion
+
+## Current Signature System
+
+### 1. CARRY + RECOMPOSE
+The selected object persists and determines the next composition.
+
+### 2. TRACE
+Prior interaction leaves a subtle, causal state.
+
+### 3. BECOME THE MAKER
+Workshops transform the user from observer to participant.
+
+### 4. SETTLE WITH INTENT
+Expression contracts as the user approaches booking, cart, and checkout.
 
 ## Current Visual / Digital Grammar
 
@@ -64,42 +82,19 @@ Web references may now be used only to challenge, validate, and improve implemen
 - **Interaction:** cause leaves consequence
 - **Navigation:** stable center
 - **Transitions:** carry, do not erase
-- **Color:** material event, not theme paint
+- **Color:** real material-derived state, not theme paint
 - **Commerce:** expression decreases as commitment increases
 - **Mobile:** recompose, never merely shrink
 - **3D/WebGL:** not required to prove thesis v1
 
 ## First Prototype Target
 
-**Home object state → Shop focus → Product Detail via Carry → return with retained context**
+**Home object state → Shop focus → Product Detail via Carry + Recompose → return with retained context**
 
-The first prototype should prove the thesis in one complete product loop before the entire site is built.
-
-## Project Principle
-
-Nothing in this repository should become a visual motif merely because it “looks like pottery.”
-
-Every major aesthetic or interaction decision should be traceable back to:
-
-1. product truth,
-2. material behavior,
-3. craft process,
-4. cultural or historical evidence,
-5. extracted meaning,
-6. digital translation,
-7. authored visual thesis,
-8. or a deliberate product/usability requirement.
+The prototype must prove causal continuity, not merely show a beautiful transition.
 
 ## Next Stage
 
-**Web Reality Check**
+**Step 07 — Product Architecture**
 
-The job of web-reference research is now to:
-
-- challenge originality,
-- find implementation precedents,
-- expose generic ideas,
-- establish usability/performance expectations,
-- and identify where the authored thesis can be pushed further.
-
-It is not allowed to redefine Fokhara by copying the visual language of award-winning sites.
+Define the route, content, commerce, workshop, booking, and support system so the signature behaviors are structural rather than decorative.
