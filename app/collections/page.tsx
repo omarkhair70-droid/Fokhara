@@ -55,14 +55,10 @@ export default async function CollectionsPage() {
               className="collectionIndex__item"
               key={collection.slug}
               style={materialStateCssVars(collection.name)}
+              materialId={material.id}
+              reflectivity={material.reflectivity}
+              rhythm={rhythm}
             >
-              <span
-                className="collectionIndex__state"
-                data-material={material.id}
-                data-reflectivity={material.reflectivity}
-                data-rhythm={rhythm}
-                aria-hidden="true"
-              />
               <span className="collectionIndex__number">
                 {String(index + 1).padStart(2, "0")}
               </span>
