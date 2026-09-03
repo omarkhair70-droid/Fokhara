@@ -89,6 +89,7 @@
 .axis {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
+  pointer-events: none;
   gap: .7rem;
   align-items: center;
   color: var(--ink-muted);
