@@ -24,11 +24,17 @@ type Phase =
   | "settled"
   | "cancelled";
 
+export type ProductComposition =
+  | "mass-left"
+  | "mass-right"
+  | "vertical-pressure";
+
 type CarrySnapshot = {
   product: Product;
   sourceRoute: string;
   destinationRoute: string;
   sourceRect: Rect;
+  composition: ProductComposition;
   targetRect?: Rect;
 };
 
@@ -42,6 +48,7 @@ type CarryContextValue = {
   ) => void;
   registerProductTarget: (productId: string, element: HTMLElement | null) => void;
   isCarrying: (productId: string) => boolean;
+  getProductComposition: (productId: string) => ProductComposition | null;
 };
 
 const CarryContext = createContext<CarryContextValue | null>(null);
@@ -49,6 +56,24 @@ const CarryContext = createContext<CarryContextValue | null>(null);
 const rectOf = (element: HTMLElement): Rect => {
   const rect = element.getBoundingClientRect();
   return { x: rect.x, y: rect.y, width: rect.width, height: rect.height };
+};
+
+const chooseComposition = (
+  product: Product,
+  sourceRect: Rect
+): ProductComposition => {
+  if (window.innerWidth <= 820) return "vertical-pressure";
+
+  const sourceCenter = sourceRect.x + sourceRect.width / 2;
+  const ratio = sourceCenter / window.innerWidth;
+
+  if (ratio < 0.38) return "mass-left";
+  if (ratio > 0.62) return "mass-right";
+
+  // Center-band selections intentionally become a more compressed,
+  // vertically resolved detail state. Product form only breaks near ties.
+  if (product.form === "mug" && ratio >= 0.5) return "mass-right";
+  return "vertical-pressure";
 };
 
 export function CarryProvider({ children }: { children: React.ReactNode }) {
@@ -101,11 +126,13 @@ export function CarryProvider({ children }: { children: React.ReactNode }) {
         sessionStorage.setItem("fokhara:shop-return", JSON.stringify(returnState));
       }
 
+      const sourceRect = rectOf(source);
       const next: CarrySnapshot = {
         product,
         sourceRoute: pathname,
         destinationRoute,
-        sourceRect: rectOf(source)
+        sourceRect,
+        composition: chooseComposition(product, sourceRect)
       };
 
       setSnapshot(next);
@@ -154,7 +181,9 @@ export function CarryProvider({ children }: { children: React.ReactNode }) {
       beginProductCarry,
       registerProductTarget,
       isCarrying: (productId: string) =>
-        Boolean(snapshot && snapshot.product.id === productId && phase !== "idle")
+        Boolean(snapshot && snapshot.product.id === productId && phase !== "idle"),
+      getProductComposition: (productId: string) =>
+        snapshot?.product.id === productId ? snapshot.composition : null
     }),
     [phase, beginProductCarry, registerProductTarget, snapshot]
   );
