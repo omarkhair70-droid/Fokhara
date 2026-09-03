@@ -26,7 +26,8 @@ This repository tests a research-led creative workflow where the visual and inte
 - [x] VP4 — Material State System
 - [x] VP5 — Image Choreography & Crop Authorship
 - [x] VP6 — Carry / Recompose Visual Refinement
-- [ ] VP7 — Motion Physics & Interaction Restraint
+- [x] VP7 — Motion Physics & Interaction Restraint
+- [ ] VP8 — Page Pacing & Compositional Rhythm
 - [ ] Visual Production
 - [ ] Visual Review + Subtraction
 - [ ] Final Production QA
@@ -187,7 +188,7 @@ Commerce BFF:
 
 ## Next
 
-**VP7 — Motion Physics & Interaction Restraint**
+**VP8 — Page Pacing & Compositional Rhythm**
 
 The structural system is now the canvas, not the finished artwork.
 

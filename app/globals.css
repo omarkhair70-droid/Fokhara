@@ -22,6 +22,16 @@
   --type-display-weight: 500;
   --type-text-weight: 400;
   --type-utility-weight: 600;
+
+  /* VP7 — semantic motion budget */
+  --motion-utility-fast: 100ms;
+  --motion-utility: 160ms;
+  --motion-composition: 320ms;
+  --motion-carry-out: 240ms;
+  --motion-carry-in: 280ms;
+  --motion-carry-trace: 180ms;
+  --ease-utility: cubic-bezier(.2, 0, 0, 1);
+  --ease-settle: cubic-bezier(.2, .65, .25, 1);
 }
 
 * {
@@ -366,7 +376,6 @@ button.buttonPrimary:disabled {
 .shopSection {
   padding: clamp(3rem, 7vw, 7rem) clamp(1rem, 3vw, 3rem) var(--space-field);
   opacity: .86;
-  transition: opacity 180ms ease;
 }
 
 .shopSection[data-ready="true"] {
@@ -489,7 +498,15 @@ button.buttonPrimary:disabled {
 .carryTarget {
   width: 100%;
   height: 100%;
-  transition: opacity 100ms linear;
+}
+
+.carrySource {
+  /* Source suppression is immediate so the lift clone never doubles it. */
+  transition: none;
+}
+
+.carryTarget {
+  transition: opacity var(--motion-utility-fast) linear;
 }
 
 .carrySource[data-carrying="true"],
@@ -2732,7 +2749,9 @@ button {
       ),
       transparent 32rem
     );
-  transition: background 420ms ease;
+  transition:
+    opacity var(--motion-utility) var(--ease-utility),
+    background var(--motion-composition) var(--ease-settle);
 }
 
 .shopSection[data-material-filter="neutral"] {
@@ -2916,10 +2935,8 @@ button {
 }
 
 /* Current product shoot: larger object presence in discovery/browse,
-   silhouette preservation at evaluation. */
-.productVisual[data-visual-role="home"] .productVisual__image {
-  transition: transform 520ms cubic-bezier(.2,.65,.25,1);
-}
+   silhouette preservation at evaluation. Crop roles are static per rendered
+   element, so no inert transform animation is attached here. */
 
 .productVisual[data-visual-role="detail"] .productVisual__image,
 .productVisual[data-visual-role="cart"] .productVisual__image {
@@ -2943,13 +2960,13 @@ button {
 .carryOverlayVisual__source {
   z-index: 2;
   opacity: 1;
-  transition: opacity 280ms ease;
+  transition: opacity var(--motion-carry-out) var(--ease-utility);
 }
 
 .carryOverlayVisual__destination {
   z-index: 1;
   opacity: 0;
-  transition: opacity 320ms ease;
+  transition: opacity var(--motion-carry-in) var(--ease-settle);
 }
 
 .carryOverlay[data-recomposing="true"] .carryOverlayVisual__source {
@@ -2976,11 +2993,8 @@ button {
   overflow: hidden;
 }
 
-/* Workshop images use their own factual focus anchors.
-   The image truth attribute documents what the source actually depicts. */
-.workshopVisual__image {
-  transition: transform 420ms cubic-bezier(.2,.65,.25,1);
-}
+/* Workshop images use factual focus anchors. Their crop role is static per
+   rendered element, so no decorative transform transition is needed. */
 
 .workshopVisual[data-image-truth="action"] .workshopVisual__actions,
 .workshopVisual[data-image-truth="process-context"] .workshopVisual__actions {
@@ -3067,7 +3081,7 @@ button {
     var(--material-clay)
   );
   opacity: .44;
-  transition: opacity 220ms ease;
+  transition: opacity var(--motion-carry-trace) var(--ease-utility);
 }
 
 .carryOverlay[data-phase="captured"],
