@@ -5,9 +5,14 @@ import { usePathname } from "next/navigation";
 
 function intentForPath(pathname: string) {
   if (pathname === "/") return "discovery";
-  if (pathname === "/shop") return "browse";
-  if (pathname.startsWith("/shop/")) return "evaluate";
-  if (pathname === "/cart") return "commit";
+  if (pathname === "/shop" || pathname === "/workshops") return "browse";
+  if (
+    pathname.startsWith("/shop/") ||
+    pathname.startsWith("/workshops/")
+  ) {
+    return "evaluate";
+  }
+  if (pathname.startsWith("/book/") || pathname === "/cart") return "commit";
   if (pathname === "/checkout") return "transaction";
   return "browse";
 }
@@ -27,7 +32,15 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <Link data-active={pathname.startsWith("/shop")} href="/shop">
             Shop
           </Link>
-          <span className="navMuted" aria-disabled="true">Workshops</span>
+          <Link
+            data-active={
+              pathname.startsWith("/workshops") ||
+              pathname.startsWith("/book/")
+            }
+            href="/workshops"
+          >
+            Workshops
+          </Link>
           <span className="navMuted" aria-disabled="true">Studio</span>
           <span className="navMuted" aria-disabled="true">Visit</span>
         </nav>

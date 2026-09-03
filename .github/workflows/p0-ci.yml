@@ -1,9 +1,10 @@
-name: P0 CI
+name: Prototype CI
 
 on:
   push:
     branches:
       - prototype/p0-carry-recompose
+      - prototype/p1-become-maker
   pull_request:
     branches:
       - main
