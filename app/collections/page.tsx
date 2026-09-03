@@ -23,19 +23,18 @@ export default async function CollectionsPage() {
   return (
     <section className="collectionsPage">
       <header className="collectionsHero">
-        <p className="eyebrow">Object system / material states</p>
+        <p className="eyebrow">Collections / fired surfaces</p>
         <h1>One form system. Different fired surfaces.</h1>
         <p>
-          Fokhara’s current Woo catalog does not store collection identity as a
-          formal taxonomy, so P2 derives these groups from live product names
-          and keeps that compatibility rule isolated.
+          The same functional forms shift character through glaze, oxide,
+          depth and exposed clay. Browse the current collections by surface.
         </p>
       </header>
 
       {result.source === "fixture" ? (
         <div className="dataFallback" role="status">
-          Live catalog unavailable. Collection groups are being shown from the
-          curated fallback set.
+          The current shop is temporarily unavailable. Showing a saved
+          collection selection.
         </div>
       ) : null}
 
@@ -72,7 +71,7 @@ export default async function CollectionsPage() {
                 ) : null}
               </div>
               <div className="collectionIndex__copy">
-                <p className="eyebrow">Material state</p>
+                <p className="eyebrow">Fired surface</p>
                 <h2>{collection.name}</h2>
                 <span className="materialTrace" aria-hidden="true" />
                 <dl>
