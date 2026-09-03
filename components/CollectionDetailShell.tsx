@@ -89,7 +89,6 @@ export function CollectionDetailShell({
       data-inherited={inherited}
       style={style}
     >
-      <span className="collectionArrivalTrace" aria-hidden="true" />
       {children}
     </article>
   );
