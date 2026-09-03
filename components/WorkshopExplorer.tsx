@@ -115,7 +115,7 @@ export function WorkshopExplorer({ workshops }: { workshops: Workshop[] }) {
               );
             }}
           >
-            <WorkshopVisual workshop={workshop} />
+            <WorkshopVisual workshop={workshop} visualRole="index" />
             <div className="workshopCard__info">
               <span>{workshop.format}</span>
               <h2>{workshop.name}</h2>

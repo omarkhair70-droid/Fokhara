@@ -8,6 +8,8 @@ import {
   materialStateCssVars,
   materialStateForCollection
 } from "@/lib/visual/material-state";
+import { ProductVisual } from "@/components/ProductVisual";
+import { CarryProductLink } from "@/components/CarryProductLink";
 
 type Props = {
   params: Promise<{ collectionSlug: string }>;
@@ -63,7 +65,13 @@ export default async function CollectionPage({ params }: Props) {
         </div>
 
         <div className="collectionDetail__lead">
-          {lead?.image ? <img src={lead.image.src} alt={lead.image.alt} /> : null}
+          {lead ? (
+            <ProductVisual
+              product={lead}
+              visualRole="collection"
+              label
+            />
+          ) : null}
         </div>
       </header>
 
@@ -75,17 +83,13 @@ export default async function CollectionPage({ params }: Props) {
 
       <div className="collectionProducts">
         {collection.products.map((product) => (
-          <Link
-            href={"/shop/" + product.slug}
+          <CarryProductLink
+            product={product}
             key={product.id}
             className="collectionProduct"
             style={materialStateCssVars(product.collection)}
+            visualRole="collection"
           >
-            <div className="collectionProduct__image">
-              {product.image ? (
-                <img src={product.image.src} alt={product.image.alt} loading="lazy" />
-              ) : null}
-            </div>
             <div className="collectionProduct__copy">
               <strong>{product.name}</strong>
               <span>{formatEgp(product.priceEgp)}</span>
@@ -97,7 +101,7 @@ export default async function CollectionPage({ params }: Props) {
                     : "Out of stock"}
               </span>
             </div>
-          </Link>
+          </CarryProductLink>
         ))}
       </div>
 

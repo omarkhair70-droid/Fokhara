@@ -7,6 +7,7 @@ import {
   materialStateCssVars,
   materialStateForCollection
 } from "@/lib/visual/material-state";
+import { ProductVisual } from "@/components/ProductVisual";
 
 export const metadata: Metadata = {
   title: "Collections",
@@ -59,8 +60,12 @@ export default async function CollectionsPage() {
                 {String(index + 1).padStart(2, "0")}
               </span>
               <div className="collectionIndex__image">
-                {lead?.image ? (
-                  <img src={lead.image.src} alt={lead.image.alt} loading="lazy" />
+                {lead ? (
+                  <ProductVisual
+                    product={lead}
+                    visualRole="collection"
+                    label
+                  />
                 ) : null}
               </div>
               <div className="collectionIndex__copy">

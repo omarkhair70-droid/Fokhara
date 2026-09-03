@@ -140,6 +140,7 @@ export function ShopExplorer({
             product={product}
             className="productCard"
             style={materialStateCssVars(product.collection)}
+            visualRole="browse"
             returnState={() => ({
               scrollY: window.scrollY,
               focusId: product.id,

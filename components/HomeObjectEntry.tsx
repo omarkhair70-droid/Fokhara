@@ -42,6 +42,7 @@ export function HomeObjectEntry({ product }: { product: Product }) {
         product={product}
         className="homeObject__product"
         style={materialStateCssVars(product.collection)}
+        visualRole="home"
       >
         <div className="objectCaption">
           <span>{product.collection}</span>

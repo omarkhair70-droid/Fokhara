@@ -58,9 +58,9 @@ export function ProductDetailClient({ product }: { product: Product }) {
           ref={targetRef}
           className="carryTarget"
           data-carrying={carrying}
-          aria-label={`Prototype visual stand-in for ${product.name}`}
+          aria-label={`Current visual for ${product.name}`}
         >
-          <ProductVisual product={product} />
+          <ProductVisual product={product} visualRole="detail" />
         </div>
         <p className="prototypeNote">
           {product.image

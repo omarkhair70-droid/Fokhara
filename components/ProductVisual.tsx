@@ -3,17 +3,23 @@ import {
   materialStateCssVars,
   materialStateForCollection
 } from "@/lib/visual/material-state";
+import {
+  productImageChoreography,
+  type ProductVisualRole
+} from "@/lib/visual/image-choreography";
 
 type ProductVisualProps = {
   product: Product;
   className?: string;
   label?: boolean;
+  visualRole?: ProductVisualRole;
 };
 
 export function ProductVisual({
   product,
   className = "",
-  label = false
+  label = false,
+  visualRole = "browse"
 }: ProductVisualProps) {
   const hasMedia = Boolean(product.image?.src);
   const material = materialStateForCollection(product.collection);
@@ -25,9 +31,11 @@ export function ProductVisual({
       data-has-media={hasMedia}
       data-material={material.id}
       data-reflectivity={material.reflectivity}
+      data-visual-role={visualRole}
       style={
         {
           ...materialStateCssVars(product.collection),
+          ...productImageChoreography(visualRole),
           "--object-accent": product.accent,
           "--object-ink": product.accentInk
         } as React.CSSProperties
@@ -45,6 +53,11 @@ export function ProductVisual({
           className="productVisual__image"
           src={product.image!.src}
           alt=""
+          loading={
+            visualRole === "home" || visualRole === "detail"
+              ? "eager"
+              : "lazy"
+          }
           decoding="async"
         />
       ) : (

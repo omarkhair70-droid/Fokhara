@@ -4,6 +4,7 @@ import { useRef } from "react";
 import type { Product } from "@/lib/products";
 import { useCarry } from "@/features/carry/CarryProvider";
 import { ProductVisual } from "@/components/ProductVisual";
+import type { ProductVisualRole } from "@/lib/visual/image-choreography";
 import { track } from "@/lib/analytics";
 
 type Props = {
@@ -12,6 +13,7 @@ type Props = {
   returnState?: () => Record<string, unknown>;
   children?: React.ReactNode;
   style?: React.CSSProperties;
+  visualRole?: ProductVisualRole;
 };
 
 export function CarryProductLink({
@@ -19,7 +21,8 @@ export function CarryProductLink({
   className = "",
   returnState,
   children,
-  style
+  style,
+  visualRole = "browse"
 }: Props) {
   const mediaRef = useRef<HTMLDivElement>(null);
   const { beginProductCarry, isCarrying } = useCarry();
@@ -50,11 +53,17 @@ export function CarryProductLink({
           return;
         }
         event.preventDefault();
-        beginProductCarry(product, mediaRef.current, href, returnState?.());
+        beginProductCarry(
+          product,
+          mediaRef.current,
+          href,
+          returnState?.(),
+          visualRole
+        );
       }}
     >
       <div ref={mediaRef} className="carrySource" data-carrying={carrying}>
-        <ProductVisual product={product} />
+        <ProductVisual product={product} visualRole={visualRole} />
       </div>
       {children}
     </a>

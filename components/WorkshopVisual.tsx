@@ -1,13 +1,32 @@
 import type { Workshop } from "@/lib/workshops";
+import {
+  workshopImageChoreography,
+  workshopImageTruth,
+  type WorkshopVisualRole
+} from "@/lib/visual/image-choreography";
 
-export function WorkshopVisual({ workshop }: { workshop: Workshop }) {
+export function WorkshopVisual({
+  workshop,
+  visualRole = "index"
+}: {
+  workshop: Workshop;
+  visualRole?: WorkshopVisualRole;
+}) {
   const hasMedia = Boolean(workshop.image?.src);
+  const imageTruth = workshopImageTruth(workshop.id);
 
   return (
     <div
       className="workshopVisual"
       data-has-media={hasMedia}
-      style={{ "--workshop-accent": workshop.accent } as React.CSSProperties}
+      data-visual-role={visualRole}
+      data-image-truth={imageTruth}
+      style={
+        {
+          "--workshop-accent": workshop.accent,
+          ...workshopImageChoreography(workshop.id, visualRole)
+        } as React.CSSProperties
+      }
       aria-hidden="true"
     >
       {hasMedia ? (
@@ -15,7 +34,7 @@ export function WorkshopVisual({ workshop }: { workshop: Workshop }) {
           className="workshopVisual__image"
           src={workshop.image!.src}
           alt=""
-          loading="lazy"
+          loading={visualRole === "detail" ? "eager" : "lazy"}
           decoding="async"
         />
       ) : (

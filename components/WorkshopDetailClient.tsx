@@ -65,7 +65,7 @@ export function WorkshopDetailClient({
         data-maker-stage="observe"
       >
         <div className="workshopDetail__visual">
-          <WorkshopVisual workshop={workshop} />
+          <WorkshopVisual workshop={workshop} visualRole="detail" />
         </div>
         <div className="workshopDetail__heroCopy">
           <Link className="backLink" href="/workshops">
