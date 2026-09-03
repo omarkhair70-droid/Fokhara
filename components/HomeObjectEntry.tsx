@@ -17,8 +17,8 @@ export function HomeObjectEntry({ product }: { product: Product }) {
           remembers.
         </h1>
         <p className="lede">
-          An experimental digital study for Fokhara: objects do not reset between
-          pages. They carry what happened before.
+          Functional ceramics shaped by hand, glaze and firing. Each piece keeps
+          a trace of how it was made, then moves into everyday use.
         </p>
         <div className="homeActions">
           <TrackedLink

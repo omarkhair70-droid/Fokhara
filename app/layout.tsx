@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     template: "%s — Fokhara"
   },
   description:
-    "Experimental digital redesign for Fokhara Studio & Shop: ceramics, making, studio and participation."
+    "Fokhara Studio & Shop in New Cairo — handmade ceramics, pottery workshops, courses and studio visits."
 };
 
 export default function RootLayout({

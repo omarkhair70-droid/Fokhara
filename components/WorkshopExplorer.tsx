@@ -71,11 +71,11 @@ export function WorkshopExplorer({ workshops }: { workshops: Workshop[] }) {
   return (
     <section className="workshopsPage" data-ready={ready}>
       <header className="workshopsIntro">
-        <p className="eyebrow">Participation system / browse</p>
+        <p className="eyebrow">Workshops / choose a process</p>
         <h1>Choose what you want your hands to do.</h1>
         <p>
-          Workshops are not treated as SKUs. Start with the action, then see the
-          commitment clearly.
+          Start with the kind of making you want to try, then compare the time,
+          format and commitment before you book.
         </p>
       </header>
 

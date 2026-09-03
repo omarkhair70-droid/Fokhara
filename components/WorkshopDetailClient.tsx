@@ -109,7 +109,7 @@ export function WorkshopDetailClient({
         className="makerSection makerSection--facts"
         data-maker-stage="choose"
       >
-        <p className="eyebrow">Choose / commitment truth</p>
+        <p className="eyebrow">Choose / details</p>
         <h2>Know the commitment before you book.</h2>
         <dl className="workshopFactGrid">
           <div>
@@ -164,7 +164,7 @@ export function WorkshopDetailClient({
         className="makerSection makerSection--commit"
         data-maker-stage="commit"
       >
-        <p className="eyebrow">Commit / request mode</p>
+        <p className="eyebrow">Booking / request</p>
         <h2>Your preferred date is a request, not an instant confirmation.</h2>
         <p className="makerSection__body">
           Fokhara currently asks participants to contact the studio to choose a
@@ -192,7 +192,7 @@ export function WorkshopDetailClient({
           target="_blank"
           rel="noreferrer"
         >
-          Verify current Fokhara listing ↗
+          View workshop at Fokhara ↗
         </a>
       </section>
 

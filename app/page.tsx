@@ -22,7 +22,7 @@ export default async function HomePage() {
       <HomeObjectEntry product={featured} />
       <HomeMakerEntry workshop={makerWorkshop} />
       <section className="homeProof">
-        <p className="eyebrow">Two product systems</p>
+        <p className="eyebrow">Own / make</p>
         <p className="homeProof__statement">
           Own the object, or cross the threshold and become the maker.
         </p>

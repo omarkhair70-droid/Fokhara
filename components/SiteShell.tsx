@@ -27,9 +27,18 @@ function intentForPath(pathname: string) {
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const intent = intentForPath(pathname);
+  const shopActive =
+    pathname.startsWith("/shop") || pathname.startsWith("/collections");
+  const workshopsActive =
+    pathname.startsWith("/workshops") || pathname.startsWith("/book/");
+  const studioActive = pathname === "/studio";
+  const visitActive = pathname === "/visit";
 
   return (
     <div className="siteShell" data-intent={intent}>
+      <a className="skipLink" href="#main-content">
+        Skip to content
+      </a>
       <header className="siteHeader">
         <Link className="brand" href="/">
           Fokhara
@@ -37,33 +46,37 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
         </Link>
         <nav aria-label="Primary">
           <Link
-            data-active={
-              pathname.startsWith("/shop") ||
-              pathname.startsWith("/collections")
-            }
+            data-active={shopActive}
+            aria-current={shopActive ? "page" : undefined}
             href="/shop"
           >
             Shop
           </Link>
           <Link
-            data-active={
-              pathname.startsWith("/workshops") ||
-              pathname.startsWith("/book/")
-            }
+            data-active={workshopsActive}
+            aria-current={workshopsActive ? "page" : undefined}
             href="/workshops"
           >
             Workshops
           </Link>
-          <Link data-active={pathname === "/studio"} href="/studio">
+          <Link
+            data-active={studioActive}
+            aria-current={studioActive ? "page" : undefined}
+            href="/studio"
+          >
             Studio
           </Link>
-          <Link data-active={pathname === "/visit"} href="/visit">
+          <Link
+            data-active={visitActive}
+            aria-current={visitActive ? "page" : undefined}
+            href="/visit"
+          >
             Visit
           </Link>
         </nav>
         <CartIndicator />
       </header>
-      <main>{children}</main>
+      <main id="main-content">{children}</main>
     </div>
   );
 }

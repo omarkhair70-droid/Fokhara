@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { getCeramicProducts } from "@/lib/commerce/woo";
 import { formatEgp } from "@/lib/products";
 import { groupProductsByCollection } from "@/lib/collections";
@@ -8,6 +7,7 @@ import {
   materialStateForCollection
 } from "@/lib/visual/material-state";
 import { ProductVisual } from "@/components/ProductVisual";
+import { CollectionMemoryLink } from "@/components/CollectionMemoryLink";
 
 export const metadata: Metadata = {
   title: "Collections",
@@ -23,19 +23,18 @@ export default async function CollectionsPage() {
   return (
     <section className="collectionsPage">
       <header className="collectionsHero">
-        <p className="eyebrow">Object system / material states</p>
+        <p className="eyebrow">Collections / fired surfaces</p>
         <h1>One form system. Different fired surfaces.</h1>
         <p>
-          Fokhara’s current Woo catalog does not store collection identity as a
-          formal taxonomy, so P2 derives these groups from live product names
-          and keeps that compatibility rule isolated.
+          The same functional forms shift character through glaze, oxide,
+          depth and exposed clay. Browse the current collections by surface.
         </p>
       </header>
 
       {result.source === "fixture" ? (
         <div className="dataFallback" role="status">
-          Live catalog unavailable. Collection groups are being shown from the
-          curated fallback set.
+          The current shop is temporarily unavailable. Showing a saved
+          collection selection.
         </div>
       ) : null}
 
@@ -50,14 +49,15 @@ export default async function CollectionsPage() {
             index === 0 ? "anchor" : index % 3 === 0 ? "release" : "scan";
 
           return (
-            <Link
+            <CollectionMemoryLink
               href={"/collections/" + collection.slug}
+              collectionSlug={collection.slug}
               className="collectionIndex__item"
               key={collection.slug}
-              data-material={material.id}
-              data-reflectivity={material.reflectivity}
-              data-rhythm={rhythm}
               style={materialStateCssVars(collection.name)}
+              materialId={material.id}
+              reflectivity={material.reflectivity}
+              rhythm={rhythm}
             >
               <span className="collectionIndex__number">
                 {String(index + 1).padStart(2, "0")}
@@ -72,7 +72,7 @@ export default async function CollectionsPage() {
                 ) : null}
               </div>
               <div className="collectionIndex__copy">
-                <p className="eyebrow">Material state</p>
+                <p className="eyebrow">Fired surface</p>
                 <h2>{collection.name}</h2>
                 <span className="materialTrace" aria-hidden="true" />
                 <dl>
@@ -90,7 +90,7 @@ export default async function CollectionsPage() {
                   </div>
                 </dl>
               </div>
-            </Link>
+            </CollectionMemoryLink>
           );
         })}
       </div>

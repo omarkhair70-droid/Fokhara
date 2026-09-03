@@ -21,8 +21,8 @@ export default function VisitPage() {
         <p className="eyebrow">Visit / practical</p>
         <h1>Find the studio. Then work with the material.</h1>
         <p>
-          Current public studio details, kept deliberately separate from live
-          workshop availability.
+          Address, posted studio hours and contact details for planning your
+          visit. Workshop dates are confirmed separately.
         </p>
       </header>
 
@@ -59,8 +59,8 @@ export default function VisitPage() {
             ))}
           </dl>
           <p>
-            These are the hours Fokhara currently publishes publicly. They are
-            not a promise of workshop seat availability.
+            Workshop times may differ from studio hours. Confirm your session
+            separately when you book.
           </p>
         </section>
 
@@ -72,10 +72,9 @@ export default function VisitPage() {
 
         <section className="visitPickup">
           <p className="eyebrow">Objects / pickup</p>
-          <h2>Shop listings currently point back to the studio.</h2>
+          <h2>Bring the object back to the place it was made.</h2>
           <p>
-            Current ceramic product descriptions state that products are
-            available for pickup at the studio.
+            Listed ceramics are available for pickup at the studio.
           </p>
           <div>
             <Link href="/shop">Browse ceramics</Link>

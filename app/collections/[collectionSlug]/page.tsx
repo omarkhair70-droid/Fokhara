@@ -10,6 +10,7 @@ import {
 } from "@/lib/visual/material-state";
 import { ProductVisual } from "@/components/ProductVisual";
 import { CarryProductLink } from "@/components/CarryProductLink";
+import { CollectionDetailShell } from "@/components/CollectionDetailShell";
 
 type Props = {
   params: Promise<{ collectionSlug: string }>;
@@ -44,10 +45,11 @@ export default async function CollectionPage({ params }: Props) {
   const material = materialStateForCollection(collection.name);
 
   return (
-    <article
+    <CollectionDetailShell
+      collectionSlug={collection.slug}
       className="collectionDetail"
-      data-material={material.id}
-      data-reflectivity={material.reflectivity}
+      materialId={material.id}
+      reflectivity={material.reflectivity}
       style={materialStateCssVars(collection.name)}
     >
       <header className="collectionDetail__hero">
@@ -55,12 +57,15 @@ export default async function CollectionPage({ params }: Props) {
           <Link href="/collections" className="backLink">
             ← All collections
           </Link>
-          <p className="eyebrow">Collection / material state</p>
+          <p className="eyebrow">Collection / fired surface</p>
           <h1>{collection.name}</h1>
-          <span className="materialTrace materialTrace--hero" aria-hidden="true" />
+          <span
+            className="materialTrace materialTrace--hero collectionArrivalTrace"
+            aria-hidden="true"
+          />
           <p>
-            A live grouping of the ceramic forms currently carrying the{" "}
-            {collection.name} name in Fokhara’s Woo catalog.
+            {collection.name} carries its surface language across the
+            functional forms currently available from Fokhara.
           </p>
         </div>
 
@@ -106,13 +111,13 @@ export default async function CollectionPage({ params }: Props) {
       </div>
 
       <section className="collectionDetail__exit">
-        <p className="eyebrow">Collection → whole system</p>
-        <h2>Keep the surface. Change the action.</h2>
+        <p className="eyebrow">Beyond the collection</p>
+        <h2>Keep the surface, or work with clay yourself.</h2>
         <div>
           <Link href="/shop">Return to all ceramics</Link>
           <Link href="/workshops">Make with clay yourself</Link>
         </div>
       </section>
-    </article>
+    </CollectionDetailShell>
   );
 }

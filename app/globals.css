@@ -83,6 +83,23 @@ a:focus-visible,
   min-height: 100vh;
 }
 
+.skipLink {
+  position: fixed;
+  z-index: 2000;
+  top: .75rem;
+  left: .75rem;
+  padding: .65rem .85rem;
+  background: var(--ink-primary);
+  color: var(--field-raised);
+  transform: translateY(calc(-100% - 1rem));
+  transition: transform var(--motion-utility) var(--ease-utility);
+}
+
+.skipLink:focus-visible {
+  transform: translateY(0);
+  outline-color: var(--field-raised);
+}
+
 .siteShell[data-intent="evaluate"] {
   background:
     linear-gradient(
@@ -607,14 +624,6 @@ button.buttonPrimary:disabled {
 
 .carryTarget {
   min-height: 65svh;
-}
-
-.prototypeNote {
-  margin: 0;
-  padding: .75rem;
-  border-top: 1px solid var(--line);
-  font-size: .68rem;
-  color: var(--ink-muted);
 }
 
 .productDetail__info {
@@ -4097,5 +4106,519 @@ button {
   .cartLine > button {
     grid-column: 1 / -1;
     justify-self: start;
+  }
+}
+
+
+/* VP10 — FULL VISUAL REVIEW / FIRST CORRECTION PASS
+   Real renders showed a strong system but too much repeated editorial grammar.
+   These overrides move emphasis back toward material, object and action. */
+
+/* SHOP — break the endless equal-card catalog into material chapters. */
+.shopChapters {
+  display: grid;
+  gap: clamp(5rem, 9vw, 10rem);
+  padding-bottom: clamp(5rem, 9vw, 10rem);
+}
+
+.shopChapter {
+  position: relative;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.shopChapter::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: min(11rem, 32vw);
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    var(--material-depth),
+    var(--material-glaze) 62%,
+    var(--material-clay)
+  );
+}
+
+.shopChapter__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: end;
+  padding: clamp(1rem, 2vw, 2rem) 0 clamp(1.5rem, 3vw, 3rem);
+}
+
+.shopChapter__header h2 {
+  margin: .25rem 0 0;
+  font-size: clamp(3.5rem, 7vw, 7rem);
+  line-height: .82;
+  letter-spacing: -.065em;
+  font-weight: 500;
+  color: var(--material-ink);
+}
+
+.shopChapter__meta {
+  display: grid;
+  gap: .35rem;
+  justify-items: end;
+  padding-bottom: .35rem;
+  font-size: .76rem;
+}
+
+.shopChapter__meta a {
+  margin-top: .5rem;
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
+
+.productGrid--chapter {
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.productGrid--chapter .productCard {
+  min-height: 0;
+  max-height: none;
+  grid-template-rows: auto auto;
+}
+
+.productGrid--chapter .carrySource {
+  min-height: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.productGrid--count-1 .productCard {
+  grid-column: span 8;
+}
+
+.productGrid--count-2 .productCard,
+.productGrid--count-4 .productCard {
+  grid-column: span 6;
+}
+
+.productGrid--count-3 .productCard {
+  grid-column: span 4;
+}
+
+/* COLLECTION INDEX — same system, but not the same panel seven times. */
+.collectionIndex__item[data-rhythm="release"] {
+  grid-template-columns: 4rem minmax(300px, 1.12fr) minmax(240px, .88fr);
+}
+
+.collectionIndex__item[data-rhythm="release"] .collectionIndex__number {
+  grid-column: 1;
+}
+
+.collectionIndex__item[data-rhythm="release"] .collectionIndex__copy {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.collectionIndex__item[data-rhythm="release"] .collectionIndex__image {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.collectionIndex__copy {
+  align-self: end;
+}
+
+/* COLLECTION DETAIL — keep the image authoritative without delaying identity. */
+.collectionDetail__hero {
+  min-height: 72svh;
+  grid-template-columns: minmax(300px, .82fr) minmax(0, 1.18fr);
+  align-items: end;
+}
+
+.collectionDetail__copy {
+  justify-content: flex-end;
+  padding-bottom: clamp(2rem, 5vw, 5rem);
+}
+
+.collectionDetail__lead {
+  min-height: 58svh;
+  max-height: 720px;
+}
+
+/* PRODUCT DETAIL — the first viewport must contain object + identity + action. */
+@media (min-width: 821px) {
+  .productDetail[data-composition="vertical-pressure"] {
+    min-height: calc(100svh - var(--header-height));
+    grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+    grid-template-rows: 1fr;
+    gap: clamp(2rem, 5vw, 6rem);
+    align-items: stretch;
+  }
+
+  .productDetail[data-composition="vertical-pressure"] .productDetail__mediaColumn {
+    order: 1;
+    width: auto;
+    min-height: calc(100svh - var(--header-height) - 2rem);
+    justify-self: stretch;
+  }
+
+  .productDetail[data-composition="vertical-pressure"] .productDetail__info {
+    order: 2;
+    width: auto;
+    max-width: 620px;
+    display: flex;
+    flex-direction: column;
+    justify-self: stretch;
+    justify-content: center;
+    padding: clamp(1rem, 2.5vw, 2.5rem) 0;
+  }
+
+  .productDetail[data-composition="vertical-pressure"] .backLink,
+  .productDetail[data-composition="vertical-pressure"] .eyebrow,
+  .productDetail[data-composition="vertical-pressure"] h1,
+  .productDetail[data-composition="vertical-pressure"] .price,
+  .productDetail[data-composition="vertical-pressure"] .stockState,
+  .productDetail[data-composition="vertical-pressure"] .productDescription,
+  .productDetail[data-composition="vertical-pressure"] .purchaseBlock,
+  .productDetail[data-composition="vertical-pressure"] .productFacts {
+    grid-column: auto;
+  }
+
+  .productDetail[data-composition="vertical-pressure"] .productDetail__info h1 {
+    font-size: clamp(4rem, 6.4vw, 7rem);
+  }
+
+  .productDetail[data-composition="vertical-pressure"] .productFacts {
+    margin-top: auto;
+  }
+}
+
+/* Empty cart now belongs to the same authored world instead of a utility void. */
+.cartEmpty {
+  min-height: 48svh;
+  max-width: 54rem;
+  align-content: center;
+}
+
+.cartEmpty h2 {
+  margin: 0;
+  max-width: 11ch;
+  font-size: clamp(3rem, 6vw, 6rem);
+  line-height: .88;
+  letter-spacing: -.055em;
+  font-weight: 500;
+}
+
+.cartEmpty > p:not(.eyebrow) {
+  max-width: 34rem;
+  color: var(--ink-secondary);
+  line-height: 1.5;
+}
+
+@media (max-width: 820px) {
+  .shopChapters {
+    gap: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .shopChapter__header {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .shopChapter__header h2 {
+    font-size: clamp(3rem, 15vw, 5rem);
+  }
+
+  .shopChapter__meta {
+    justify-items: start;
+  }
+
+  .productGrid--count-1 .productCard,
+  .productGrid--count-2 .productCard,
+  .productGrid--count-3 .productCard,
+  .productGrid--count-4 .productCard {
+    grid-column: 1;
+  }
+
+  .productGrid--chapter .carrySource {
+    aspect-ratio: 4 / 5;
+  }
+
+  .collectionIndex__item[data-rhythm="release"] {
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+  }
+
+  .collectionIndex__item[data-rhythm="release"] .collectionIndex__number {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .collectionIndex__item[data-rhythm="release"] .collectionIndex__image,
+  .collectionIndex__item[data-rhythm="release"] .collectionIndex__copy {
+    grid-column: 2;
+    grid-row: auto;
+  }
+
+  .collectionDetail__hero {
+    min-height: auto;
+  }
+
+  .collectionDetail__copy {
+    padding-bottom: 0;
+  }
+
+  .collectionDetail__lead {
+    min-height: 50svh;
+    max-height: none;
+  }
+
+  .cartEmpty {
+    min-height: 48svh;
+  }
+}
+
+
+/* VP10 — REVIEW CORRECTION 02
+   Screenshot review caught two cascade regressions from the first rebalance. */
+
+/* Product bridge must follow the product evaluation surface, never precede it. */
+@media (min-width: 821px) {
+  .productDetail[data-composition="vertical-pressure"] > .objectMakerBridge {
+    order: 3;
+    grid-column: 1 / -1;
+  }
+}
+
+/* The late VP10 desktop collection grid must not leak into compact. */
+@media (max-width: 820px) {
+  .collectionDetail__hero {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .collectionDetail__lead {
+    width: 100%;
+    min-width: 0;
+    min-height: 50svh;
+  }
+}
+
+
+/* VP10 — LAB SYNTHESIS
+   Only the rendered experiments that earned production weight survive here. */
+
+/* COLLECTION MEMORY — the existing material trace remembers the choice.
+   No extra progress-like chrome is introduced at the viewport edge. */
+.collectionArrivalTrace {
+  transform-origin: left center;
+  transition:
+    transform 620ms var(--ease-settle),
+    box-shadow 420ms var(--ease-settle);
+}
+
+.collectionDetail[data-inherited="true"][data-arrival-phase="arrived"] .collectionArrivalTrace {
+  transform: scaleX(1.08);
+  box-shadow:
+    0 7px 18px
+    color-mix(in srgb, var(--material-glaze) 14%, transparent);
+}
+
+.collectionDetail[data-inherited="true"][data-arrival-phase="settling"] .collectionArrivalTrace {
+  transform: scaleX(1.025);
+  box-shadow:
+    0 4px 12px
+    color-mix(in srgb, var(--material-glaze) 8%, transparent);
+}
+
+.collectionDetail[data-inherited="true"][data-arrival-phase="settled"] .collectionArrivalTrace {
+  transform: scaleX(1);
+  box-shadow: none;
+}
+
+/* STUDIO EVIDENCE — real current imagery becomes the compositional engine. */
+.studioEvidence--contact {
+  min-height: 0;
+  grid-template-columns: minmax(280px, .72fr) minmax(0, 1.28fr);
+  gap: 0;
+  align-items: start;
+  padding: 0;
+}
+
+.studioEvidence__narrative {
+  position: sticky;
+  top: var(--header-height);
+  min-height: calc(100svh - var(--header-height));
+  display: flex;
+  align-items: center;
+  padding: clamp(2rem, 5vw, 6rem);
+  border-right: 1px solid var(--line);
+}
+
+.studioEvidence__narrative > div {
+  max-width: 40rem;
+}
+
+.studioEvidence__narrative h2 {
+  margin: 0;
+  max-width: 10ch;
+  font-size: clamp(3.2rem, 6vw, 6.6rem);
+  line-height: .88;
+  letter-spacing: -.058em;
+  font-weight: 500;
+}
+
+.studioEvidence__narrative p:last-child {
+  max-width: 34rem;
+  margin: 2rem 0 0;
+  color: var(--ink-secondary);
+  line-height: 1.55;
+}
+
+.studioEvidence__sheet {
+  min-width: 0;
+  padding: clamp(1rem, 2.5vw, 2.5rem);
+}
+
+.studioEvidence__frame {
+  width: 72%;
+  max-width: 100%;
+  margin: 0;
+  padding: clamp(1rem, 2vw, 2rem) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.studioEvidence__frame:first-child {
+  border-top: 1px solid var(--line);
+}
+
+.studioEvidence__frame[data-mode="anchor"] {
+  width: 100%;
+}
+
+.studioEvidence__frame[data-mode="wide"] {
+  width: 90%;
+  margin-left: auto;
+}
+
+.studioEvidence__frame[data-mode="offset"] {
+  width: 78%;
+  margin-left: 12%;
+}
+
+.studioEvidence__image {
+  min-height: 48svh;
+  overflow: hidden;
+  background: var(--field-raised);
+}
+
+.studioEvidence__frame[data-mode="anchor"] .studioEvidence__image {
+  min-height: min(78svh, 780px);
+}
+
+.studioEvidence__frame[data-mode="wide"] .studioEvidence__image {
+  min-height: 58svh;
+}
+
+.studioEvidence__image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.studioEvidence__frame figcaption {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+  gap: .35rem 1rem;
+  align-items: end;
+  padding-top: .8rem;
+}
+
+.studioEvidence__frame figcaption span,
+.studioEvidence__frame figcaption small {
+  color: var(--ink-muted);
+  font-size: .68rem;
+}
+
+.studioEvidence__frame figcaption strong {
+  min-width: 0;
+  font-size: clamp(1.15rem, 2vw, 2rem);
+  font-weight: 500;
+}
+
+.studioEvidence__frame figcaption small {
+  justify-self: end;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  text-align: right;
+}
+
+/* CARRY — keep the Lab's useful sense of lift, remove its 3D theatre. */
+.carryOverlay {
+  box-shadow:
+    0 8px 20px
+    color-mix(in srgb, var(--material-depth) 7%, transparent);
+}
+
+.carryOverlay[data-phase="lifting"],
+.carryOverlay[data-phase="navigating"] {
+  box-shadow:
+    0 18px 42px
+    color-mix(in srgb, var(--material-depth) 14%, transparent);
+}
+
+@media (max-width: 820px) {
+  .studioEvidence--contact {
+    grid-template-columns: 1fr;
+  }
+
+  .studioEvidence__narrative {
+    position: relative;
+    top: auto;
+    min-height: auto;
+    padding: 3rem var(--compact-gutter);
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .studioEvidence__narrative h2 {
+    font-size: clamp(3rem, 14vw, 5.2rem);
+  }
+
+  .studioEvidence__sheet {
+    padding: var(--compact-gutter);
+  }
+
+  .studioEvidence__frame,
+  .studioEvidence__frame[data-mode="anchor"],
+  .studioEvidence__frame[data-mode="wide"],
+  .studioEvidence__frame[data-mode="offset"] {
+    width: 100%;
+    margin-left: 0;
+    padding: 1rem 0 2.5rem;
+  }
+
+  .studioEvidence__image,
+  .studioEvidence__frame[data-mode="anchor"] .studioEvidence__image,
+  .studioEvidence__frame[data-mode="wide"] .studioEvidence__image {
+    min-height: 52svh;
+  }
+
+  .studioEvidence__frame figcaption {
+    grid-template-columns: 2rem minmax(0, 1fr);
+  }
+
+  .studioEvidence__frame figcaption small {
+    grid-column: 2;
+    justify-self: start;
+    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collectionArrivalTrace {
+    transition: none;
+  }
+
+  .carryOverlay {
+    box-shadow: none;
   }
 }

@@ -15,8 +15,8 @@ export default function StudioPage() {
         <p className="eyebrow">Studio / practice</p>
         <h1>A place where clay is learned, not only displayed.</h1>
         <p>
-          Fokhara’s current public offer holds two things together: pottery
-          workshops and courses, and handmade ceramics by Dalia Mobasher.
+          Fokhara brings finished ceramics and hands-on pottery learning into the
+          same working studio.
         </p>
       </header>
 
@@ -39,13 +39,13 @@ export default function StudioPage() {
             target="_blank"
             rel="noreferrer"
           >
-            Historical source ↗
+            Read Dalia’s story ↗
           </a>
         </div>
       </section>
 
       <section className="studioPractice">
-        <p className="eyebrow">Practice / two directions</p>
+        <p className="eyebrow">Shop / workshops</p>
         <h2>The studio produces objects and produces makers.</h2>
         <div className="studioPractice__grid">
           <Link href="/shop">
@@ -68,7 +68,7 @@ export default function StudioPage() {
       </section>
 
       <section className="studioProcess">
-        <p className="eyebrow">Process / current teaching language</p>
+        <p className="eyebrow">From clay to use</p>
         <div className="studioProcess__rail">
           <span>Center</span>
           <span>Shape</span>
@@ -78,19 +78,18 @@ export default function StudioPage() {
           <span>Use</span>
         </div>
         <p>
-          The exact sequence changes by workshop. The 1-month course currently
-          publishes a four-stage learning path: handbuilding, wheelthrowing,
-          trimming and glazing.
+          Different workshops enter the process at different points. The
+          1-month course moves through handbuilding, wheelthrowing, trimming and
+          glazing.
         </p>
       </section>
 
       <section className="studioVisitBridge">
-        <p className="eyebrow">Studio → place</p>
+        <p className="eyebrow">Visit the studio</p>
         <h2>The practice has a physical address.</h2>
         <p>
-          Fokhara currently operates from the First Settlement in New Cairo.
-          Visit details and the studio’s posted hours are kept separate from
-          workshop seat availability.
+          Fokhara is in the First Settlement, New Cairo. Find the address,
+          posted studio hours and contact details before you visit.
         </p>
         <Link href="/visit">Plan a visit</Link>
       </section>
