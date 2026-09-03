@@ -29,7 +29,7 @@ export function ShopExplorer({ products }: { products: Product[] }) {
 
       requestAnimationFrame(() => {
         if (typeof state.scrollY === "number") {
-          window.scrollTo({ top: state.scrollY, behavior: "instant" });
+          window.scrollTo({ top: state.scrollY, behavior: "auto" });
         }
         if (state.focusId) {
           const target = document.querySelector<HTMLElement>(
