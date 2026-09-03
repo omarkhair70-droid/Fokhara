@@ -28,7 +28,8 @@ This repository tests a research-led creative workflow where the visual and inte
 - [x] VP6 — Carry / Recompose Visual Refinement
 - [x] VP7 — Motion Physics & Interaction Restraint
 - [x] VP8 — Page Pacing & Compositional Rhythm
-- [ ] VP9 — Compact / Mobile Authorship
+- [x] VP9 — Compact / Mobile Authorship
+- [ ] VP10 — Full Visual Review
 - [ ] Visual Production
 - [ ] Visual Review + Subtraction
 - [ ] Final Production QA
@@ -189,7 +190,7 @@ Commerce BFF:
 
 ## Next
 
-**VP9 — Compact / Mobile Authorship**
+**VP10 — Full Visual Review**
 
 The structural system is now the canvas, not the finished artwork.
 
