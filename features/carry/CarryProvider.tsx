@@ -244,6 +244,13 @@ export function CarryProvider({ children }: { children: React.ReactNode }) {
           ? 0.998
           : 1;
 
+  const overlayLiftY =
+    phase === "lifting"
+      ? -4
+      : phase === "navigating"
+        ? -3
+        : 0;
+
   return (
     <CarryContext.Provider value={value}>
       {children}
@@ -271,7 +278,8 @@ export function CarryProvider({ children }: { children: React.ReactNode }) {
               width: overlayRect.width,
               height: overlayRect.height,
               opacity: phase === "settled" ? 0 : 1,
-              scale: overlayScale
+              scale: overlayScale,
+              y: overlayLiftY
             }}
             exit={{ opacity: 0 }}
             transition={{
@@ -301,6 +309,10 @@ export function CarryProvider({ children }: { children: React.ReactNode }) {
               },
               scale: {
                 duration: phase === "lifting" ? 0.11 : 0.28,
+                ease: [0.2, 0.65, 0.25, 1]
+              },
+              y: {
+                duration: phase === "lifting" ? 0.11 : 0.24,
                 ease: [0.2, 0.65, 0.25, 1]
               },
               opacity: {
