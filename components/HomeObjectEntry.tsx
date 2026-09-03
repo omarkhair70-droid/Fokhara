@@ -20,9 +20,9 @@ export function HomeObjectEntry({ product }: { product: Product }) {
         </p>
         <div className="homeActions">
           <a className="buttonPrimary" href="/shop">Explore ceramics</a>
-          <span className="buttonGhost" aria-disabled="true">
-            Workshops · P1
-          </span>
+          <a className="buttonGhost" href="/workshops">
+            Enter the process
+          </a>
         </div>
       </div>
 

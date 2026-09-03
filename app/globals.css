@@ -794,3 +794,692 @@ button.buttonPrimary:disabled {
     display: none !important;
   }
 }
+
+
+/* P1 — Become the Maker */
+.homeMaker {
+  min-height: 92svh;
+  padding: var(--space-field) clamp(1rem, 3vw, 3rem);
+  display: grid;
+  grid-template-columns: minmax(340px, 1.05fr) minmax(320px, .95fr);
+  gap: clamp(2rem, 7vw, 8rem);
+  align-items: center;
+  border-top: 1px solid var(--line);
+}
+
+.homeMaker__visual {
+  min-height: min(72svh, 760px);
+}
+
+.homeMaker__copy {
+  max-width: 680px;
+}
+
+.homeMaker__copy h2,
+.workshopsIntro h1,
+.makerSection h2,
+.bookingHeader h1,
+.bookingReview h1 {
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: -.06em;
+  line-height: .9;
+}
+
+.homeMaker__copy h2 {
+  font-size: clamp(3.5rem, 7vw, 7rem);
+  max-width: 10ch;
+}
+
+.homeMaker__copy > p:not(.eyebrow) {
+  max-width: 36rem;
+  margin: 2rem 0;
+  color: var(--ink-secondary);
+  line-height: 1.55;
+}
+
+.homeMaker__facts {
+  margin: 0 0 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.homeMaker__facts > div {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 1rem;
+  padding: .7rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.homeMaker__facts dt {
+  color: var(--ink-muted);
+}
+
+.homeMaker__facts dd {
+  margin: 0;
+}
+
+.workshopVisual {
+  --workshop-accent: #315d63;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  overflow: hidden;
+  background:
+    linear-gradient(120deg,
+      color-mix(in srgb, var(--workshop-accent) 20%, var(--field-raised)),
+      var(--field-raised) 58%);
+  border: 1px solid var(--line);
+}
+
+.workshopVisual__axis {
+  position: absolute;
+  left: 50%;
+  top: 8%;
+  bottom: 8%;
+  width: 1px;
+  background: color-mix(in srgb, var(--workshop-accent) 48%, transparent);
+}
+
+.workshopVisual__axis::before,
+.workshopVisual__axis::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid color-mix(in srgb, var(--workshop-accent) 48%, transparent);
+  border-radius: 50%;
+}
+
+.workshopVisual__axis::before {
+  width: clamp(9rem, 24vw, 19rem);
+  height: clamp(9rem, 24vw, 19rem);
+  top: 8%;
+}
+
+.workshopVisual__axis::after {
+  width: clamp(3rem, 8vw, 7rem);
+  height: clamp(3rem, 8vw, 7rem);
+  bottom: 12%;
+  background: color-mix(in srgb, var(--workshop-accent) 16%, transparent);
+}
+
+.workshopVisual__actions {
+  position: absolute;
+  inset: auto 1rem 1rem;
+  display: grid;
+  gap: .35rem;
+}
+
+.workshopVisual__actions > span {
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  align-items: baseline;
+  font-size: clamp(1.7rem, 4vw, 4.4rem);
+  line-height: .92;
+  letter-spacing: -.055em;
+  transform: translateX(calc(var(--i) * 7%));
+}
+
+.workshopVisual__actions small {
+  font-size: .62rem;
+  letter-spacing: .08em;
+  color: var(--ink-muted);
+}
+
+.workshopsPage {
+  padding: clamp(3rem, 7vw, 7rem) clamp(1rem, 3vw, 3rem) var(--space-field);
+  opacity: .9;
+}
+
+.workshopsPage[data-ready="true"] {
+  opacity: 1;
+}
+
+.workshopsIntro {
+  min-height: 52svh;
+  display: grid;
+  align-content: end;
+  grid-template-columns: minmax(0, 1.3fr) minmax(260px, .7fr);
+  gap: 2rem 4rem;
+  padding-bottom: clamp(3rem, 7vw, 7rem);
+}
+
+.workshopsIntro .eyebrow,
+.workshopsIntro h1 {
+  grid-column: 1;
+}
+
+.workshopsIntro h1 {
+  max-width: 11ch;
+  font-size: clamp(4rem, 8vw, 8.5rem);
+}
+
+.workshopsIntro > p:last-child {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: end;
+  margin: 0;
+  max-width: 30rem;
+  line-height: 1.55;
+  color: var(--ink-secondary);
+}
+
+.workshopGrid {
+  display: grid;
+  gap: clamp(1.2rem, 3vw, 3rem);
+}
+
+.workshopCard {
+  min-height: 72svh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
+  border-top: 1px solid var(--line);
+  padding-top: clamp(1rem, 2vw, 2rem);
+}
+
+.workshopCard:nth-child(even) {
+  grid-template-columns: minmax(300px, .85fr) minmax(0, 1.15fr);
+}
+
+.workshopCard:nth-child(even) .workshopVisual {
+  order: 2;
+}
+
+.workshopCard__info {
+  padding: clamp(1rem, 4vw, 4rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.workshopCard__info > span {
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--ink-muted);
+}
+
+.workshopCard__info h2 {
+  margin: 1rem 0;
+  max-width: 11ch;
+  font-size: clamp(2.5rem, 5vw, 5.6rem);
+  line-height: .9;
+  font-weight: 500;
+  letter-spacing: -.055em;
+}
+
+.workshopCard__info > p {
+  color: var(--workshop-accent, var(--ink-secondary));
+  letter-spacing: .03em;
+}
+
+.workshopCard__info dl {
+  margin: auto 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.workshopCard__info dl > div {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: 1rem;
+  padding: .65rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: .8rem;
+}
+
+.workshopCard__info dt {
+  color: var(--ink-muted);
+}
+
+.workshopCard__info dd {
+  margin: 0;
+}
+
+.workshopDetail {
+  --workshop-accent: #315d63;
+  position: relative;
+}
+
+.makerRail {
+  position: fixed;
+  z-index: 35;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  gap: .35rem;
+  padding: .7rem;
+  background: color-mix(in srgb, var(--field-primary) 88%, transparent);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--line);
+}
+
+.makerRail > span:not(.makerRail__label) {
+  font-size: .62rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  opacity: .35;
+}
+
+.makerRail > span[data-active="true"] {
+  opacity: 1;
+  color: var(--workshop-accent);
+}
+
+.makerRail__label {
+  font-size: .58rem;
+  color: var(--ink-muted);
+  margin-bottom: .3rem;
+}
+
+.workshopDetail__hero {
+  min-height: calc(100svh - var(--header-height));
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr);
+  gap: clamp(2rem, 5vw, 6rem);
+  padding: clamp(1rem, 3vw, 3rem);
+}
+
+.workshopDetail__visual {
+  min-height: 72svh;
+}
+
+.workshopDetail__heroCopy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: clamp(1rem, 4vw, 4rem);
+}
+
+.workshopDetail__heroCopy .backLink {
+  margin-bottom: auto;
+}
+
+.workshopDetail__heroCopy h1 {
+  margin: 0;
+  max-width: 9ch;
+  font-size: clamp(4rem, 7vw, 7.6rem);
+  line-height: .86;
+  letter-spacing: -.065em;
+  font-weight: 500;
+}
+
+.workshopSummary {
+  max-width: 36rem;
+  margin: 2rem 0;
+  color: var(--ink-secondary);
+  line-height: 1.55;
+}
+
+.workshopImmediateFacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem 1.4rem;
+  margin-bottom: 1.5rem;
+  font-size: .82rem;
+}
+
+.workshopImmediateFacts strong {
+  color: var(--workshop-accent);
+}
+
+.makerSection {
+  min-height: 85svh;
+  padding: var(--space-field) clamp(1rem, 8vw, 10rem);
+  display: grid;
+  align-content: center;
+  border-top: 1px solid var(--line);
+}
+
+.makerSection h2 {
+  max-width: 12ch;
+  font-size: clamp(3.5rem, 7vw, 7.5rem);
+}
+
+.makerSection__body {
+  max-width: 42rem;
+  margin: 2rem 0;
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  line-height: 1.55;
+  color: var(--ink-secondary);
+}
+
+.processVerbs {
+  list-style: none;
+  margin: clamp(3rem, 6vw, 6rem) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.processVerbs li {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  align-items: baseline;
+  padding: .9rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.processVerbs li span {
+  font-size: .68rem;
+  color: var(--ink-muted);
+}
+
+.processVerbs li strong {
+  font-size: clamp(2.5rem, 6vw, 6.5rem);
+  line-height: .9;
+  letter-spacing: -.055em;
+  font-weight: 500;
+}
+
+.workshopFactGrid {
+  margin: clamp(3rem, 6vw, 6rem) 0 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.workshopFactGrid > div {
+  min-height: 9rem;
+  padding: 1rem;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.workshopFactGrid__wide {
+  grid-column: span 3;
+}
+
+.workshopFactGrid dt {
+  font-size: .68rem;
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  color: var(--ink-muted);
+}
+
+.workshopFactGrid dd {
+  margin: 1rem 0 0;
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+}
+
+.recurringDays {
+  margin-top: 3rem;
+  max-width: 62rem;
+}
+
+.recurringDays h3 {
+  margin-bottom: .5rem;
+}
+
+.recurringDays > p {
+  color: var(--ink-secondary);
+}
+
+.recurringDays > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-top: 1rem;
+}
+
+.recurringDays span {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: .6rem .85rem;
+  font-size: .78rem;
+}
+
+.makerSection--commit {
+  background:
+    linear-gradient(
+      120deg,
+      color-mix(in srgb, var(--workshop-accent) 10%, var(--field-primary)),
+      var(--field-primary) 65%
+    );
+}
+
+.policyList {
+  max-width: 44rem;
+  margin: 1rem 0 2rem;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.policyList li {
+  padding: .75rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.sourceLink {
+  width: max-content;
+  margin-top: 1rem;
+  font-size: .75rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.bookingPage {
+  min-height: calc(100svh - var(--header-height));
+  padding: clamp(2rem, 6vw, 6rem) clamp(1rem, 8vw, 10rem);
+  background: var(--field-commit);
+}
+
+.bookingHeader {
+  max-width: 70rem;
+}
+
+.bookingHeader .backLink {
+  display: inline-block;
+  margin-bottom: clamp(3rem, 8vw, 7rem);
+}
+
+.bookingHeader h1,
+.bookingReview h1 {
+  max-width: 10ch;
+  font-size: clamp(3.8rem, 7vw, 7.5rem);
+}
+
+.bookingHeader > p:last-child,
+.bookingReview > p {
+  max-width: 38rem;
+  color: var(--ink-secondary);
+  line-height: 1.55;
+}
+
+.bookingForm {
+  max-width: 74rem;
+  margin-top: clamp(3rem, 6vw, 6rem);
+}
+
+.bookingForm fieldset {
+  margin: 0;
+  padding: 2rem 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.bookingForm legend {
+  padding: 0 0 1.5rem;
+  font-size: .72rem;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+.bookingForm label {
+  max-width: 40rem;
+  display: grid;
+  gap: .6rem;
+  margin-bottom: 1.2rem;
+  font-size: .82rem;
+}
+
+.bookingForm input,
+.bookingForm select {
+  width: 100%;
+  min-height: 50px;
+  padding: .8rem;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--field-raised) 50%, transparent);
+  color: inherit;
+  font: inherit;
+}
+
+.bookingCheckbox {
+  grid-template-columns: auto 1fr !important;
+  align-items: start;
+  gap: .7rem !important;
+}
+
+.bookingCheckbox input {
+  width: 1rem;
+  min-height: auto;
+  margin-top: .15rem;
+}
+
+.bookingDisclosure {
+  max-width: 38rem;
+  color: var(--ink-muted);
+  font-size: .75rem;
+  line-height: 1.5;
+}
+
+.bookingCommitBar {
+  position: sticky;
+  bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1rem;
+  background: color-mix(in srgb, var(--field-raised) 92%, transparent);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(14px);
+}
+
+.bookingCommitBar > div {
+  display: grid;
+  gap: .2rem;
+}
+
+.bookingCommitBar span {
+  font-size: .65rem;
+  color: var(--ink-muted);
+}
+
+.bookingReview {
+  max-width: 70rem;
+}
+
+.bookingSummary {
+  margin: clamp(3rem, 6vw, 6rem) 0 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.bookingSummary > div {
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+  gap: 1rem;
+  padding: .8rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.bookingSummary dt {
+  color: var(--ink-muted);
+}
+
+.bookingSummary dd {
+  margin: 0;
+}
+
+.bookingReview__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .7rem;
+}
+
+.bookingEdit {
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+@media (max-width: 820px) {
+  .homeMaker,
+  .workshopCard,
+  .workshopCard:nth-child(even),
+  .workshopDetail__hero {
+    grid-template-columns: 1fr;
+  }
+
+  .homeMaker__visual {
+    min-height: 58svh;
+  }
+
+  .workshopsIntro {
+    min-height: 45svh;
+    grid-template-columns: 1fr;
+  }
+
+  .workshopsIntro > p:last-child {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .workshopCard {
+    min-height: auto;
+  }
+
+  .workshopCard:nth-child(even) .workshopVisual {
+    order: initial;
+  }
+
+  .workshopCard__info {
+    min-height: 55svh;
+  }
+
+  .makerRail {
+    position: sticky;
+    top: calc(var(--header-height) + .5rem);
+    transform: none;
+    margin: .5rem 1rem 0;
+    grid-template-columns: auto repeat(4, 1fr);
+    align-items: center;
+  }
+
+  .makerRail__label {
+    margin: 0;
+  }
+
+  .workshopDetail__visual {
+    min-height: 58svh;
+  }
+
+  .workshopDetail__heroCopy {
+    min-height: 64svh;
+    padding-right: 0;
+  }
+
+  .workshopFactGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .workshopFactGrid__wide {
+    grid-column: span 2;
+  }
+
+  .bookingPage {
+    padding-inline: 1rem;
+  }
+
+  .bookingSummary > div {
+    grid-template-columns: 1fr;
+    gap: .25rem;
+  }
+
+  .bookingCommitBar {
+    bottom: .5rem;
+  }
+}

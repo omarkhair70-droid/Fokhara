@@ -1,15 +1,17 @@
 import { HomeObjectEntry } from "@/components/HomeObjectEntry";
+import { HomeMakerEntry } from "@/components/HomeMakerEntry";
 import { featuredProduct } from "@/lib/products";
+import { featuredWorkshop } from "@/lib/workshops";
 
 export default function HomePage() {
   return (
     <>
       <HomeObjectEntry product={featuredProduct} />
+      <HomeMakerEntry workshop={featuredWorkshop} />
       <section className="homeProof">
-        <p className="eyebrow">P0 thesis proof</p>
+        <p className="eyebrow">Two product systems</p>
         <p className="homeProof__statement">
-          Select the object. It should not vanish. The next route should form
-          around it, then return you to the same browse context.
+          Own the object, or cross the threshold and become the maker.
         </p>
       </section>
     </>
