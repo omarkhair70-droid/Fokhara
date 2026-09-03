@@ -14,11 +14,20 @@ import {
 import type { Product } from "@/lib/products";
 import { ProductVisual } from "@/components/ProductVisual";
 import type { ProductVisualRole } from "@/lib/visual/image-choreography";
+import {
+  CARRY_LIFT_MS,
+  carryPhysicsForRects
+} from "@/lib/visual/carry-physics";
+import {
+  materialStateCssVars,
+  materialStateForCollection
+} from "@/lib/visual/material-state";
 
 type Rect = { x: number; y: number; width: number; height: number };
 type Phase =
   | "idle"
   | "captured"
+  | "lifting"
   | "navigating"
   | "target-ready"
   | "recomposing"
@@ -87,9 +96,13 @@ export function CarryProvider({ children }: { children: React.ReactNode }) {
   const [phase, setPhase] = useState<Phase>("idle");
   const targetRef = useRef<HTMLElement | null>(null);
   const cleanupTimer = useRef<number | null>(null);
+  const navigationTimer = useRef<number | null>(null);
 
   const clearCarry = useCallback((nextPhase: Phase = "idle") => {
     if (cleanupTimer.current) window.clearTimeout(cleanupTimer.current);
+    if (navigationTimer.current) window.clearTimeout(navigationTimer.current);
+    cleanupTimer.current = null;
+    navigationTimer.current = null;
     targetRef.current = null;
     setPhase(nextPhase);
     setSnapshot(null);
@@ -98,6 +111,7 @@ export function CarryProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     return () => {
       if (cleanupTimer.current) window.clearTimeout(cleanupTimer.current);
+      if (navigationTimer.current) window.clearTimeout(navigationTimer.current);
     };
   }, []);
 
@@ -140,12 +154,26 @@ export function CarryProvider({ children }: { children: React.ReactNode }) {
         sourceVisualRole
       };
 
-      setSnapshot(next);
-      setPhase(reducedMotion ? "navigating" : "captured");
+      if (cleanupTimer.current) window.clearTimeout(cleanupTimer.current);
+      if (navigationTimer.current) window.clearTimeout(navigationTimer.current);
 
-      requestAnimationFrame(() => {
+      setSnapshot(next);
+
+      if (reducedMotion) {
         setPhase("navigating");
         router.push(destinationRoute);
+        return;
+      }
+
+      setPhase("captured");
+
+      requestAnimationFrame(() => {
+        setPhase("lifting");
+        navigationTimer.current = window.setTimeout(() => {
+          navigationTimer.current = null;
+          setPhase("navigating");
+          router.push(destinationRoute);
+        }, CARRY_LIFT_MS);
       });
     },
     [pathname, reducedMotion, router]
@@ -164,8 +192,11 @@ export function CarryProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
+      const targetRect = rectOf(element);
+      const physics = carryPhysicsForRects(snapshot.sourceRect, targetRect);
+
       setSnapshot((current) =>
-        current ? { ...current, targetRect: rectOf(element) } : current
+        current ? { ...current, targetRect } : current
       );
       setPhase("target-ready");
 
@@ -174,7 +205,7 @@ export function CarryProvider({ children }: { children: React.ReactNode }) {
         cleanupTimer.current = window.setTimeout(() => {
           setPhase("settled");
           cleanupTimer.current = window.setTimeout(() => clearCarry(), 90);
-        }, 560);
+        }, physics.settleMs);
       });
     },
     [snapshot, pathname, reducedMotion, clearCarry]
@@ -194,9 +225,26 @@ export function CarryProvider({ children }: { children: React.ReactNode }) {
   );
 
   const overlayRect =
-    phase === "recomposing" || phase === "target-ready"
+    phase === "recomposing" || phase === "target-ready" || phase === "settled"
       ? snapshot?.targetRect ?? snapshot?.sourceRect
       : snapshot?.sourceRect;
+
+  const physics = snapshot
+    ? carryPhysicsForRects(snapshot.sourceRect, snapshot.targetRect)
+    : null;
+
+  const material = snapshot
+    ? materialStateForCollection(snapshot.product.collection)
+    : null;
+
+  const overlayScale =
+    phase === "lifting"
+      ? 1.014
+      : phase === "navigating"
+        ? 1.008
+        : phase === "settled"
+          ? 0.998
+          : 1;
 
   return (
     <CarryContext.Provider value={value}>
@@ -207,26 +255,60 @@ export function CarryProvider({ children }: { children: React.ReactNode }) {
             key={snapshot.product.id}
             className="carryOverlay"
             aria-hidden="true"
+            data-phase={phase}
+            data-material={material?.id ?? "neutral"}
+            data-distance-profile={physics?.id ?? "near"}
+            style={materialStateCssVars(snapshot.product.collection)}
             initial={{
               left: snapshot.sourceRect.x,
               top: snapshot.sourceRect.y,
               width: snapshot.sourceRect.width,
               height: snapshot.sourceRect.height,
-              opacity: 1
+              opacity: 1,
+              scale: 1
             }}
             animate={{
               left: overlayRect.x,
               top: overlayRect.y,
               width: overlayRect.width,
               height: overlayRect.height,
-              opacity: phase === "settled" ? 0 : 1
+              opacity: phase === "settled" ? 0 : 1,
+              scale: overlayScale
             }}
             exit={{ opacity: 0 }}
             transition={{
-              type: "spring",
-              stiffness: 170,
-              damping: 24,
-              mass: 0.82
+              left: {
+                type: "spring",
+                stiffness: physics?.stiffness ?? 176,
+                damping: physics?.damping ?? 24,
+                mass: physics?.mass ?? 0.82
+              },
+              top: {
+                type: "spring",
+                stiffness: physics?.stiffness ?? 176,
+                damping: physics?.damping ?? 24,
+                mass: physics?.mass ?? 0.82
+              },
+              width: {
+                type: "spring",
+                stiffness: physics?.stiffness ?? 176,
+                damping: physics?.damping ?? 24,
+                mass: physics?.mass ?? 0.82
+              },
+              height: {
+                type: "spring",
+                stiffness: physics?.stiffness ?? 176,
+                damping: physics?.damping ?? 24,
+                mass: physics?.mass ?? 0.82
+              },
+              scale: {
+                duration: phase === "lifting" ? 0.11 : 0.28,
+                ease: [0.2, 0.65, 0.25, 1]
+              },
+              opacity: {
+                duration: 0.12,
+                ease: "easeOut"
+              }
             }}
             data-recomposing={
               phase === "target-ready" || phase === "recomposing"
