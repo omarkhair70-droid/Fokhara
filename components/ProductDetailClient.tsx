@@ -9,6 +9,10 @@ import { AddToCartButton } from "@/components/AddToCartButton";
 import { ObjectMakerBridge } from "@/components/ObjectMakerBridge";
 import { collectionToSlug } from "@/lib/collections";
 import {
+  materialStateCssVars,
+  materialStateForCollection
+} from "@/lib/visual/material-state";
+import {
   type ProductComposition,
   useCarry
 } from "@/features/carry/CarryProvider";
@@ -34,6 +38,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
   );
 
   const carrying = isCarrying(product.id);
+  const material = materialStateForCollection(product.collection);
 
   useEffect(() => {
     registerProductTarget(product.id, targetRef.current);
@@ -44,12 +49,9 @@ export function ProductDetailClient({ product }: { product: Product }) {
     <article
       className="productDetail"
       data-composition={composition}
-      style={
-        {
-          "--material-accent": product.accent,
-          "--material-accent-ink": product.accentInk
-        } as React.CSSProperties
-      }
+      data-material={material.id}
+      data-reflectivity={material.reflectivity}
+      style={materialStateCssVars(product.collection)}
     >
       <div className="productDetail__mediaColumn">
         <div

@@ -5,6 +5,10 @@ import type { Product } from "@/lib/products";
 import { formatEgp } from "@/lib/products";
 import { CarryProductLink } from "@/components/CarryProductLink";
 import Link from "next/link";
+import {
+  materialStateCssVars,
+  materialStateForCollection
+} from "@/lib/visual/material-state";
 
 type Props = {
   products: Product[];
@@ -73,6 +77,9 @@ export function ShopExplorer({
     }
   }, [filters]);
 
+  const activeMaterial =
+    filter === "All" ? materialStateForCollection() : materialStateForCollection(filter);
+
   const visible = useMemo(
     () =>
       filter === "All"
@@ -86,6 +93,8 @@ export function ShopExplorer({
       className="shopSection"
       data-ready={ready}
       data-commerce-source={dataSource}
+      data-material-filter={activeMaterial.id}
+      style={materialStateCssVars(filter === "All" ? undefined : filter)}
     >
       <div className="shopIntro">
         <p className="eyebrow">Object system / live catalog</p>
@@ -130,6 +139,7 @@ export function ShopExplorer({
             key={product.id}
             product={product}
             className="productCard"
+            style={materialStateCssVars(product.collection)}
             returnState={() => ({
               scrollY: window.scrollY,
               focusId: product.id,

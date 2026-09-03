@@ -4,6 +4,10 @@ import { notFound } from "next/navigation";
 import { getCeramicProducts } from "@/lib/commerce/woo";
 import { findCollection } from "@/lib/collections";
 import { formatEgp } from "@/lib/products";
+import {
+  materialStateCssVars,
+  materialStateForCollection
+} from "@/lib/visual/material-state";
 
 type Props = {
   params: Promise<{ collectionSlug: string }>;
@@ -35,9 +39,15 @@ export default async function CollectionPage({ params }: Props) {
   const lead =
     collection.products.find((product) => product.image) ??
     collection.products[0];
+  const material = materialStateForCollection(collection.name);
 
   return (
-    <article className="collectionDetail">
+    <article
+      className="collectionDetail"
+      data-material={material.id}
+      data-reflectivity={material.reflectivity}
+      style={materialStateCssVars(collection.name)}
+    >
       <header className="collectionDetail__hero">
         <div className="collectionDetail__copy">
           <Link href="/collections" className="backLink">
@@ -45,6 +55,7 @@ export default async function CollectionPage({ params }: Props) {
           </Link>
           <p className="eyebrow">Collection / material state</p>
           <h1>{collection.name}</h1>
+          <span className="materialTrace materialTrace--hero" aria-hidden="true" />
           <p>
             A live grouping of the ceramic forms currently carrying the{" "}
             {collection.name} name in Fokhara’s Woo catalog.
@@ -68,6 +79,7 @@ export default async function CollectionPage({ params }: Props) {
             href={"/shop/" + product.slug}
             key={product.id}
             className="collectionProduct"
+            style={materialStateCssVars(product.collection)}
           >
             <div className="collectionProduct__image">
               {product.image ? (
