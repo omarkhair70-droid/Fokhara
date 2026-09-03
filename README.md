@@ -6,7 +6,7 @@ This repository is being used to test a research-led creative workflow where the
 
 ## Current Status
 
-**Product Architecture closed. Original Synthesis / Implementation Blueprint is next.**
+**Original Synthesis / Implementation Blueprint closed. Ready for P0 prototype implementation.**
 
 - [x] Step 01 — Product Truth
 - [x] Step 02 — Non-Web Source Research / Source Atlas
@@ -15,19 +15,17 @@ This repository is being used to test a research-led creative workflow where the
 - [x] Step 05 — First Visual Thesis
 - [x] Step 06 — Web Reality Check
 - [x] Step 07 — Product Architecture
-- [ ] Step 08 — Original Synthesis / Implementation Blueprint
-- [ ] Prototype / Implementation
+- [x] Step 08 — Original Synthesis / Implementation Blueprint
+- [ ] P0 — Carry + Recompose Product Loop
+- [ ] P1 — Become the Maker / Booking
+- [ ] P2 — Full Product System
 - [ ] Visual Review + Subtraction
 
 ## Core Rule
 
 > The web is the medium of execution, not the source of the idea.
 
-The first authored visual world was completed before consulting award-site references.
-
-The Web Reality Check was used to challenge originality and establish the implementation quality bar, not to replace the thesis.
-
-## Research Foundation
+## Research / Design Foundation
 
 - [Step 01 — Product Truth](docs/research/01-product-truth.md)
 - [Step 02 — Non-Web Source Atlas](docs/research/02-non-web-source-atlas.md)
@@ -36,39 +34,25 @@ The Web Reality Check was used to challenge originality and establish the implem
 - [Step 05 — First Visual Thesis](docs/research/05-first-visual-thesis.md)
 - [Step 06 — Web Reality Check](docs/research/06-web-reality-check.md)
 - [Step 07 — Product Architecture](docs/research/07-product-architecture.md)
+- [Step 08 — Implementation Blueprint](docs/research/08-implementation-blueprint.md)
 
-## First Visual Thesis
+## Internal Visual Thesis
 
-### Internal Name
 **THE FORM REMEMBERS**
-
-## Refined Thesis
 
 > **A digital material system where actions leave trace, selected objects causally reform later states, people can cross from observer to maker, and the interface settles from expressive exploration into precise commitment.**
 
-## Product Architecture
+## Technical Baseline
 
-Fokhara is treated as two first-class product systems:
-
-### OWN
-**discover → evaluate → buy → use**
-
-### MAKE
-**discover → choose → commit → participate → learn**
-
-Primary routes:
-
-- Home
-- Shop
-- Collection
-- Product Detail
-- Workshops
-- Workshop Detail
-- Booking
-- Studio
-- Visit
-- Cart
-- Checkout
+- Next.js 16.3.3 Active LTS
+- App Router + TypeScript
+- React Server Components by default
+- Motion for React 13.x
+- CSS Modules + semantic CSS custom-property tokens
+- WooCommerce / WordPress retained as initial operational source
+- WooCommerce isolated behind a Fokhara commerce adapter + Next BFF
+- native View Transition API only as progressive enhancement
+- no WebGL requirement for P0/P1
 
 ## Signature System
 
@@ -84,29 +68,37 @@ Workshops transform the user from observer to participant.
 ### 4. SETTLE WITH INTENT
 Expression contracts as the user approaches booking, cart, and checkout.
 
-## Current Business-Truth Guardrail
+## P0 Prototype
 
-The redesign must not imply real-time workshop availability unless a real scheduling source is connected.
+Build only:
 
-Booking architecture therefore supports explicit availability modes such as:
+1. minimal Home object entry
+2. Shop listing
+3. Product Detail
+4. Carry + Recompose
+5. return-state restoration
+6. compact/mobile equivalent
+7. reduced-motion equivalent
 
-- live
-- request
-- next available
-- contact
+The Product Detail route must also work as a direct deep link with no carry state.
 
-rather than visually faking a live calendar.
+## Architecture Guardrails
 
-## First Build Slice
+- no client-only SPA
+- no fake live workshop availability
+- no random composition
+- no effect without causal meaning
+- no checkout assumption before gateway compatibility is verified
+- no WebGL until P0/P1 pass
+- failed transition must never become failed navigation
+- transactional clarity wins over spectacle
 
-**Home object entry → Shop → Product Detail via Carry + Recompose → return with retained state → mobile + reduced-motion equivalents**
+## Production Source
 
-Then:
+The current Fokhara installation exposes WooCommerce Store API endpoints, so the redesign can preserve the existing commerce backend while replacing the customer-facing experience.
 
-**Workshops → Workshop Detail → truthful booking commitment flow**
+Production checkout remains gated on verification of the current payment gateway's Store API/headless compatibility.
 
-## Next Stage
+## Next
 
-**Step 08 — Original Synthesis / Implementation Blueprint**
-
-Translate the thesis and architecture into concrete technical structure, components, state contracts, transition architecture, responsive modes, and prototype acceptance gates.
+**P0 Prototype Implementation — Home → Shop → Product via Carry + Recompose → Back with Trace.**
