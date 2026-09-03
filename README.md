@@ -19,6 +19,8 @@ This repository tests a research-led creative workflow where the visual and inte
 - [x] P0 — Carry + Recompose Product Loop
 - [x] P1 — Become the Maker / Booking Truth
 - [x] P2 — Full Product System — structurally closed
+- [x] VP0 — Visual Truth Audit
+- [ ] VP1 — Photography & Image Direction
 - [ ] Visual Production
 - [ ] Visual Review + Subtraction
 - [ ] Final Production QA
@@ -179,9 +181,11 @@ Commerce BFF:
 
 ## Next
 
-**Authored Visual Production**
+**VP1 — Photography & Image Direction**
 
 The structural system is now the canvas, not the finished artwork.
+
+VP0 established the real current asset surface: 19 live product primaries, usable official workshop imagery, a broader unresolved archive, and clear macro/founder/studio/use gaps.
 
 Next work should concentrate on:
 
