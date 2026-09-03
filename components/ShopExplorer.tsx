@@ -92,8 +92,9 @@ export function ShopExplorer({
         <h1>Ceramics, held in context.</h1>
         <p>
           Product names, prices and stock now come through Fokhara’s current
-          WooCommerce Store API. P2 still uses abstract visual stand-ins while
-          approved product photography is being prepared.
+          WooCommerce Store API. VP2 now uses Fokhara’s current product
+          photography as object truth; missing alternate and macro frames remain
+          explicit production gaps.
         </p>
       </div>
 

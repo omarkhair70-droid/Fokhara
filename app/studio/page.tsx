@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { StudioEvidence } from "@/components/StudioEvidence";
 
 export const metadata: Metadata = {
   title: "Studio",
@@ -40,6 +41,8 @@ export default function StudioPage() {
           </a>
         </div>
       </section>
+
+      <StudioEvidence />
 
       <section className="studioPractice">
         <p className="eyebrow">Practice / two directions</p>

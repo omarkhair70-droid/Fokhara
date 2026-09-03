@@ -61,7 +61,9 @@ export function ProductDetailClient({ product }: { product: Product }) {
           <ProductVisual product={product} />
         </div>
         <p className="prototypeNote">
-          Live product data · visual art direction still uses a temporary stand-in.
+          {product.image
+            ? "Current Fokhara product image · live Woo source."
+            : "No current Fokhara product image available · fallback visualization."}
         </p>
       </div>
 
