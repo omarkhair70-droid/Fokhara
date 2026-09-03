@@ -1,0 +1,144 @@
+.labIndex {
+  min-height: calc(100svh - var(--header-height));
+  padding: clamp(1rem, 3vw, 3rem);
+}
+
+.hero {
+  min-height: 70svh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, .7fr);
+  gap: 2rem 5rem;
+  align-content: end;
+  padding-bottom: clamp(4rem, 8vw, 8rem);
+}
+
+.hero h1 {
+  margin: .7rem 0 0;
+  max-width: 9ch;
+  font-size: clamp(4.5rem, 8.5vw, 9rem);
+  line-height: .8;
+  letter-spacing: -.075em;
+  font-weight: 500;
+}
+
+.hero > p:last-child {
+  align-self: end;
+  max-width: 34rem;
+  margin: 0;
+  color: var(--ink-secondary);
+  line-height: 1.55;
+}
+
+.grid {
+  display: grid;
+}
+
+.card {
+  min-height: 30rem;
+  display: grid;
+  grid-template-columns: 4rem minmax(0, 1fr) auto;
+  gap: clamp(1rem, 4vw, 4rem);
+  align-items: end;
+  padding: clamp(1.5rem, 3vw, 3rem) 0;
+  border-top: 1px solid var(--line);
+}
+
+.card:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.card > span {
+  align-self: start;
+  color: var(--ink-muted);
+  font-size: .7rem;
+}
+
+.card h2 {
+  margin: .4rem 0 1rem;
+  max-width: 11ch;
+  font-size: clamp(3.3rem, 6vw, 6.5rem);
+  line-height: .84;
+  letter-spacing: -.06em;
+  font-weight: 500;
+}
+
+.card div > p:last-child {
+  max-width: 34rem;
+  color: var(--ink-secondary);
+  line-height: 1.5;
+}
+
+.card > strong {
+  align-self: end;
+  font-size: .75rem;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: .3em;
+}
+
+.rules {
+  min-height: 72svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(5rem, 10vw, 10rem) 0;
+}
+
+.rules h2 {
+  margin: .7rem 0 2rem;
+  max-width: 10ch;
+  font-size: clamp(4rem, 7vw, 7.5rem);
+  line-height: .84;
+  letter-spacing: -.065em;
+  font-weight: 500;
+}
+
+.rules ol {
+  max-width: 46rem;
+  margin: 0;
+  padding-left: 1.2rem;
+  color: var(--ink-secondary);
+  line-height: 1.6;
+}
+
+@media (max-width: 820px) {
+  .labIndex {
+    padding: 1rem;
+  }
+
+  .hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 3rem 0 5rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.8rem, 17vw, 6.2rem);
+  }
+
+  .card {
+    min-height: auto;
+    grid-template-columns: 2rem minmax(0, 1fr);
+    gap: 1rem;
+    padding: 2rem 0 3rem;
+  }
+
+  .card > strong {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .card h2 {
+    font-size: clamp(3rem, 14vw, 5rem);
+  }
+
+  .rules {
+    min-height: auto;
+    padding: 5rem 0;
+  }
+
+  .rules h2 {
+    font-size: clamp(3.4rem, 15vw, 5.2rem);
+  }
+}
