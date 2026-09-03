@@ -114,3 +114,34 @@ Keep it only if all are true:
 6. removing it would remove meaning, not just spectacle.
 
 If it fails any of those tests, delete it.
+
+
+## Current implementation snapshot
+
+Lab index:
+- `/lab`
+
+Built experiments:
+1. `/lab/material-memory`
+2. `/lab/carry-space`
+3. `/lab/kiln-threshold`
+4. `/lab/collection-inheritance`
+5. `/lab/collection-inheritance/[collectionSlug]`
+6. `/lab/studio-contact-sheet`
+
+Interaction-aware capture:
+- `npm run capture:lab`
+- `scripts/lab-capture.ps1`
+- output: `visual-review/lab/`
+- package: `fokhara-lab-review.zip`
+
+Latest validated Lab HEAD before documentation-only updates:
+`4af3adf002f9c7ff549d1c5c861bcfba440e3819`
+
+Validation result:
+- TypeScript: PASS
+- production build: PASS
+- GitHub workflow: PASS
+
+The Lab remains disposable. No experiment is accepted for production merely
+because it builds or looks novel. Visual review must decide what survives.
