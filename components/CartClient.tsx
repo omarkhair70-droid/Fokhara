@@ -73,13 +73,35 @@ export function CartClient() {
     );
   }
 
+  const orderEmailHref = cart
+    ? "mailto:fokhara@outlook.com?subject=" +
+      encodeURIComponent("Ceramics order request") +
+      "&body=" +
+      encodeURIComponent(
+        [
+          "Hello Fokhara,",
+          "",
+          "I would like to ask about these pieces:",
+          ...cart.items.map(
+            (item) =>
+              `- ${item.name} × ${item.quantity} · ${formatEgp(item.lineTotalEgp)}`
+          ),
+          "",
+          `Current total shown: ${formatEgp(cart.totalEgp)}`,
+          "",
+          "Please confirm availability and how I can complete the order."
+        ].join("\n")
+      )
+    : "#";
+
   return (
     <section className="cartPage">
       <header className="cartHeader">
-        <p className="eyebrow">Commit / live Woo cart</p>
+        <p className="eyebrow">Cart / ceramics</p>
         <h1>Your selected forms.</h1>
         <p>
-          This cart is backed by Fokhara’s current WooCommerce customer session.
+          Review the pieces you selected before contacting the studio to
+          complete the order.
         </p>
       </header>
 
@@ -91,9 +113,11 @@ export function CartClient() {
 
       {cart?.items.length === 0 ? (
         <div className="cartEmpty">
-          <p>Your cart is empty.</p>
+          <p className="eyebrow">Nothing selected yet</p>
+          <h2>Your cart is waiting for its first piece.</h2>
+          <p>Browse the current ceramics and carry a form into the cart.</p>
           <a className="buttonPrimary" href="/shop">
-            Return to shop
+            Explore ceramics
           </a>
         </div>
       ) : null}
@@ -160,13 +184,13 @@ export function CartClient() {
             <div className="cartSummary__gate">
               <span>Checkout</span>
               <p>
-                Cart session is live. Checkout remains gated until Fokhara’s
-                payment method compatibility is verified.
+                Online payment is not available on this site yet. Send the
+                current cart to Fokhara to confirm availability and payment.
               </p>
             </div>
-            <button className="buttonPrimary" type="button" disabled>
-              Checkout · payment audit gate
-            </button>
+            <a className="buttonPrimary" href={orderEmailHref}>
+              Email this cart to Fokhara
+            </a>
           </aside>
         </>
       ) : null}
