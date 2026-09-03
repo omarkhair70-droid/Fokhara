@@ -5,12 +5,20 @@ import Link from "next/link";
 import type { Workshop } from "@/lib/workshops";
 import { formatWorkshopPrice } from "@/lib/workshops";
 import { WorkshopVisual } from "@/components/WorkshopVisual";
+import { WorkshopObjectBridge } from "@/components/WorkshopObjectBridge";
+import type { Product } from "@/lib/products";
 
 type MakerStage = "observe" | "understand" | "choose" | "commit";
 
 const stages: MakerStage[] = ["observe", "understand", "choose", "commit"];
 
-export function WorkshopDetailClient({ workshop }: { workshop: Workshop }) {
+export function WorkshopDetailClient({
+  workshop,
+  relatedProducts
+}: {
+  workshop: Workshop;
+  relatedProducts: Product[];
+}) {
   const [stage, setStage] = useState<MakerStage>("observe");
 
   useEffect(() => {
@@ -184,6 +192,8 @@ export function WorkshopDetailClient({ workshop }: { workshop: Workshop }) {
           Verify current Fokhara listing ↗
         </a>
       </section>
+
+      <WorkshopObjectBridge products={relatedProducts} />
     </article>
   );
 }

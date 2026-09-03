@@ -2142,3 +2142,138 @@ button.buttonPrimary:disabled {
     border-right: 0;
   }
 }
+
+
+/* P2 — cross-system bridges */
+.shopCollectionEntry {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 0 1rem;
+  padding: .75rem 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  font-size: .75rem;
+}
+
+.shopCollectionEntry span {
+  color: var(--ink-muted);
+}
+
+.shopCollectionEntry a,
+.objectMakerBridge__actions a,
+.workshopObjectBridge__actions a {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.objectMakerBridge,
+.workshopObjectBridge {
+  grid-column: 1 / -1;
+  min-height: 70svh;
+  padding: var(--space-field) clamp(1rem, 8vw, 10rem);
+  border-top: 1px solid var(--line);
+}
+
+.objectMakerBridge {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
+  gap: clamp(2rem, 7vw, 8rem);
+  align-items: center;
+}
+
+.objectMakerBridge h2,
+.workshopObjectBridge h2 {
+  margin: 0;
+  max-width: 11ch;
+  font-size: clamp(3rem, 6vw, 6.5rem);
+  line-height: .9;
+  letter-spacing: -.055em;
+  font-weight: 500;
+}
+
+.objectMakerBridge__copy {
+  max-width: 38rem;
+  line-height: 1.55;
+  color: var(--ink-secondary);
+}
+
+.objectMakerBridge__actions,
+.workshopObjectBridge__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  margin-top: 2rem;
+}
+
+.workshopObjectBridge header {
+  max-width: 60rem;
+}
+
+.workshopObjectBridge header > p:last-child {
+  max-width: 38rem;
+  color: var(--ink-secondary);
+  line-height: 1.55;
+}
+
+.workshopObjectBridge__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-top: clamp(3rem, 6vw, 6rem);
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.workshopObjectBridge__item {
+  min-height: 30rem;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  background: var(--field-primary);
+}
+
+.workshopObjectBridge__item img,
+.workshopObjectBridge__imageFallback {
+  width: 100%;
+  height: 100%;
+  min-height: 24rem;
+  display: block;
+  object-fit: cover;
+  background: var(--field-raised);
+}
+
+.workshopObjectBridge__item > div {
+  display: grid;
+  gap: .35rem;
+  padding: .8rem;
+}
+
+.workshopObjectBridge__item span {
+  font-size: .68rem;
+  color: var(--ink-muted);
+}
+
+.workshopObjectBridge__item strong {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.productDetail__info .eyebrow a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 820px) {
+  .objectMakerBridge {
+    grid-template-columns: 1fr;
+  }
+
+  .workshopObjectBridge__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workshopObjectBridge__item {
+    min-height: 24rem;
+  }
+}

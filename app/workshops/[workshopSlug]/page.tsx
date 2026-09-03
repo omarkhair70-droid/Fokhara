@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { WorkshopDetailClient } from "@/components/WorkshopDetailClient";
 import { getWorkshop, workshops } from "@/lib/workshops";
+import { getCeramicProducts } from "@/lib/commerce/woo";
 
 type WorkshopPageProps = {
   params: Promise<{ workshopSlug: string }>;
@@ -31,5 +32,12 @@ export default async function WorkshopPage({ params }: WorkshopPageProps) {
   const workshop = getWorkshop(workshopSlug);
   if (!workshop) notFound();
 
-  return <WorkshopDetailClient workshop={workshop} />;
+  const products = await getCeramicProducts();
+
+  return (
+    <WorkshopDetailClient
+      workshop={workshop}
+      relatedProducts={products.data}
+    />
+  );
 }

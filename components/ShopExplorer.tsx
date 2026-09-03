@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import type { Product } from "@/lib/products";
 import { formatEgp } from "@/lib/products";
 import { CarryProductLink } from "@/components/CarryProductLink";
+import Link from "next/link";
 
 type Props = {
   products: Product[];
@@ -103,6 +104,11 @@ export function ShopExplorer({
           {dataError ? <span>{dataError}</span> : null}
         </div>
       ) : null}
+
+      <div className="shopCollectionEntry">
+        <span>Material states, not just filters.</span>
+        <Link href="/collections">Browse collections →</Link>
+      </div>
 
       <div className="filterBar" aria-label="Filter by collection">
         {filters.map((item) => (

@@ -6,6 +6,8 @@ import type { Product } from "@/lib/products";
 import { formatEgp } from "@/lib/products";
 import { ProductVisual } from "@/components/ProductVisual";
 import { AddToCartButton } from "@/components/AddToCartButton";
+import { ObjectMakerBridge } from "@/components/ObjectMakerBridge";
+import { collectionToSlug } from "@/lib/collections";
 import {
   type ProductComposition,
   useCarry
@@ -68,7 +70,14 @@ export function ProductDetailClient({ product }: { product: Product }) {
           ← Back to shop
         </Link>
         <p className="eyebrow">
-          {product.collection ?? "Ceramics"} / evaluate
+          {product.collection ? (
+            <Link href={"/collections/" + collectionToSlug(product.collection)}>
+              {product.collection}
+            </Link>
+          ) : (
+            "Ceramics"
+          )}{" "}
+          / evaluate
         </p>
         <h1>{product.name}</h1>
         <p className="price">{formatEgp(product.priceEgp)}</p>
@@ -119,6 +128,8 @@ export function ProductDetailClient({ product }: { product: Product }) {
           </div>
         </dl>
       </div>
+
+      <ObjectMakerBridge product={product} />
     </article>
   );
 }
