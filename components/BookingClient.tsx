@@ -45,16 +45,36 @@ export function BookingClient({ workshop }: { workshop: Workshop }) {
     });
   }
 
+  const requestedSchedule = useNextAvailable
+    ? "Next available session"
+    : preferredWindow || preferredDate || "Studio to confirm";
+
+  const emailHref =
+    "mailto:fokhara@outlook.com?subject=" +
+    encodeURIComponent(`Workshop request · ${workshop.name}`) +
+    "&body=" +
+    encodeURIComponent(
+      [
+        "Hello Fokhara,",
+        "",
+        `I would like to request: ${workshop.name}`,
+        `Participants: ${participants}`,
+        `Preferred schedule: ${requestedSchedule}`,
+        `Price basis shown: ${formatWorkshopPrice(workshop)}`,
+        "",
+        "Please confirm availability and the next step."
+      ].join("\n")
+    );
+
   if (mode === "review") {
     return (
       <section className="bookingPage bookingPage--review">
         <div className="bookingReview">
-          <p className="eyebrow">Commit / review</p>
-          <h1>Request prepared. Nothing has been sent yet.</h1>
+          <p className="eyebrow">Review your request</p>
+          <h1>Your workshop request is ready.</h1>
           <p>
-            P1 deliberately stops before a fake confirmation. A production
-            backend/contact handoff must be connected before this can create a
-            real booking.
+            This review does not reserve a seat. Continue by email and Fokhara
+            can confirm availability directly with you.
           </p>
 
           <dl className="bookingSummary">
@@ -69,9 +89,7 @@ export function BookingClient({ workshop }: { workshop: Workshop }) {
             <div>
               <dt>Preferred schedule</dt>
               <dd>
-                {useNextAvailable
-                  ? "Next available session"
-                  : preferredWindow || preferredDate || "Studio to confirm"}
+                {requestedSchedule}
               </dd>
             </div>
             <div>
@@ -92,9 +110,9 @@ export function BookingClient({ workshop }: { workshop: Workshop }) {
             >
               Edit request
             </button>
-            <button className="buttonPrimary" type="button" disabled>
-              Send request · backend gate
-            </button>
+            <a className="buttonPrimary" href={emailHref}>
+              Continue by email
+            </a>
           </div>
         </div>
       </section>
@@ -107,7 +125,7 @@ export function BookingClient({ workshop }: { workshop: Workshop }) {
         <Link className="backLink" href={`/workshops/${workshop.slug}`}>
           ← Back to workshop
         </Link>
-        <p className="eyebrow">Commit / booking request</p>
+        <p className="eyebrow">Workshop request</p>
         <h1>{workshop.name}</h1>
         <p>
           Choose a preference. This is not live availability and does not
@@ -217,8 +235,7 @@ export function BookingClient({ workshop }: { workshop: Workshop }) {
           </p>
           <label className="bookingCheckbox">
             <input type="checkbox" required />
-            I understand this prototype is preparing a request, not confirming
-            a booking.
+            I understand this prepares a request and does not confirm a booking.
           </label>
         </fieldset>
 
