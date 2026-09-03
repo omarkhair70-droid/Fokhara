@@ -20,6 +20,8 @@ export default function StudioPage() {
         </p>
       </header>
 
+      <StudioEvidence />
+
       <section className="studioOrigin">
         <div className="studioOrigin__index">2018</div>
         <div>
@@ -41,8 +43,6 @@ export default function StudioPage() {
           </a>
         </div>
       </section>
-
-      <StudioEvidence />
 
       <section className="studioPractice">
         <p className="eyebrow">Practice / two directions</p>

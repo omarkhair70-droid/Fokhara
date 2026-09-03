@@ -3150,3 +3150,360 @@ button {
     transition: none;
   }
 }
+
+
+/* VP8 — PAGE PACING & COMPOSITIONAL RHYTHM
+   Rhythm follows content state: open → pressure → release → settle. */
+:root {
+  --pace-open: clamp(5rem, 9vw, 10rem);
+  --pace-pressure: clamp(3rem, 6vw, 6rem);
+  --pace-release: clamp(2rem, 4vw, 4rem);
+}
+
+/* HOME
+   One large object entry, one tighter maker pressure point, one short release. */
+.homeObject {
+  min-height: calc(96svh - var(--header-height));
+  padding-bottom: var(--pace-open);
+}
+
+.homeMaker {
+  min-height: 78svh;
+  padding-block: var(--pace-pressure);
+}
+
+.homeMaker__visual {
+  min-height: min(62svh, 680px);
+}
+
+.homeProof {
+  min-height: 42svh;
+  grid-template-columns: minmax(8rem, .38fr) minmax(0, 1.62fr);
+  gap: clamp(2rem, 7vw, 8rem);
+  align-items: end;
+  align-content: center;
+  padding-block: var(--pace-release);
+}
+
+.homeProof .eyebrow {
+  align-self: start;
+}
+
+.homeProof__statement {
+  grid-column: 2;
+  max-width: 15ch;
+  justify-self: end;
+}
+
+/* SHOP
+   Discovery copy yields sooner to real inventory. Repeated cosmetic staggering
+   is removed; breathing now comes from real collection boundaries. */
+.shopSection {
+  padding-top: clamp(2.5rem, 4vw, 4rem);
+}
+
+.shopIntro {
+  min-height: 40svh;
+  align-content: end;
+  padding-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.productGrid {
+  row-gap: clamp(2rem, 4vw, 4.5rem);
+}
+
+.productCard:nth-child(3n + 2) {
+  transform: none;
+}
+
+.productCard--groupStart {
+  margin-top: clamp(4rem, 8vw, 9rem);
+}
+
+/* COLLECTIONS
+   First collection establishes the material world. The rest become faster
+   scan states with deliberate releases instead of seven equal panels. */
+.collectionIndex__item[data-rhythm="anchor"] {
+  min-height: 66svh;
+  grid-template-columns: 5rem minmax(300px, 1.05fr) minmax(300px, .95fr);
+}
+
+.collectionIndex__item[data-rhythm="anchor"] .collectionIndex__image {
+  min-height: 58svh;
+}
+
+.collectionIndex__item[data-rhythm="scan"],
+.collectionIndex__item[data-rhythm="release"] {
+  min-height: 24rem;
+  grid-template-columns: 4rem minmax(220px, .72fr) minmax(300px, 1.28fr);
+}
+
+.collectionIndex__item[data-rhythm="scan"] .collectionIndex__image,
+.collectionIndex__item[data-rhythm="release"] .collectionIndex__image {
+  min-height: 20rem;
+}
+
+.collectionIndex__item[data-rhythm="scan"] .collectionIndex__copy h2,
+.collectionIndex__item[data-rhythm="release"] .collectionIndex__copy h2 {
+  font-size: clamp(2.5rem, 5vw, 5rem);
+}
+
+.collectionIndex__item[data-rhythm="release"] {
+  margin-top: clamp(2.5rem, 5vw, 5rem);
+  border-top: 1px solid var(--line);
+}
+
+.collectionDetail__hero {
+  min-height: 90svh;
+}
+
+.collectionDetail__lead {
+  min-height: 66svh;
+}
+
+.collectionProduct {
+  min-height: 56svh;
+}
+
+.collectionProduct .carrySource {
+  min-height: 38svh;
+}
+
+.collectionDetail__exit {
+  min-height: 44svh;
+  padding-block: var(--pace-release);
+}
+
+/* PRODUCT DETAIL
+   Evaluation keeps its full spatial authority. The cross-system invitation is
+   a release, not a second hero. */
+.objectMakerBridge {
+  min-height: 52svh;
+  padding-block: var(--pace-release);
+}
+
+/* WORKSHOP BROWSE
+   Format is the causal grouping. A new format gets room to announce itself;
+   siblings inside that format scan faster. */
+.workshopsIntro {
+  min-height: 44svh;
+  align-content: end;
+  padding-bottom: clamp(2.5rem, 4vw, 4rem);
+}
+
+.workshopGrid {
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.workshopCard {
+  min-height: 56svh;
+}
+
+.workshopCard[data-format-start="true"] {
+  min-height: 66svh;
+}
+
+.workshopCard[data-format-start="true"]:not(:first-child) {
+  margin-top: clamp(4rem, 8vw, 9rem);
+}
+
+/* WORKSHOP DETAIL
+   The page deliberately contracts as intent becomes concrete. */
+.workshopDetail__hero {
+  min-height: 94svh;
+}
+
+.makerSection--process {
+  min-height: 102svh;
+  padding-block: var(--pace-open);
+}
+
+.makerSection--facts {
+  min-height: 70svh;
+  padding-block: var(--pace-pressure);
+}
+
+.makerSection--commit {
+  min-height: 58svh;
+  padding-block: var(--pace-release);
+}
+
+.workshopObjectBridge {
+  min-height: 60svh;
+  padding-block: var(--pace-pressure);
+}
+
+/* STUDIO
+   Proof becomes the visual peak. Origin and systems around it are compressed,
+   so the page no longer reads as six equally-sized essays. */
+.studioHero {
+  min-height: 58svh;
+  padding-block: var(--pace-pressure);
+}
+
+.studioEvidence {
+  min-height: 92svh;
+  padding-block: clamp(1rem, 2vw, 2rem);
+}
+
+.studioEvidence__media {
+  min-height: 80svh;
+}
+
+.studioOrigin {
+  min-height: 62svh;
+  padding-block: var(--pace-pressure);
+}
+
+.studioPractice {
+  min-height: 70svh;
+  padding-block: var(--pace-pressure);
+}
+
+.studioPractice__grid {
+  margin-top: clamp(2rem, 4vw, 4rem);
+}
+
+.studioPractice__grid a {
+  min-height: 23rem;
+}
+
+.studioProcess {
+  min-height: 46svh;
+  padding-block: var(--pace-release);
+}
+
+.studioProcess__rail span {
+  min-height: 7rem;
+}
+
+.studioVisitBridge {
+  min-height: 46svh;
+  padding-block: var(--pace-release);
+}
+
+/* Compact is authored independently: remove long desktop holds and keep only
+   meaningful group separation. */
+@media (max-width: 820px) {
+  .homeObject,
+  .homeMaker,
+  .homeProof,
+  .shopIntro,
+  .collectionDetail__hero,
+  .objectMakerBridge,
+  .workshopsIntro,
+  .workshopDetail__hero,
+  .makerSection--process,
+  .makerSection--facts,
+  .makerSection--commit,
+  .workshopObjectBridge,
+  .studioHero,
+  .studioEvidence,
+  .studioOrigin,
+  .studioPractice,
+  .studioProcess,
+  .studioVisitBridge {
+    min-height: auto;
+  }
+
+  .homeObject {
+    padding-bottom: clamp(3rem, 12vw, 6rem);
+  }
+
+  .homeMaker {
+    padding-block: clamp(3rem, 10vw, 5rem);
+  }
+
+  .homeMaker__visual {
+    min-height: 58svh;
+  }
+
+  .homeProof {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding-block: clamp(3rem, 10vw, 5rem);
+  }
+
+  .homeProof__statement {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .shopIntro {
+    padding-bottom: 2.5rem;
+  }
+
+  .productGrid {
+    row-gap: 1.2rem;
+  }
+
+  .productCard--groupStart {
+    margin-top: 3.5rem;
+  }
+
+  .collectionIndex__item[data-rhythm="anchor"],
+  .collectionIndex__item[data-rhythm="scan"],
+  .collectionIndex__item[data-rhythm="release"] {
+    min-height: auto;
+  }
+
+  .collectionIndex__item[data-rhythm="release"] {
+    margin-top: 2.5rem;
+  }
+
+  .collectionIndex__item[data-rhythm="anchor"] .collectionIndex__image {
+    min-height: 58svh;
+  }
+
+  .collectionIndex__item[data-rhythm="scan"] .collectionIndex__image,
+  .collectionIndex__item[data-rhythm="release"] .collectionIndex__image {
+    min-height: 42svh;
+  }
+
+  .collectionProduct {
+    min-height: auto;
+  }
+
+  .collectionProduct .carrySource {
+    min-height: 46svh;
+  }
+
+  .workshopCard,
+  .workshopCard[data-format-start="true"] {
+    min-height: auto;
+  }
+
+  .workshopCard[data-format-start="true"]:not(:first-child) {
+    margin-top: 3.5rem;
+  }
+
+  .makerSection--process,
+  .makerSection--facts,
+  .makerSection--commit,
+  .workshopObjectBridge {
+    padding-block: clamp(3rem, 10vw, 5rem);
+  }
+
+  .studioEvidence {
+    padding-block: 1rem;
+  }
+
+  .studioEvidence__media {
+    min-height: 62svh;
+  }
+
+  .studioOrigin,
+  .studioPractice,
+  .studioProcess,
+  .studioVisitBridge {
+    padding-block: clamp(3rem, 10vw, 5rem);
+  }
+
+  .studioPractice__grid a {
+    min-height: 20rem;
+  }
+
+  .studioProcess__rail span {
+    min-height: 6rem;
+  }
+}

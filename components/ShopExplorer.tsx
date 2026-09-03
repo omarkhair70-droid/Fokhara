@@ -134,40 +134,50 @@ export function ShopExplorer({
       </div>
 
       <div className="productGrid">
-        {visible.map((product, index) => (
-          <CarryProductLink
-            key={product.id}
-            product={product}
-            className="productCard"
-            style={materialStateCssVars(product.collection)}
-            visualRole="browse"
-            returnState={() => ({
-              scrollY: window.scrollY,
-              focusId: product.id,
-              filter
-            })}
-          >
-            <span className="productCard__index">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <div
-              className="productCard__body"
-              data-product-id={product.id}
-              tabIndex={-1}
+        {visible.map((product, index) => {
+          const beginsCollection =
+            filter === "All" &&
+            index > 0 &&
+            visible[index - 1]?.collection !== product.collection;
+
+          return (
+            <CarryProductLink
+              key={product.id}
+              product={product}
+              className={
+                "productCard" +
+                (beginsCollection ? " productCard--groupStart" : "")
+              }
+              style={materialStateCssVars(product.collection)}
+              visualRole="browse"
+              returnState={() => ({
+                scrollY: window.scrollY,
+                focusId: product.id,
+                filter
+              })}
             >
-              <span>{product.collection ?? "Ceramics"}</span>
-              <strong>{product.name}</strong>
-              <span>{formatEgp(product.priceEgp)}</span>
-              <span className="stockState" data-stock={product.stock}>
-                {product.stock === "in_stock"
-                  ? "In stock"
-                  : product.stock === "on_backorder"
-                    ? "On backorder"
-                    : "Out of stock"}
+              <span className="productCard__index">
+                {String(index + 1).padStart(2, "0")}
               </span>
-            </div>
-          </CarryProductLink>
-        ))}
+              <div
+                className="productCard__body"
+                data-product-id={product.id}
+                tabIndex={-1}
+              >
+                <span>{product.collection ?? "Ceramics"}</span>
+                <strong>{product.name}</strong>
+                <span>{formatEgp(product.priceEgp)}</span>
+                <span className="stockState" data-stock={product.stock}>
+                  {product.stock === "in_stock"
+                    ? "In stock"
+                    : product.stock === "on_backorder"
+                      ? "On backorder"
+                      : "Out of stock"}
+                </span>
+              </div>
+            </CarryProductLink>
+          );
+        })}
       </div>
     </section>
   );
