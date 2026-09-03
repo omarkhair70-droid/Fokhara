@@ -20,7 +20,8 @@ This repository tests a research-led creative workflow where the visual and inte
 - [x] P1 — Become the Maker / Booking Truth
 - [x] P2 — Full Product System — structurally closed
 - [x] VP0 — Visual Truth Audit
-- [ ] VP1 — Photography & Image Direction
+- [x] VP1 — Photography & Image Direction
+- [ ] VP2 — Asset Production / Missing Visuals
 - [ ] Visual Production
 - [ ] Visual Review + Subtraction
 - [ ] Final Production QA
@@ -181,7 +182,7 @@ Commerce BFF:
 
 ## Next
 
-**VP1 — Photography & Image Direction**
+**VP2 — Asset Production / Missing Visuals**
 
 The structural system is now the canvas, not the finished artwork.
 
