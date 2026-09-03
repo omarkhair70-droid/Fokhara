@@ -21,7 +21,8 @@ This repository tests a research-led creative workflow where the visual and inte
 - [x] P2 — Full Product System — structurally closed
 - [x] VP0 — Visual Truth Audit
 - [x] VP1 — Photography & Image Direction
-- [ ] VP2 — Asset Production / Missing Visuals
+- [x] VP2 — Asset Production / Missing Visuals
+- [ ] VP3 — Typography Lab
 - [ ] Visual Production
 - [ ] Visual Review + Subtraction
 - [ ] Final Production QA
@@ -182,7 +183,7 @@ Commerce BFF:
 
 ## Next
 
-**VP2 — Asset Production / Missing Visuals**
+**VP3 — Typography Lab**
 
 The structural system is now the canvas, not the finished artwork.
 

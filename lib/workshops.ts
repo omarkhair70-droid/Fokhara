@@ -1,6 +1,11 @@
 export type WorkshopFormat = "single" | "package" | "course";
 export type AvailabilityMode = "request" | "next_available" | "contact" | "live";
 
+export type WorkshopImage = {
+  src: string;
+  alt: string;
+};
+
 export type Workshop = {
   id: string;
   slug: string;
@@ -22,6 +27,8 @@ export type Workshop = {
   recurringDays?: string[];
   sourceUrl: string;
   accent: string;
+  image?: WorkshopImage;
+  imageSource?: "woo" | "official-site";
 };
 
 export const workshops: Workshop[] = [

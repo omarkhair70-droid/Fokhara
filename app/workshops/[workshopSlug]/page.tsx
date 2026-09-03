@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { WorkshopDetailClient } from "@/components/WorkshopDetailClient";
 import { getWorkshop, workshops } from "@/lib/workshops";
 import { getCeramicProducts } from "@/lib/commerce/woo";
+import { withWorkshopMedia } from "@/lib/commerce/workshop-media";
 import {
   serializeStructuredData,
   workshopStructuredData
@@ -36,7 +37,10 @@ export default async function WorkshopPage({ params }: WorkshopPageProps) {
   const workshop = getWorkshop(workshopSlug);
   if (!workshop) notFound();
 
-  const products = await getCeramicProducts();
+  const [products, visualWorkshop] = await Promise.all([
+    getCeramicProducts(),
+    withWorkshopMedia(workshop)
+  ]);
   const structuredData = workshopStructuredData(workshop);
 
   return (
@@ -48,7 +52,7 @@ export default async function WorkshopPage({ params }: WorkshopPageProps) {
         }}
       />
       <WorkshopDetailClient
-      workshop={workshop}
+        workshop={visualWorkshop}
         relatedProducts={products.data}
       />
     </>
