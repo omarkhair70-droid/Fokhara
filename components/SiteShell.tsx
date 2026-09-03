@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { CartIndicator } from "@/components/CartIndicator";
 
 function intentForPath(pathname: string) {
   if (pathname === "/") return "discovery";
@@ -44,9 +45,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <span className="navMuted" aria-disabled="true">Studio</span>
           <span className="navMuted" aria-disabled="true">Visit</span>
         </nav>
-        <span className="cartStub" aria-label="Cart prototype placeholder">
-          Cart · 0
-        </span>
+        <CartIndicator />
       </header>
       <main>{children}</main>
     </div>
