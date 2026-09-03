@@ -8,6 +8,9 @@ type Props = {
   collectionSlug: string;
   className?: string;
   style?: CSSProperties;
+  materialId?: string;
+  reflectivity?: string;
+  rhythm?: string;
   children: ReactNode;
 };
 
@@ -18,6 +21,9 @@ export function CollectionMemoryLink({
   collectionSlug,
   className,
   style,
+  materialId,
+  reflectivity,
+  rhythm,
   children
 }: Props) {
   return (
@@ -25,6 +31,9 @@ export function CollectionMemoryLink({
       href={href}
       className={className}
       style={style}
+      data-material={materialId}
+      data-reflectivity={reflectivity}
+      data-rhythm={rhythm}
       onClick={(event) => {
         if (
           event.defaultPrevented ||
