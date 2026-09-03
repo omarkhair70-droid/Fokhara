@@ -59,7 +59,10 @@ export default async function CollectionPage({ params }: Props) {
           </Link>
           <p className="eyebrow">Collection / fired surface</p>
           <h1>{collection.name}</h1>
-          <span className="materialTrace materialTrace--hero" aria-hidden="true" />
+          <span
+            className="materialTrace materialTrace--hero collectionArrivalTrace"
+            aria-hidden="true"
+          />
           <p>
             {collection.name} carries its surface language across the
             functional forms currently available from Fokhara.
