@@ -287,35 +287,6 @@ export async function getCeramicProducts(): Promise<ProductResult<Product[]>> {
           }))
         })
       );
-
-      try {
-        const cartResponse = await storeFetch("/cart", { cache: "no-store" });
-        const cart = (await cartResponse.json()) as Record<string, unknown>;
-        console.info(
-          "[fokhara-payment-capabilities]",
-          JSON.stringify({
-            paymentMethods: Array.isArray(cart.payment_methods)
-              ? cart.payment_methods
-              : [],
-            paymentRequirements: Array.isArray(cart.payment_requirements)
-              ? cart.payment_requirements
-              : [],
-            needsPayment: Boolean(cart.needs_payment),
-            needsShipping: Boolean(cart.needs_shipping),
-            hasCalculators: Boolean(cart.has_calculated_shipping)
-          })
-        );
-      } catch (cartError) {
-        console.warn(
-          "[fokhara-payment-capabilities]",
-          JSON.stringify({
-            error:
-              cartError instanceof Error
-                ? cartError.message
-                : "Could not inspect cart capabilities"
-          })
-        );
-      }
     }
 
     return { data: ceramics, source: "live" };
@@ -421,5 +392,23 @@ export async function inspectStoreApi() {
           }
         : null
     )
+  };
+}
+
+
+export async function inspectPaymentCapabilities() {
+  const response = await storeFetch("/cart", { cache: "no-store" });
+  const cart = (await response.json()) as Record<string, unknown>;
+
+  return {
+    paymentMethods: Array.isArray(cart.payment_methods)
+      ? cart.payment_methods
+      : [],
+    paymentRequirements: Array.isArray(cart.payment_requirements)
+      ? cart.payment_requirements
+      : [],
+    needsPayment: Boolean(cart.needs_payment),
+    needsShipping: Boolean(cart.needs_shipping),
+    hasCalculatedShipping: Boolean(cart.has_calculated_shipping)
   };
 }
