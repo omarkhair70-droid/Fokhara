@@ -152,6 +152,7 @@ export function materialStateCssVars(collection?: string): CSSProperties {
     "--material-ink": state.ink,
     "--material-accent-ink": state.accentInk,
     "--material-pressure": String(state.pressure),
+    "--material-pressure-mix": `${Math.round(state.pressure * 100)}%`,
     "--material-sheen": String(state.sheen)
   } as CSSProperties;
 }
