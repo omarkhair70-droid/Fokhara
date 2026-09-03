@@ -9,12 +9,12 @@ export function StudioEvidence() {
         <img src={media.src} alt={media.alt} loading="lazy" decoding="async" />
       </div>
       <div className="studioEvidence__copy">
-        <p className="eyebrow">Current studio evidence / official media</p>
+        <p className="eyebrow">Inside the studio</p>
         <h2>Hands, wheels, clay, and a room that is actually used.</h2>
         <p>
-          The visual-production system now prefers real Fokhara workshop
-          photography over invented craft imagery. Final Studio authorship still
-          needs a dedicated founder frame and a deliberate wide spatial image.
+          Pottery here is learned around real wheels, tools, clay and other
+          people making beside you. The studio is a working room, not a display
+          set.
         </p>
       </div>
     </section>
