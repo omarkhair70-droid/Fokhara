@@ -1,12 +1,21 @@
 import { HomeObjectEntry } from "@/components/HomeObjectEntry";
 import { HomeMakerEntry } from "@/components/HomeMakerEntry";
-import { featuredProduct } from "@/lib/products";
+import { getCeramicProducts } from "@/lib/commerce/woo";
+import { featuredProduct as fallbackFeatured } from "@/lib/products";
 import { featuredWorkshop } from "@/lib/workshops";
 
-export default function HomePage() {
+export const revalidate = 60;
+
+export default async function HomePage() {
+  const products = await getCeramicProducts();
+  const featured =
+    products.data.find((product) => product.stock === "in_stock") ??
+    products.data[0] ??
+    fallbackFeatured;
+
   return (
     <>
-      <HomeObjectEntry product={featuredProduct} />
+      <HomeObjectEntry product={featured} />
       <HomeMakerEntry workshop={featuredWorkshop} />
       <section className="homeProof">
         <p className="eyebrow">Two product systems</p>

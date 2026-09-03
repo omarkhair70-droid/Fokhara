@@ -1483,3 +1483,21 @@ button.buttonPrimary:disabled {
     bottom: .5rem;
   }
 }
+
+
+/* P2 — live commerce data states */
+.dataFallback {
+  display: grid;
+  gap: .35rem;
+  margin: 0 0 1.5rem;
+  padding: .8rem 1rem;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, #9b6448 8%, var(--field-primary));
+  font-size: .75rem;
+  line-height: 1.45;
+}
+
+.dataFallback span {
+  color: var(--ink-muted);
+  overflow-wrap: anywhere;
+}
