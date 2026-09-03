@@ -49,6 +49,7 @@ const manifest = {
   generatedAt: new Date().toISOString(),
   baseUrl: BASE_URL,
   routes: [],
+  interactions: [],
   profiles
 };
 
@@ -240,6 +241,185 @@ for (const profile of profiles) {
     } finally {
       await page.close();
     }
+  }
+
+  // LAB SYNTHESIS — capture the accepted interaction ideas inside real routes.
+  // These are evidence-only captures; they do not change the production state.
+
+  // Collection memory: selected surface → inherited arrival trace → settled edge.
+  {
+    const page = await context.newPage();
+    await page.goto(BASE_URL + "/collections", {
+      waitUntil: "domcontentloaded",
+      timeout: 45_000
+    });
+    await page.waitForTimeout(700);
+
+    const nebula = page.getByRole("link", { name: /Nebula/i }).first();
+    await Promise.all([
+      page.waitForURL(/\/collections\/nebula/, { timeout: 20_000 }),
+      nebula.click()
+    ]);
+
+    const arriving = page.locator(
+      '.collectionDetail[data-inherited="true"][data-arrival-phase="arrived"]'
+    );
+
+    await arriving.waitFor({ state: "visible", timeout: 8_000 }).catch(() => {});
+    await page.waitForTimeout(80);
+
+    const arrivalPath = path.join(
+      profileDir,
+      "interaction__collection-arrival.png"
+    );
+    await page.screenshot({
+      path: arrivalPath,
+      fullPage: false,
+      animations: "allow"
+    });
+
+    await page.waitForTimeout(1200);
+
+    const settledPath = path.join(
+      profileDir,
+      "interaction__collection-settled.png"
+    );
+    await page.screenshot({
+      path: settledPath,
+      fullPage: false,
+      animations: "allow"
+    });
+
+    manifest.interactions.push({
+      id: "collection-memory",
+      profile: profile.id,
+      screenshots: {
+        arrival: path.relative(OUTPUT_ROOT, arrivalPath).replaceAll("\\", "/"),
+        settled: path.relative(OUTPUT_ROOT, settledPath).replaceAll("\\", "/")
+      },
+      url: page.url()
+    });
+
+    await page.close();
+  }
+
+  // Carry: source lift → route recomposition → settled product.
+  {
+    const page = await context.newPage();
+    await page.goto(BASE_URL + "/collections/nebula", {
+      waitUntil: "domcontentloaded",
+      timeout: 45_000
+    });
+    await page.waitForTimeout(700);
+
+    const product = page.locator(".collectionProduct").first();
+    await product.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(120);
+
+    await product.click();
+    await page.waitForTimeout(36);
+
+    const liftPath = path.join(profileDir, "interaction__carry-lift.png");
+    await page.screenshot({
+      path: liftPath,
+      fullPage: false,
+      animations: "allow"
+    });
+
+    await page.waitForURL(/\/shop\//, { timeout: 20_000 });
+    await page
+      .locator('.carryOverlay[data-phase="recomposing"]')
+      .waitFor({ state: "visible", timeout: 6_000 })
+      .catch(() => {});
+    await page.waitForTimeout(90);
+
+    const recomposePath = path.join(
+      profileDir,
+      "interaction__carry-recompose.png"
+    );
+    await page.screenshot({
+      path: recomposePath,
+      fullPage: false,
+      animations: "allow"
+    });
+
+    await page.waitForTimeout(760);
+
+    const settledPath = path.join(
+      profileDir,
+      "interaction__carry-settled.png"
+    );
+    await page.screenshot({
+      path: settledPath,
+      fullPage: false,
+      animations: "allow"
+    });
+
+    manifest.interactions.push({
+      id: "carry-micro-depth",
+      profile: profile.id,
+      screenshots: {
+        lift: path.relative(OUTPUT_ROOT, liftPath).replaceAll("\\", "/"),
+        recompose: path.relative(OUTPUT_ROOT, recomposePath).replaceAll("\\", "/"),
+        settled: path.relative(OUTPUT_ROOT, settledPath).replaceAll("\\", "/")
+      },
+      url: page.url()
+    });
+
+    await page.close();
+  }
+
+  // Studio: real-image composition at the opening and mid-sequence.
+  {
+    const page = await context.newPage();
+    await page.goto(BASE_URL + "/studio", {
+      waitUntil: "domcontentloaded",
+      timeout: 45_000
+    });
+    await page.waitForTimeout(700);
+
+    const frames = page.locator(".studioEvidence__frame");
+
+    if ((await frames.count()) > 0) {
+      await frames.first().scrollIntoViewIfNeeded();
+      await page.waitForTimeout(450);
+
+      const openingPath = path.join(
+        profileDir,
+        "interaction__studio-evidence-opening.png"
+      );
+      await page.screenshot({
+        path: openingPath,
+        fullPage: false,
+        animations: "disabled"
+      });
+
+      const middle = frames.nth(Math.min(2, (await frames.count()) - 1));
+      await middle.scrollIntoViewIfNeeded();
+      await page.waitForTimeout(450);
+
+      const middlePath = path.join(
+        profileDir,
+        "interaction__studio-evidence-middle.png"
+      );
+      await page.screenshot({
+        path: middlePath,
+        fullPage: false,
+        animations: "disabled"
+      });
+
+      manifest.interactions.push({
+        id: "studio-evidence",
+        profile: profile.id,
+        screenshots: {
+          opening: path.relative(OUTPUT_ROOT, openingPath).replaceAll("\\", "/"),
+          middle: path.relative(OUTPUT_ROOT, middlePath).replaceAll("\\", "/")
+        },
+        url: page.url()
+      });
+    }
+
+    await page.close();
   }
 
   await context.close();
