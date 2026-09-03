@@ -22,7 +22,8 @@ This repository tests a research-led creative workflow where the visual and inte
 - [x] VP0 — Visual Truth Audit
 - [x] VP1 — Photography & Image Direction
 - [x] VP2 — Asset Production / Missing Visuals
-- [ ] VP3 — Typography Lab
+- [x] VP3 — Typography Lab
+- [ ] VP4 — Material State System
 - [ ] Visual Production
 - [ ] Visual Review + Subtraction
 - [ ] Final Production QA
@@ -183,7 +184,7 @@ Commerce BFF:
 
 ## Next
 
-**VP3 — Typography Lab**
+**VP4 — Material State System**
 
 The structural system is now the canvas, not the finished artwork.
 
