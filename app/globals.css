@@ -4099,3 +4099,269 @@ button {
     justify-self: start;
   }
 }
+
+
+/* VP10 — FULL VISUAL REVIEW / FIRST CORRECTION PASS
+   Real renders showed a strong system but too much repeated editorial grammar.
+   These overrides move emphasis back toward material, object and action. */
+
+/* SHOP — break the endless equal-card catalog into material chapters. */
+.shopChapters {
+  display: grid;
+  gap: clamp(5rem, 9vw, 10rem);
+  padding-bottom: clamp(5rem, 9vw, 10rem);
+}
+
+.shopChapter {
+  position: relative;
+  padding-top: 1rem;
+  border-top: 1px solid var(--line);
+}
+
+.shopChapter::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: min(11rem, 32vw);
+  height: 2px;
+  background: linear-gradient(
+    to right,
+    var(--material-depth),
+    var(--material-glaze) 62%,
+    var(--material-clay)
+  );
+}
+
+.shopChapter__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 2rem;
+  align-items: end;
+  padding: clamp(1rem, 2vw, 2rem) 0 clamp(1.5rem, 3vw, 3rem);
+}
+
+.shopChapter__header h2 {
+  margin: .25rem 0 0;
+  font-size: clamp(3.5rem, 7vw, 7rem);
+  line-height: .82;
+  letter-spacing: -.065em;
+  font-weight: 500;
+  color: var(--material-ink);
+}
+
+.shopChapter__meta {
+  display: grid;
+  gap: .35rem;
+  justify-items: end;
+  padding-bottom: .35rem;
+  font-size: .76rem;
+}
+
+.shopChapter__meta a {
+  margin-top: .5rem;
+  text-decoration: underline;
+  text-underline-offset: .25em;
+}
+
+.productGrid--chapter {
+  gap: clamp(1rem, 2vw, 2rem);
+}
+
+.productGrid--chapter .productCard {
+  min-height: 0;
+  max-height: none;
+  grid-template-rows: auto auto;
+}
+
+.productGrid--chapter .carrySource {
+  min-height: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+}
+
+.productGrid--count-1 .productCard {
+  grid-column: span 8;
+}
+
+.productGrid--count-2 .productCard,
+.productGrid--count-4 .productCard {
+  grid-column: span 6;
+}
+
+.productGrid--count-3 .productCard {
+  grid-column: span 4;
+}
+
+/* COLLECTION INDEX — same system, but not the same panel seven times. */
+.collectionIndex__item[data-rhythm="release"] {
+  grid-template-columns: 4rem minmax(300px, 1.12fr) minmax(240px, .88fr);
+}
+
+.collectionIndex__item[data-rhythm="release"] .collectionIndex__number {
+  grid-column: 1;
+}
+
+.collectionIndex__item[data-rhythm="release"] .collectionIndex__copy {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.collectionIndex__item[data-rhythm="release"] .collectionIndex__image {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.collectionIndex__copy {
+  align-self: end;
+}
+
+/* COLLECTION DETAIL — keep the image authoritative without delaying identity. */
+.collectionDetail__hero {
+  min-height: 72svh;
+  grid-template-columns: minmax(300px, .82fr) minmax(0, 1.18fr);
+  align-items: end;
+}
+
+.collectionDetail__copy {
+  justify-content: flex-end;
+  padding-bottom: clamp(2rem, 5vw, 5rem);
+}
+
+.collectionDetail__lead {
+  min-height: 58svh;
+  max-height: 720px;
+}
+
+/* PRODUCT DETAIL — the first viewport must contain object + identity + action. */
+@media (min-width: 821px) {
+  .productDetail[data-composition="vertical-pressure"] {
+    min-height: calc(100svh - var(--header-height));
+    grid-template-columns: minmax(0, 1.05fr) minmax(360px, .95fr);
+    grid-template-rows: 1fr;
+    gap: clamp(2rem, 5vw, 6rem);
+    align-items: stretch;
+  }
+
+  .productDetail[data-composition="vertical-pressure"] .productDetail__mediaColumn {
+    order: 1;
+    width: auto;
+    min-height: calc(100svh - var(--header-height) - 2rem);
+    justify-self: stretch;
+  }
+
+  .productDetail[data-composition="vertical-pressure"] .productDetail__info {
+    order: 2;
+    width: auto;
+    max-width: 620px;
+    display: flex;
+    flex-direction: column;
+    justify-self: stretch;
+    justify-content: center;
+    padding: clamp(1rem, 2.5vw, 2.5rem) 0;
+  }
+
+  .productDetail[data-composition="vertical-pressure"] .backLink,
+  .productDetail[data-composition="vertical-pressure"] .eyebrow,
+  .productDetail[data-composition="vertical-pressure"] h1,
+  .productDetail[data-composition="vertical-pressure"] .price,
+  .productDetail[data-composition="vertical-pressure"] .stockState,
+  .productDetail[data-composition="vertical-pressure"] .productDescription,
+  .productDetail[data-composition="vertical-pressure"] .purchaseBlock,
+  .productDetail[data-composition="vertical-pressure"] .productFacts {
+    grid-column: auto;
+  }
+
+  .productDetail[data-composition="vertical-pressure"] .productDetail__info h1 {
+    font-size: clamp(4rem, 6.4vw, 7rem);
+  }
+
+  .productDetail[data-composition="vertical-pressure"] .productFacts {
+    margin-top: auto;
+  }
+}
+
+/* Empty cart now belongs to the same authored world instead of a utility void. */
+.cartEmpty {
+  min-height: 48svh;
+  max-width: 54rem;
+  align-content: center;
+}
+
+.cartEmpty h2 {
+  margin: 0;
+  max-width: 11ch;
+  font-size: clamp(3rem, 6vw, 6rem);
+  line-height: .88;
+  letter-spacing: -.055em;
+  font-weight: 500;
+}
+
+.cartEmpty > p:not(.eyebrow) {
+  max-width: 34rem;
+  color: var(--ink-secondary);
+  line-height: 1.5;
+}
+
+@media (max-width: 820px) {
+  .shopChapters {
+    gap: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .shopChapter__header {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .shopChapter__header h2 {
+    font-size: clamp(3rem, 15vw, 5rem);
+  }
+
+  .shopChapter__meta {
+    justify-items: start;
+  }
+
+  .productGrid--count-1 .productCard,
+  .productGrid--count-2 .productCard,
+  .productGrid--count-3 .productCard,
+  .productGrid--count-4 .productCard {
+    grid-column: 1;
+  }
+
+  .productGrid--chapter .carrySource {
+    aspect-ratio: 4 / 5;
+  }
+
+  .collectionIndex__item[data-rhythm="release"] {
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+  }
+
+  .collectionIndex__item[data-rhythm="release"] .collectionIndex__number {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .collectionIndex__item[data-rhythm="release"] .collectionIndex__image,
+  .collectionIndex__item[data-rhythm="release"] .collectionIndex__copy {
+    grid-column: 2;
+    grid-row: auto;
+  }
+
+  .collectionDetail__hero {
+    min-height: auto;
+  }
+
+  .collectionDetail__copy {
+    padding-bottom: 0;
+  }
+
+  .collectionDetail__lead {
+    min-height: 50svh;
+    max-height: none;
+  }
+
+  .cartEmpty {
+    min-height: 48svh;
+  }
+}
