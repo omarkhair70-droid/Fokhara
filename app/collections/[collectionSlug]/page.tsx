@@ -10,6 +10,7 @@ import {
 } from "@/lib/visual/material-state";
 import { ProductVisual } from "@/components/ProductVisual";
 import { CarryProductLink } from "@/components/CarryProductLink";
+import { CollectionDetailShell } from "@/components/CollectionDetailShell";
 
 type Props = {
   params: Promise<{ collectionSlug: string }>;
@@ -44,10 +45,11 @@ export default async function CollectionPage({ params }: Props) {
   const material = materialStateForCollection(collection.name);
 
   return (
-    <article
+    <CollectionDetailShell
+      collectionSlug={collection.slug}
       className="collectionDetail"
-      data-material={material.id}
-      data-reflectivity={material.reflectivity}
+      materialId={material.id}
+      reflectivity={material.reflectivity}
       style={materialStateCssVars(collection.name)}
     >
       <header className="collectionDetail__hero">
@@ -113,6 +115,6 @@ export default async function CollectionPage({ params }: Props) {
           <Link href="/workshops">Make with clay yourself</Link>
         </div>
       </section>
-    </article>
+    </CollectionDetailShell>
   );
 }
