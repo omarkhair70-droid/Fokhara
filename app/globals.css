@@ -2515,7 +2515,4 @@ button.buttonPrimary:disabled {
     min-height: 62svh;
   }
 
-  .productVisual__image {
-    object-fit: cover;
-  }
 }
