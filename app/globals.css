@@ -2675,6 +2675,7 @@ button {
   --material-ink: var(--ink-primary);
   --material-accent-ink: #f5f2ea;
   --material-pressure: .06;
+  --material-pressure-mix: 6%;
   --material-sheen: .05;
 }
 
@@ -2726,8 +2727,7 @@ button {
       circle at 78% 12%,
       color-mix(
         in srgb,
-        var(--material-glaze)
-        calc(var(--material-pressure) * 34%),
+        var(--material-glaze) var(--material-pressure-mix),
         transparent
       ),
       transparent 32rem
