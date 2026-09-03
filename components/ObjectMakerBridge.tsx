@@ -1,5 +1,5 @@
-import Link from "next/link";
 import type { Product } from "@/lib/products";
+import { TrackedLink } from "@/components/TrackedLink";
 
 export function ObjectMakerBridge({ product }: { product: Product }) {
   return (
@@ -20,12 +20,26 @@ export function ObjectMakerBridge({ product }: { product: Product }) {
           ceramic object to working with clay yourself.
         </p>
         <div className="objectMakerBridge__actions">
-          <Link href="/workshops/handbuilding-pottery-workshop">
+          <TrackedLink
+            href="/workshops/handbuilding-pottery-workshop"
+            eventName="product_to_workshop"
+            eventPayload={{
+              productId: product.id,
+              workshopSlug: "handbuilding-pottery-workshop"
+            }}
+          >
             Try handbuilding
-          </Link>
-          <Link href="/workshops/wheelthrowing-pottery-workshop">
+          </TrackedLink>
+          <TrackedLink
+            href="/workshops/wheelthrowing-pottery-workshop"
+            eventName="product_to_workshop"
+            eventPayload={{
+              productId: product.id,
+              workshopSlug: "wheelthrowing-pottery-workshop"
+            }}
+          >
             Try wheelthrowing
-          </Link>
+          </TrackedLink>
         </div>
       </div>
     </section>

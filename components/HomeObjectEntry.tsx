@@ -3,6 +3,7 @@
 import { CarryProductLink } from "@/components/CarryProductLink";
 import type { Product } from "@/lib/products";
 import { formatEgp } from "@/lib/products";
+import { TrackedLink } from "@/components/TrackedLink";
 
 export function HomeObjectEntry({ product }: { product: Product }) {
   return (
@@ -19,10 +20,20 @@ export function HomeObjectEntry({ product }: { product: Product }) {
           pages. They carry what happened before.
         </p>
         <div className="homeActions">
-          <a className="buttonPrimary" href="/shop">Explore ceramics</a>
-          <a className="buttonGhost" href="/workshops">
+          <TrackedLink
+            className="buttonPrimary"
+            href="/shop"
+            eventName="home_shop_enter"
+          >
+            Explore ceramics
+          </TrackedLink>
+          <TrackedLink
+            className="buttonGhost"
+            href="/workshops"
+            eventName="home_workshops_enter"
+          >
             Enter the process
-          </a>
+          </TrackedLink>
         </div>
       </div>
 

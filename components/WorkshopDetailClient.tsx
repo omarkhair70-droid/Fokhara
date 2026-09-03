@@ -183,6 +183,9 @@ export function WorkshopDetailClient({
         >
           Continue to booking request
         </Link>
+        <Link className="sourceLink" href="/policies/workshops">
+          Current workshop policies →
+        </Link>
         <a
           className="sourceLink"
           href={workshop.sourceUrl}

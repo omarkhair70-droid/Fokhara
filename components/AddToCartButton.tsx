@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { Cart } from "@/lib/commerce/cart";
 import type { Product } from "@/lib/products";
+import { track } from "@/lib/analytics";
 
 export function AddToCartButton({ product }: { product: Product }) {
   const [state, setState] = useState<"idle" | "adding" | "added" | "error">(
@@ -54,6 +55,12 @@ export function AddToCartButton({ product }: { product: Product }) {
         new CustomEvent("fokhara:cart-updated", { detail: cart })
       );
       setState("added");
+      track("add_to_cart", {
+        productId: product.id,
+        productSlug: product.slug,
+        valueEgp: product.priceEgp,
+        cartCount: cart.count
+      });
 
       window.setTimeout(() => setState("idle"), 1800);
     } catch (caught) {

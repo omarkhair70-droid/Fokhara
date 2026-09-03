@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { TrackedLink } from "@/components/TrackedLink";
 import type { Product } from "@/lib/products";
 import { formatEgp } from "@/lib/products";
 import { collectionToSlug } from "@/lib/collections";
@@ -27,10 +28,15 @@ export function WorkshopObjectBridge({
 
       <div className="workshopObjectBridge__grid">
         {visible.map((product) => (
-          <Link
+          <TrackedLink
             href={"/shop/" + product.slug}
             key={product.id}
             className="workshopObjectBridge__item"
+            eventName="workshop_to_product"
+            eventPayload={{
+              productId: product.id,
+              productSlug: product.slug
+            }}
           >
             {product.image ? (
               <img
@@ -49,7 +55,7 @@ export function WorkshopObjectBridge({
               </span>
               <strong>{product.name}</strong>
             </div>
-          </Link>
+          </TrackedLink>
         ))}
       </div>
 

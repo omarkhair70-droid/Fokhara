@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProductDetailClient } from "@/components/ProductDetailClient";
 import { getProductBySlug } from "@/lib/commerce/woo";
+import {
+  productStructuredData,
+  serializeStructuredData
+} from "@/lib/seo";
 
 type ProductPageProps = {
   params: Promise<{ productSlug: string }>;
@@ -30,5 +34,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   if (!product) notFound();
 
-  return <ProductDetailClient product={product} />;
+  const structuredData = productStructuredData(product);
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeStructuredData(structuredData)
+        }}
+      />
+      <ProductDetailClient product={product} />
+    </>
+  );
 }
