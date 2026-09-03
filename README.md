@@ -6,11 +6,11 @@ This repository is being used to test a research-led creative workflow where the
 
 ## Current Status
 
-**Research foundation locked before Meaning Extraction.**
+**Meaning system extracted. Digital translation has not started.**
 
 - [x] Step 01 — Product Truth
 - [x] Step 02 — Non-Web Source Research / Source Atlas
-- [ ] Step 03 — Meaning Extraction
+- [x] Step 03 — Meaning Extraction
 - [ ] Digital Translation
 - [ ] Product Architecture
 - [ ] Web Reality Check
@@ -21,18 +21,28 @@ This repository is being used to test a research-led creative workflow where the
 
 > The web is the medium of execution, not the source of the idea.
 
-At this stage, award websites, design galleries, Godly, Awwwards, SiteInspire, and similar web-design references are deliberately excluded from creative sourcing.
+At this stage, award websites, design galleries, Godly, Awwwards, SiteInspire, and similar web-design references remain excluded from creative sourcing.
 
 ## Research Foundation
 
 - [Step 01 — Product Truth](docs/research/01-product-truth.md)
 - [Step 02 — Non-Web Source Atlas](docs/research/02-non-web-source-atlas.md)
+- [Step 03 — Meaning Extraction](docs/research/03-meaning-extraction.md)
 
-## Working Thesis — Not a Tagline
+## Working Creative Thesis — Not Website Copy
 
-> Fokhara is not about displaying pottery. It is about the moment formless earth meets a human hand and becomes something worth keeping.
+> **Fokhara is a choreography of becoming: matter takes memory under pressure, crosses thresholds through time, and carries the trace of making into everyday life.**
 
-This is a research compass, not final copy and not a locked visual direction.
+## Active Meaning System
+
+1. **Becoming**
+2. **Retained Trace**
+3. **Centered Tension**
+4. **Time Is Material**
+5. **Material Agency**
+6. **Craft Enters Life**
+
+These principles are now the creative filter for future translation.
 
 ## Project Principle
 
@@ -44,7 +54,8 @@ Every major aesthetic or interaction decision should eventually be traceable bac
 2. material behavior,
 3. craft process,
 4. cultural or historical evidence,
-5. or a deliberate product/usability requirement.
+5. extracted meaning,
+6. or a deliberate product/usability requirement.
 
 ## Current Guardrail
 
@@ -62,4 +73,4 @@ No final decision has yet been made for:
 
 The project is intentionally still malleable.
 
-The next stage is **Step 03 — Meaning Extraction**, where the source field will be reduced aggressively before digital translation begins.
+The next stage is **Digital Translation**: converting the six principles into possible spatial, typographic, motion, interaction, image, and navigation behaviors without making literal pottery effects.
