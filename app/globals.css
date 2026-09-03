@@ -4365,3 +4365,29 @@ button {
     min-height: 48svh;
   }
 }
+
+
+/* VP10 — REVIEW CORRECTION 02
+   Screenshot review caught two cascade regressions from the first rebalance. */
+
+/* Product bridge must follow the product evaluation surface, never precede it. */
+@media (min-width: 821px) {
+  .productDetail[data-composition="vertical-pressure"] > .objectMakerBridge {
+    order: 3;
+    grid-column: 1 / -1;
+  }
+}
+
+/* The late VP10 desktop collection grid must not leak into compact. */
+@media (max-width: 820px) {
+  .collectionDetail__hero {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .collectionDetail__lead {
+    width: 100%;
+    min-width: 0;
+    min-height: 50svh;
+  }
+}
