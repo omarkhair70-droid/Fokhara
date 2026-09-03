@@ -105,10 +105,6 @@ export function ProductDetailClient({ product }: { product: Product }) {
             <dd>{product.form}</dd>
           </div>
           <div>
-            <dt>Entry composition</dt>
-            <dd>{composition}</dd>
-          </div>
-          <div>
             <dt>Source</dt>
             <dd>
               <a href={product.sourceUrl} target="_blank" rel="noreferrer">
