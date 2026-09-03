@@ -3507,3 +3507,595 @@ button {
     min-height: 6rem;
   }
 }
+
+
+/* VP9 — COMPACT / MOBILE AUTHORSHIP
+   Compact is a separate composition mode, not a scaled desktop layout. */
+@media (max-width: 820px) {
+  :root {
+    --header-height: 116px;
+    --compact-gutter: 1rem;
+  }
+
+  /* HEADER / NAV — two real rows, touch-sized, horizontally scannable. */
+  .siteHeader {
+    min-height: var(--header-height);
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-rows: auto auto;
+    gap: .25rem 1rem;
+    padding:
+      .55rem
+      max(var(--compact-gutter), env(safe-area-inset-right))
+      .25rem
+      max(var(--compact-gutter), env(safe-area-inset-left));
+  }
+
+  .brand,
+  .cartStub {
+    min-height: 44px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .siteHeader nav {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    min-width: 0;
+    justify-content: flex-start;
+    gap: 1.25rem;
+    padding: .2rem 0 0;
+    border-top: 1px solid var(--line);
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+  }
+
+  .siteHeader nav::-webkit-scrollbar,
+  .filterBar::-webkit-scrollbar,
+  .makerRail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .siteHeader nav a {
+    min-height: 40px;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Shared horizontal choice bars do not consume multiple compact rows. */
+  .filterBar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+    margin-inline: calc(var(--compact-gutter) * -1);
+    padding-inline: var(--compact-gutter);
+  }
+
+  .filterBar button {
+    min-height: 44px;
+    flex: 0 0 auto;
+  }
+
+  /* HOME — copy first, object second, no oversized dead hold. */
+  .homeObject {
+    gap: 2.25rem;
+    padding:
+      2rem
+      var(--compact-gutter)
+      clamp(3rem, 12vw, 5rem);
+  }
+
+  .homeObject h1 {
+    font-size: clamp(3.7rem, 18vw, 6rem);
+  }
+
+  .lede {
+    margin-top: 1.5rem;
+  }
+
+  .homeActions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .6rem;
+  }
+
+  .homeActions a {
+    min-width: 0;
+    padding-inline: .75rem;
+  }
+
+  .homeObject__product {
+    min-height: 56svh;
+  }
+
+  .homeMaker {
+    padding-inline: var(--compact-gutter);
+  }
+
+  .homeMaker__visual {
+    min-height: 52svh;
+  }
+
+  .homeMaker__copy h2 {
+    font-size: clamp(3rem, 14vw, 5.4rem);
+  }
+
+  /* SHOP — mobile browsing density is intentionally higher than desktop. */
+  .shopSection {
+    padding-inline: var(--compact-gutter);
+  }
+
+  .shopIntro h1 {
+    font-size: clamp(3.3rem, 16vw, 5.8rem);
+  }
+
+  .shopCollectionEntry {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+
+  .productCard {
+    min-height: auto;
+    max-height: none;
+    grid-template-rows: minmax(50svh, 25rem) auto;
+  }
+
+  .productCard--groupStart {
+    margin-top: 2.75rem;
+  }
+
+  /* COLLECTIONS — override VP8 desktop rhythm specificity explicitly. */
+  .collectionsPage {
+    padding-inline: var(--compact-gutter);
+  }
+
+  .collectionsHero {
+    min-height: auto;
+    padding-bottom: clamp(3rem, 10vw, 5rem);
+  }
+
+  .collectionsHero h1,
+  .collectionDetail__copy h1,
+  .studioHero h1,
+  .visitHero h1 {
+    font-size: clamp(3.4rem, 16vw, 5.8rem);
+  }
+
+  .collectionIndex__item[data-rhythm="anchor"],
+  .collectionIndex__item[data-rhythm="scan"],
+  .collectionIndex__item[data-rhythm="release"] {
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    gap: 1rem;
+    padding-block: 1rem;
+  }
+
+  .collectionIndex__item[data-rhythm] .collectionIndex__image,
+  .collectionIndex__item[data-rhythm] .collectionIndex__copy {
+    grid-column: 2;
+  }
+
+  .collectionIndex__item[data-rhythm="anchor"] .collectionIndex__image {
+    min-height: 52svh;
+  }
+
+  .collectionIndex__item[data-rhythm="scan"] .collectionIndex__image,
+  .collectionIndex__item[data-rhythm="release"] .collectionIndex__image {
+    min-height: 38svh;
+  }
+
+  .collectionIndex__item[data-rhythm="scan"] .collectionIndex__copy h2,
+  .collectionIndex__item[data-rhythm="release"] .collectionIndex__copy h2 {
+    font-size: clamp(2.7rem, 13vw, 4.6rem);
+  }
+
+  .collectionDetail__hero {
+    padding: 1rem var(--compact-gutter) 2rem;
+    gap: 2rem;
+  }
+
+  .collectionDetail__copy .backLink {
+    margin-bottom: 2rem;
+  }
+
+  .collectionDetail__lead {
+    min-height: 52svh;
+  }
+
+  .collectionProducts {
+    padding: var(--compact-gutter);
+  }
+
+  .collectionProduct .carrySource {
+    min-height: 44svh;
+  }
+
+  /* PRODUCT DETAIL — action precedes long description in the actual DOM. */
+  .productDetail,
+  .productDetail[data-composition="mass-right"],
+  .productDetail[data-composition="vertical-pressure"] {
+    padding: .75rem var(--compact-gutter) 2rem;
+    gap: 1rem;
+  }
+
+  .productDetail__mediaColumn,
+  .productDetail[data-composition="vertical-pressure"] .productDetail__mediaColumn {
+    min-height: 52svh;
+  }
+
+  .carryTarget {
+    min-height: 48svh;
+  }
+
+  .productDetail__info {
+    min-height: auto;
+    padding: .75rem 0 2rem;
+  }
+
+  .productDetail__info .backLink {
+    margin-bottom: 2rem;
+  }
+
+  .productDetail__info h1 {
+    font-size: clamp(3.4rem, 16vw, 5.6rem);
+  }
+
+  .purchaseBlock {
+    margin-top: 1rem;
+  }
+
+  .purchaseBlock .addToCart,
+  .purchaseBlock .buttonPrimary {
+    width: 100%;
+  }
+
+  .productDescription {
+    margin-top: 1.5rem;
+  }
+
+  .productFacts {
+    margin-top: 1.5rem;
+  }
+
+  /* WORKSHOP BROWSE — one image + natural content height, not two viewports. */
+  .workshopsPage {
+    padding-inline: var(--compact-gutter);
+  }
+
+  .workshopsIntro h1 {
+    font-size: clamp(3.4rem, 16vw, 5.8rem);
+  }
+
+  .workshopCard .workshopVisual {
+    min-height: 48svh;
+  }
+
+  .workshopCard__info {
+    min-height: auto;
+    padding: 1.5rem 0 2.5rem;
+  }
+
+  .workshopCard__info h2 {
+    font-size: clamp(2.7rem, 13vw, 4.8rem);
+  }
+
+  .workshopCard__info dl {
+    margin-top: 2rem;
+  }
+
+  .workshopCard[data-format-start="true"]:not(:first-child) {
+    margin-top: 3rem;
+  }
+
+  /* WORKSHOP DETAIL — stage rail becomes a native horizontal state strip. */
+  .makerRail {
+    position: sticky;
+    z-index: 45;
+    top: var(--header-height);
+    transform: none;
+    display: flex;
+    grid-template-columns: none;
+    align-items: center;
+    gap: 1rem;
+    margin: 0;
+    padding:
+      .55rem
+      max(var(--compact-gutter), env(safe-area-inset-right))
+      .55rem
+      max(var(--compact-gutter), env(safe-area-inset-left));
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+    border-inline: 0;
+    background: color-mix(in srgb, var(--field-primary) 96%, transparent);
+  }
+
+  .makerRail__label {
+    display: none;
+  }
+
+  .makerRail > span:not(.makerRail__label) {
+    min-height: 34px;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+  }
+
+  .workshopDetail__hero {
+    padding: 1rem var(--compact-gutter) 2rem;
+    gap: 1rem;
+  }
+
+  .workshopDetail__visual {
+    min-height: 50svh;
+  }
+
+  .workshopDetail__heroCopy {
+    min-height: auto;
+    padding: 1.5rem 0 3rem;
+  }
+
+  .workshopDetail__heroCopy .backLink {
+    margin-bottom: 2rem;
+  }
+
+  .workshopDetail__heroCopy h1 {
+    font-size: clamp(3.5rem, 16vw, 5.8rem);
+  }
+
+  .workshopDetail__heroCopy > .buttonPrimary {
+    width: 100%;
+  }
+
+  .makerSection {
+    padding-inline: var(--compact-gutter);
+  }
+
+  .makerSection h2 {
+    font-size: clamp(3rem, 14vw, 5.2rem);
+  }
+
+  .processVerbs {
+    margin-top: 2.5rem;
+  }
+
+  .processVerbs li {
+    grid-template-columns: 2.5rem 1fr;
+    gap: .5rem;
+    padding: .75rem 0;
+  }
+
+  .processVerbs li strong {
+    font-size: clamp(2.3rem, 12vw, 4.3rem);
+  }
+
+  .workshopFactGrid {
+    margin-top: 2.5rem;
+  }
+
+  .workshopFactGrid > div {
+    min-height: 7rem;
+    padding: .85rem;
+  }
+
+  .workshopObjectBridge {
+    padding-inline: var(--compact-gutter);
+  }
+
+  .workshopObjectBridge__grid {
+    margin-top: 2.5rem;
+  }
+
+  .workshopObjectBridge__item {
+    min-height: 22rem;
+  }
+
+  .workshopObjectBridge__visual,
+  .workshopObjectBridge__visual .productVisual {
+    min-height: 18rem;
+  }
+
+  /* BOOKING — touch-first fields and a compact sticky commit control. */
+  .bookingPage {
+    padding:
+      1.75rem
+      max(var(--compact-gutter), env(safe-area-inset-right))
+      5rem
+      max(var(--compact-gutter), env(safe-area-inset-left));
+  }
+
+  .bookingHeader .backLink {
+    margin-bottom: 2rem;
+  }
+
+  .bookingHeader h1,
+  .bookingReview h1 {
+    font-size: clamp(3.3rem, 15vw, 5.4rem);
+  }
+
+  .bookingForm {
+    margin-top: 2.5rem;
+    padding-bottom: 5rem;
+  }
+
+  .bookingForm fieldset {
+    padding: 1.5rem 0;
+  }
+
+  .bookingForm input,
+  .bookingForm select {
+    min-height: 52px;
+    font-size: 16px;
+  }
+
+  .bookingCommitBar {
+    bottom: max(.5rem, env(safe-area-inset-bottom));
+    gap: .75rem;
+    padding: .75rem;
+  }
+
+  .bookingCommitBar .buttonPrimary {
+    min-width: 9.5rem;
+  }
+
+  .bookingSummary {
+    margin-top: 2.5rem;
+  }
+
+  /* CART — dense, explicit and thumb-usable. */
+  .cartPage {
+    padding:
+      2rem
+      max(var(--compact-gutter), env(safe-area-inset-right))
+      4rem
+      max(var(--compact-gutter), env(safe-area-inset-left));
+  }
+
+  .cartHeader {
+    min-height: 30svh;
+    padding-bottom: 2.5rem;
+  }
+
+  .cartHeader h1,
+  .cartPage > h1 {
+    font-size: clamp(3.4rem, 16vw, 5.6rem);
+  }
+
+  .cartLine {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: .75rem 1rem;
+  }
+
+  .cartLine > div {
+    grid-column: 1 / -1;
+  }
+
+  .cartLine label {
+    width: 5.5rem;
+  }
+
+  .cartLine > strong,
+  .cartLine > button {
+    justify-self: end;
+    align-self: end;
+  }
+
+  .cartSummary {
+    width: 100%;
+    margin-top: 2.5rem;
+  }
+
+  .cartSummary__gate {
+    grid-template-columns: 1fr !important;
+    gap: .35rem !important;
+  }
+
+  /* STUDIO / VISIT — practical blocks use natural height on compact. */
+  .studioEvidence {
+    gap: 2rem;
+    padding: 1rem var(--compact-gutter) 3rem;
+  }
+
+  .studioEvidence__copy h2,
+  .studioOrigin h2,
+  .studioPractice h2,
+  .studioVisitBridge h2,
+  .visitAddress h2,
+  .visitPickup h2 {
+    font-size: clamp(2.9rem, 13vw, 5rem);
+  }
+
+  .studioProcess__rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .visitHero {
+    min-height: auto;
+    padding: 3rem var(--compact-gutter);
+  }
+
+  .visitGrid > section {
+    min-height: auto;
+    padding: 3rem var(--compact-gutter);
+  }
+
+  .visitAddress .buttonPrimary {
+    width: 100%;
+  }
+
+  .visitContact a {
+    width: 100%;
+    font-size: clamp(1.8rem, 8vw, 2.8rem);
+  }
+
+  /* POLICIES — reading surface, not four desktop cards stacked unchanged. */
+  .policiesPage {
+    padding: 3rem var(--compact-gutter);
+  }
+
+  .policiesHero {
+    min-height: auto;
+    padding-bottom: 3rem;
+  }
+
+  .policiesHero h1 {
+    font-size: clamp(3.3rem, 15vw, 5.5rem);
+  }
+
+  .policiesGrid {
+    border-left: 0;
+  }
+
+  .policiesGrid section {
+    padding: 2.5rem 0;
+    border-right: 0;
+  }
+
+  .policiesGrid h2 {
+    font-size: clamp(2.7rem, 12vw, 4.5rem);
+  }
+
+  .policiesExit {
+    min-height: auto;
+    padding-block: 3rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .homeActions {
+    grid-template-columns: 1fr;
+  }
+
+  .shopCollectionEntry {
+    grid-template-columns: 1fr;
+    gap: .35rem;
+  }
+
+  .workshopFactGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .workshopFactGrid__wide {
+    grid-column: 1;
+  }
+
+  .bookingCommitBar {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .bookingCommitBar .buttonPrimary {
+    width: 100%;
+  }
+
+  .cartLine {
+    grid-template-columns: 1fr auto;
+  }
+
+  .cartLine > button {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}

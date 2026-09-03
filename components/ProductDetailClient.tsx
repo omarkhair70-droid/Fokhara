@@ -93,14 +93,6 @@ export function ProductDetailClient({ product }: { product: Product }) {
               : "Out of stock"}
         </p>
 
-        {product.description ? (
-          <p className="productDescription">{product.description}</p>
-        ) : (
-          <p className="productDescription">
-            No verified public description is available for this product yet.
-          </p>
-        )}
-
         <div className="purchaseBlock">
           <AddToCartButton product={product} />
           <span>
@@ -108,6 +100,14 @@ export function ProductDetailClient({ product }: { product: Product }) {
             stays gated until payment compatibility is verified.
           </span>
         </div>
+
+        {product.description ? (
+          <p className="productDescription">{product.description}</p>
+        ) : (
+          <p className="productDescription">
+            No verified public description is available for this product yet.
+          </p>
+        )}
 
         <dl className="productFacts">
           <div>
