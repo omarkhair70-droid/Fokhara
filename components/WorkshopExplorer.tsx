@@ -93,50 +93,57 @@ export function WorkshopExplorer({ workshops }: { workshops: Workshop[] }) {
       </div>
 
       <div className="workshopGrid">
-        {visible.map((workshop) => (
-          <Link
-            key={workshop.id}
-            href={`/workshops/${workshop.slug}`}
-            className="workshopCard"
-            data-workshop-focus={workshop.id}
-            onClick={() => {
-              track("workshop_open", {
-                workshopId: workshop.id,
-                workshopSlug: workshop.slug,
-                format: workshop.format
-              });
-              sessionStorage.setItem(
-                "fokhara:workshops-return",
-                JSON.stringify({
-                  scrollY: window.scrollY,
-                  focusId: workshop.id,
-                  filter
-                })
-              );
-            }}
-          >
-            <WorkshopVisual workshop={workshop} visualRole="index" />
-            <div className="workshopCard__info">
-              <span>{workshop.format}</span>
-              <h2>{workshop.name}</h2>
-              <p>{workshop.actions.join(" → ")}</p>
-              <dl>
-                <div>
-                  <dt>Time</dt>
-                  <dd>{workshop.duration}</dd>
-                </div>
-                <div>
-                  <dt>For</dt>
-                  <dd>{workshop.age}</dd>
-                </div>
-                <div>
-                  <dt>Price</dt>
-                  <dd>{formatWorkshopPrice(workshop)}</dd>
-                </div>
-              </dl>
-            </div>
-          </Link>
-        ))}
+        {visible.map((workshop, index) => {
+          const beginsFormat =
+            index === 0 || visible[index - 1]?.format !== workshop.format;
+
+          return (
+            <Link
+              key={workshop.id}
+              href={`/workshops/${workshop.slug}`}
+              className="workshopCard"
+              data-workshop-focus={workshop.id}
+              data-format={workshop.format}
+              data-format-start={beginsFormat}
+              onClick={() => {
+                track("workshop_open", {
+                  workshopId: workshop.id,
+                  workshopSlug: workshop.slug,
+                  format: workshop.format
+                });
+                sessionStorage.setItem(
+                  "fokhara:workshops-return",
+                  JSON.stringify({
+                    scrollY: window.scrollY,
+                    focusId: workshop.id,
+                    filter
+                  })
+                );
+              }}
+            >
+              <WorkshopVisual workshop={workshop} visualRole="index" />
+              <div className="workshopCard__info">
+                <span>{workshop.format}</span>
+                <h2>{workshop.name}</h2>
+                <p>{workshop.actions.join(" → ")}</p>
+                <dl>
+                  <div>
+                    <dt>Time</dt>
+                    <dd>{workshop.duration}</dd>
+                  </div>
+                  <div>
+                    <dt>For</dt>
+                    <dd>{workshop.age}</dd>
+                  </div>
+                  <div>
+                    <dt>Price</dt>
+                    <dd>{formatWorkshopPrice(workshop)}</dd>
+                  </div>
+                </dl>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </section>
   );

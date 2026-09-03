@@ -46,6 +46,8 @@ export default async function CollectionsPage() {
             collection.products[0];
 
           const material = materialStateForCollection(collection.name);
+          const rhythm =
+            index === 0 ? "anchor" : index % 3 === 0 ? "release" : "scan";
 
           return (
             <Link
@@ -54,6 +56,7 @@ export default async function CollectionsPage() {
               key={collection.slug}
               data-material={material.id}
               data-reflectivity={material.reflectivity}
+              data-rhythm={rhythm}
               style={materialStateCssVars(collection.name)}
             >
               <span className="collectionIndex__number">
