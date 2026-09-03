@@ -10,7 +10,7 @@ export function HomeMakerEntry({ workshop }: { workshop: Workshop }) {
         <WorkshopVisual workshop={workshop} visualRole="home" />
       </div>
       <div className="homeMaker__copy">
-        <p className="eyebrow">Become the maker / P1</p>
+        <p className="eyebrow">Workshops / enter the process</p>
         <h2>Don’t only keep the form. Enter the process.</h2>
         <p>{workshop.summary}</p>
         <dl className="homeMaker__facts">
