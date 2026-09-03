@@ -104,7 +104,15 @@ function productForm(name: string): ProductForm {
   return "other";
 }
 
-const collectionNames = ["Nebula", "Midnight", "Ocean"] as const;
+const collectionNames = [
+  "Nebula",
+  "Midnight",
+  "Ocean",
+  "Foggy",
+  "Lazuli",
+  "Latte Foam",
+  "Seaweed"
+] as const;
 
 function collectionFrom(product: WooProduct) {
   const tagMatch = product.tags?.find((tag) =>
