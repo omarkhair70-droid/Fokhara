@@ -4,6 +4,7 @@ import { useRef } from "react";
 import type { Product } from "@/lib/products";
 import { useCarry } from "@/features/carry/CarryProvider";
 import { ProductVisual } from "@/components/ProductVisual";
+import { track } from "@/lib/analytics";
 
 type Props = {
   product: Product;
@@ -28,6 +29,12 @@ export function CarryProductLink({
       className={className}
       href={href}
       onClick={(event) => {
+        track("product_open", {
+          productId: product.id,
+          productSlug: product.slug,
+          collection: product.collection ?? null
+        });
+
         if (
           event.defaultPrevented ||
           event.button !== 0 ||

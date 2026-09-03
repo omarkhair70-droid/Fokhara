@@ -5,6 +5,7 @@ import Link from "next/link";
 import type { Workshop, WorkshopFormat } from "@/lib/workshops";
 import { formatWorkshopPrice } from "@/lib/workshops";
 import { WorkshopVisual } from "@/components/WorkshopVisual";
+import { track } from "@/lib/analytics";
 
 type Filter = "all" | WorkshopFormat;
 const filters: { value: Filter; label: string }[] = [
@@ -99,6 +100,11 @@ export function WorkshopExplorer({ workshops }: { workshops: Workshop[] }) {
             className="workshopCard"
             data-workshop-focus={workshop.id}
             onClick={() => {
+              track("workshop_open", {
+                workshopId: workshop.id,
+                workshopSlug: workshop.slug,
+                format: workshop.format
+              });
               sessionStorage.setItem(
                 "fokhara:workshops-return",
                 JSON.stringify({

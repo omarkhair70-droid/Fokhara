@@ -5,6 +5,7 @@ on:
     branches:
       - prototype/p0-carry-recompose
       - prototype/p1-become-maker
+      - prototype/p2-full-product-system
   pull_request:
     branches:
       - main

@@ -1,9 +1,10 @@
 "use client";
 
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Link from "next/link";
 import type { Workshop } from "@/lib/workshops";
 import { formatWorkshopPrice } from "@/lib/workshops";
+import { track } from "@/lib/analytics";
 
 type Mode = "form" | "review";
 
@@ -14,8 +15,26 @@ export function BookingClient({ workshop }: { workshop: Workshop }) {
   const [preferredDate, setPreferredDate] = useState("");
   const [useNextAvailable, setUseNextAvailable] = useState(false);
 
+  useEffect(() => {
+    track("booking_start", {
+      workshopId: workshop.id,
+      workshopSlug: workshop.slug
+    });
+  }, [workshop.id, workshop.slug]);
+
   function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    track("booking_commit", {
+      workshopId: workshop.id,
+      participants,
+      scheduleMode: useNextAvailable
+        ? "next_available"
+        : preferredWindow
+          ? "recurring_window"
+          : preferredDate
+            ? "preferred_date"
+            : "studio_confirm"
+    });
     setMode("review");
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -118,6 +137,11 @@ export function BookingClient({ workshop }: { workshop: Workshop }) {
                 onChange={(event) => {
                   setPreferredWindow(event.currentTarget.value);
                   setUseNextAvailable(false);
+                  track("preferred_schedule_selected", {
+                    workshopId: workshop.id,
+                    mode: "recurring_window",
+                    value: event.currentTarget.value
+                  });
                 }}
                 disabled={useNextAvailable}
               >
@@ -139,6 +163,11 @@ export function BookingClient({ workshop }: { workshop: Workshop }) {
               onChange={(event) => {
                 setPreferredDate(event.currentTarget.value);
                 setUseNextAvailable(false);
+                track("preferred_schedule_selected", {
+                  workshopId: workshop.id,
+                  mode: "preferred_date",
+                  value: event.currentTarget.value
+                });
               }}
               disabled={useNextAvailable}
             />
@@ -153,6 +182,10 @@ export function BookingClient({ workshop }: { workshop: Workshop }) {
                 if (event.currentTarget.checked) {
                   setPreferredDate("");
                   setPreferredWindow("");
+                  track("preferred_schedule_selected", {
+                    workshopId: workshop.id,
+                    mode: "next_available"
+                  });
                 }
               }}
             />
@@ -173,6 +206,9 @@ export function BookingClient({ workshop }: { workshop: Workshop }) {
             <li>Full bookings may move to the nearest available date.</li>
             <li>Pottery firing follows the studio kiln schedule.</li>
           </ul>
+          <p className="bookingPolicyLink">
+            <Link href="/policies/workshops">Read current workshop policies →</Link>
+          </p>
           <label className="bookingCheckbox">
             <input type="checkbox" required />
             I understand this prototype is preparing a request, not confirming

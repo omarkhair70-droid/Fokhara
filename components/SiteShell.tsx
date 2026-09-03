@@ -2,10 +2,17 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { CartIndicator } from "@/components/CartIndicator";
 
 function intentForPath(pathname: string) {
   if (pathname === "/") return "discovery";
-  if (pathname === "/shop" || pathname === "/workshops") return "browse";
+  if (
+    pathname === "/shop" ||
+    pathname.startsWith("/collections") ||
+    pathname === "/workshops" ||
+    pathname === "/studio" ||
+    pathname === "/visit"
+  ) return "browse";
   if (
     pathname.startsWith("/shop/") ||
     pathname.startsWith("/workshops/")
@@ -29,7 +36,13 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           <span>Studio & Shop</span>
         </Link>
         <nav aria-label="Primary">
-          <Link data-active={pathname.startsWith("/shop")} href="/shop">
+          <Link
+            data-active={
+              pathname.startsWith("/shop") ||
+              pathname.startsWith("/collections")
+            }
+            href="/shop"
+          >
             Shop
           </Link>
           <Link
@@ -41,12 +54,14 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           >
             Workshops
           </Link>
-          <span className="navMuted" aria-disabled="true">Studio</span>
-          <span className="navMuted" aria-disabled="true">Visit</span>
+          <Link data-active={pathname === "/studio"} href="/studio">
+            Studio
+          </Link>
+          <Link data-active={pathname === "/visit"} href="/visit">
+            Visit
+          </Link>
         </nav>
-        <span className="cartStub" aria-label="Cart prototype placeholder">
-          Cart · 0
-        </span>
+        <CartIndicator />
       </header>
       <main>{children}</main>
     </div>

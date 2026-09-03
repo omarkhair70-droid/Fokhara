@@ -1,7 +1,7 @@
-import Link from "next/link";
 import type { Workshop } from "@/lib/workshops";
 import { formatWorkshopPrice } from "@/lib/workshops";
 import { WorkshopVisual } from "@/components/WorkshopVisual";
+import { TrackedLink } from "@/components/TrackedLink";
 
 export function HomeMakerEntry({ workshop }: { workshop: Workshop }) {
   return (
@@ -27,9 +27,13 @@ export function HomeMakerEntry({ workshop }: { workshop: Workshop }) {
             <dd>{workshop.age}</dd>
           </div>
         </dl>
-        <Link className="buttonPrimary" href="/workshops">
+        <TrackedLink
+          className="buttonPrimary"
+          href="/workshops"
+          eventName="home_workshops_enter"
+        >
           Explore workshops
-        </Link>
+        </TrackedLink>
       </div>
     </section>
   );

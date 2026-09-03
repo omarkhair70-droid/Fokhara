@@ -2,11 +2,11 @@
 
 An experimental redesign project for **Fokhara Studio & Shop**.
 
-This repository is being used to test a research-led creative workflow where the visual and interaction language is derived first from the **real product, material, craft, culture, physical processes, and meaning** — and only afterward checked against the current web craft landscape.
+This repository tests a research-led creative workflow where the visual and interaction language is derived first from the **real product, material, craft, culture, physical processes, and meaning** — and only afterward checked against the current web craft landscape.
 
 ## Current Status
 
-**Original Synthesis / Implementation Blueprint closed. Ready for P0 prototype implementation.**
+**Research, architecture, P0, P1 and the P2 structural product system are closed. The project is ready to move into authored visual production and final review.**
 
 - [x] Step 01 — Product Truth
 - [x] Step 02 — Non-Web Source Research / Source Atlas
@@ -16,10 +16,23 @@ This repository is being used to test a research-led creative workflow where the
 - [x] Step 06 — Web Reality Check
 - [x] Step 07 — Product Architecture
 - [x] Step 08 — Original Synthesis / Implementation Blueprint
-- [ ] P0 — Carry + Recompose Product Loop
-- [ ] P1 — Become the Maker / Booking
-- [ ] P2 — Full Product System
+- [x] P0 — Carry + Recompose Product Loop
+- [x] P1 — Become the Maker / Booking Truth
+- [x] P2 — Full Product System — structurally closed
+- [ ] Visual Production
 - [ ] Visual Review + Subtraction
+- [ ] Final Production QA
+
+### External production gate
+
+The current live Fokhara Woo store exposes Paymob gateways through the Store API, but actual headless payment processing is intentionally not exercised against the owner's live store.
+
+Checkout payment completion remains gated until either:
+
+- a Woo/Paymob staging or test environment is available, or
+- the owner explicitly approves a controlled live-order test.
+
+This gate does **not** block the visual-production phase.
 
 ## Core Rule
 
@@ -35,6 +48,8 @@ This repository is being used to test a research-led creative workflow where the
 - [Step 06 — Web Reality Check](docs/research/06-web-reality-check.md)
 - [Step 07 — Product Architecture](docs/research/07-product-architecture.md)
 - [Step 08 — Implementation Blueprint](docs/research/08-implementation-blueprint.md)
+- [P2 — Data Wiring & Payment Audit](docs/implementation/P2_DATA_WIRING.md)
+- [P2 — Structural Acceptance](docs/implementation/P2_STRUCTURAL_ACCEPTANCE.md)
 
 ## Internal Visual Thesis
 
@@ -44,15 +59,17 @@ This repository is being used to test a research-led creative workflow where the
 
 ## Technical Baseline
 
-- Next.js 16.3.3 Active LTS
+- Next.js 16.3.3
 - App Router + TypeScript
 - React Server Components by default
-- Motion for React 13.x
-- CSS Modules + semantic CSS custom-property tokens
-- WooCommerce / WordPress retained as initial operational source
-- WooCommerce isolated behind a Fokhara commerce adapter + Next BFF
+- semantic authored CSS
+- WooCommerce / WordPress retained as operational source
+- normalized Fokhara commerce domain
+- Next BFF for Woo session and mutation plumbing
 - native View Transition API only as progressive enhancement
-- no WebGL requirement for P0/P1
+- no WebGL requirement
+- vendor-neutral analytics contract
+- Product / Course structured data
 
 ## Signature System
 
@@ -68,19 +85,84 @@ Workshops transform the user from observer to participant.
 ### 4. SETTLE WITH INTENT
 Expression contracts as the user approaches booking, cart, and checkout.
 
-## P0 Prototype
+## Implemented Product System
 
-Build only:
+### Object loop
 
-1. minimal Home object entry
-2. Shop listing
-3. Product Detail
-4. Carry + Recompose
-5. return-state restoration
-6. compact/mobile equivalent
-7. reduced-motion equivalent
+```
+Home
+  → Shop
+  → Collections
+  → Product Detail
+  → Live Cart
+```
 
-The Product Detail route must also work as a direct deep link with no carry state.
+Includes:
+
+- live Woo product data
+- 19 current ceramic products discovered from the real store at P2 audit time
+- live price / stock / descriptions / primary images
+- collection grouping adapter
+- Carry + Recompose
+- return-state restoration
+- live Woo Cart-Token session
+- add / update / remove / totals
+- structured Product SEO
+
+### Maker loop
+
+```
+Home
+  → Workshops
+  → Workshop Detail
+  → Booking Request Review
+```
+
+Includes:
+
+- process-first workshop discovery
+- observer → understand → choose → commit progression
+- recurring-window truth
+- no fake live capacity
+- no fake booking confirmation
+- current workshop policies
+- structured Course SEO
+
+### Cross-system continuity
+
+```
+Object → Workshops
+Workshop → Objects
+Studio → Shop / Workshops / Visit
+Collection → Shop / Workshops
+```
+
+The product-to-workshop bridge does not claim an unverified making method for a specific object.
+
+## Current Routes
+
+- `/`
+- `/shop`
+- `/shop/[productSlug]`
+- `/collections`
+- `/collections/[collectionSlug]`
+- `/workshops`
+- `/workshops/[workshopSlug]`
+- `/book/[workshopSlug]`
+- `/cart`
+- `/studio`
+- `/visit`
+- `/policies/workshops`
+
+Commerce BFF:
+
+- `/api/commerce/products`
+- `/api/commerce/products/[slug]`
+- `/api/commerce/cart`
+- `/api/commerce/cart/items`
+- `/api/commerce/cart/items/[key]`
+- `/api/commerce/health`
+- `/api/commerce/capabilities`
 
 ## Architecture Guardrails
 
@@ -88,17 +170,30 @@ The Product Detail route must also work as a direct deep link with no carry stat
 - no fake live workshop availability
 - no random composition
 - no effect without causal meaning
-- no checkout assumption before gateway compatibility is verified
-- no WebGL until P0/P1 pass
+- no fake checkout/payment success
+- no production-order mutation for compatibility testing
+- no WebGL until it has a real product/concept reason
 - failed transition must never become failed navigation
 - transactional clarity wins over spectacle
-
-## Production Source
-
-The current Fokhara installation exposes WooCommerce Store API endpoints, so the redesign can preserve the existing commerce backend while replacing the customer-facing experience.
-
-Production checkout remains gated on verification of the current payment gateway's Store API/headless compatibility.
+- unknown production facts remain unknown until Fokhara confirms them
 
 ## Next
 
-**P0 Prototype Implementation — Home → Shop → Product via Carry + Recompose → Back with Trace.**
+**Authored Visual Production**
+
+The structural system is now the canvas, not the finished artwork.
+
+Next work should concentrate on:
+
+1. approved/original Fokhara photography
+2. final typography
+3. material-aware image crops and focal points
+4. refined Carry / Trace motion
+5. page pacing and compositional pressure
+6. compact/mobile visual authorship
+7. reduced-motion visual equivalence
+8. full-site visual review
+9. subtraction of generic award-site language
+10. performance and final production QA
+
+The next phase must make the site unmistakably **Fokhara**, not merely a well-built ceramics website.

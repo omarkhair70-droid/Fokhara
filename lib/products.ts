@@ -1,20 +1,35 @@
-export type ProductCollection = "Nebula" | "Midnight" | "Ocean";
+export type ProductForm = "espresso" | "pinch" | "mug" | "other";
+
+export type ProductImage = {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+};
 
 export type Product = {
   id: string;
+  wooId?: number;
   slug: string;
   name: string;
   priceEgp: number;
-  stock: "in_stock" | "out_of_stock";
-  collection: ProductCollection;
-  form: "espresso" | "pinch" | "mug";
+  regularPriceEgp?: number;
+  stock: "in_stock" | "out_of_stock" | "on_backorder";
+  collection?: string;
+  collectionSource?: "tag" | "name_prefix" | "unknown";
+  form: ProductForm;
   accent: string;
   accentInk: string;
   description?: string;
   sourceUrl: string;
+  image?: ProductImage;
+  categorySlugs?: string[];
+  tagSlugs?: string[];
+  purchasable?: boolean;
+  hasOptions?: boolean;
 };
 
-export const products: Product[] = [
+export const fallbackProducts: Product[] = [
   {
     id: "nebula-espresso",
     slug: "nebula-espresso-cup",
@@ -22,6 +37,7 @@ export const products: Product[] = [
     priceEgp: 300,
     stock: "in_stock",
     collection: "Nebula",
+    collectionSource: "name_prefix",
     form: "espresso",
     accent: "#65677f",
     accentInk: "#f5f2ea",
@@ -34,6 +50,7 @@ export const products: Product[] = [
     priceEgp: 450,
     stock: "in_stock",
     collection: "Nebula",
+    collectionSource: "name_prefix",
     form: "pinch",
     accent: "#79768a",
     accentInk: "#f7f2e9",
@@ -48,6 +65,7 @@ export const products: Product[] = [
     priceEgp: 450,
     stock: "out_of_stock",
     collection: "Midnight",
+    collectionSource: "name_prefix",
     form: "pinch",
     accent: "#2b2d30",
     accentInk: "#f4efe4",
@@ -60,6 +78,7 @@ export const products: Product[] = [
     priceEgp: 450,
     stock: "out_of_stock",
     collection: "Midnight",
+    collectionSource: "name_prefix",
     form: "mug",
     accent: "#26292c",
     accentInk: "#f4efe4",
@@ -72,6 +91,7 @@ export const products: Product[] = [
     priceEgp: 300,
     stock: "out_of_stock",
     collection: "Ocean",
+    collectionSource: "name_prefix",
     form: "espresso",
     accent: "#3f7377",
     accentInk: "#eff6f2",
@@ -86,6 +106,7 @@ export const products: Product[] = [
     priceEgp: 450,
     stock: "out_of_stock",
     collection: "Ocean",
+    collectionSource: "name_prefix",
     form: "pinch",
     accent: "#43797c",
     accentInk: "#eff6f2",
@@ -93,10 +114,10 @@ export const products: Product[] = [
   }
 ];
 
-export const featuredProduct = products[1];
+export const featuredProduct = fallbackProducts[1];
 
-export function getProduct(slug: string) {
-  return products.find((product) => product.slug === slug);
+export function getFallbackProduct(slug: string) {
+  return fallbackProducts.find((product) => product.slug === slug);
 }
 
 export function formatEgp(value: number) {

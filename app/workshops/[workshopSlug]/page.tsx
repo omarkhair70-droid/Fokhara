@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { WorkshopDetailClient } from "@/components/WorkshopDetailClient";
 import { getWorkshop, workshops } from "@/lib/workshops";
+import { getCeramicProducts } from "@/lib/commerce/woo";
+import {
+  serializeStructuredData,
+  workshopStructuredData
+} from "@/lib/seo";
 
 type WorkshopPageProps = {
   params: Promise<{ workshopSlug: string }>;
@@ -31,5 +36,21 @@ export default async function WorkshopPage({ params }: WorkshopPageProps) {
   const workshop = getWorkshop(workshopSlug);
   if (!workshop) notFound();
 
-  return <WorkshopDetailClient workshop={workshop} />;
+  const products = await getCeramicProducts();
+  const structuredData = workshopStructuredData(workshop);
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeStructuredData(structuredData)
+        }}
+      />
+      <WorkshopDetailClient
+      workshop={workshop}
+        relatedProducts={products.data}
+      />
+    </>
+  );
 }
