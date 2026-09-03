@@ -1,5 +1,6 @@
 import type { Product, ProductForm } from "@/lib/products";
 import { fallbackProducts, getFallbackProduct } from "@/lib/products";
+import { materialStateForCollection } from "@/lib/visual/material-state";
 
 const STORE_ORIGIN =
   process.env.FOKHARA_STORE_ORIGIN ?? "https://fokharastudioandshop.com";
@@ -147,16 +148,8 @@ function collectionFrom(product: WooProduct) {
 }
 
 function materialAccent(collection?: string) {
-  switch (collection?.toLowerCase()) {
-    case "nebula":
-      return { accent: "#6f7083", accentInk: "#f7f2e9" };
-    case "midnight":
-      return { accent: "#282b2e", accentInk: "#f4efe4" };
-    case "ocean":
-      return { accent: "#42767a", accentInk: "#eff6f2" };
-    default:
-      return { accent: "#6d6a62", accentInk: "#f5f2ea" };
-  }
+  const state = materialStateForCollection(collection);
+  return { accent: state.accent, accentInk: state.accentInk };
 }
 
 function normalizeProduct(value: unknown): Product | null {

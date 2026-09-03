@@ -2656,3 +2656,242 @@ button {
     letter-spacing: .085em;
   }
 }
+
+
+/* VP4 — MATERIAL STATE SYSTEM
+   Real images remain untinted. Interface fields inherit restrained material traces. */
+.siteShell,
+.productVisual,
+.productDetail,
+.shopSection,
+.collectionIndex__item,
+.collectionDetail,
+.collectionProduct,
+.homeObject__product {
+  --material-field: var(--field-primary);
+  --material-glaze: #77746d;
+  --material-clay: #8f674e;
+  --material-depth: #343634;
+  --material-ink: var(--ink-primary);
+  --material-accent-ink: #f5f2ea;
+  --material-pressure: .06;
+  --material-sheen: .05;
+}
+
+.productVisual[data-has-media="true"] {
+  /* Object truth stays neutral. Never tint the source photograph. */
+  background: var(--field-raised);
+}
+
+.homeObject__product,
+.productCard,
+.collectionProduct {
+  position: relative;
+}
+
+.homeObject__product::before,
+.productCard::before,
+.collectionProduct::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    var(--material-glaze) 0 46%,
+    var(--material-clay) 46% 74%,
+    var(--material-depth) 74% 100%
+  );
+  opacity: .72;
+}
+
+.homeObject__product .objectCaption,
+.productCard__body,
+.collectionProduct__copy {
+  background:
+    linear-gradient(
+      115deg,
+      color-mix(in srgb, var(--material-field) 70%, var(--field-raised)),
+      var(--field-raised) 72%
+    );
+}
+
+.shopSection {
+  background:
+    radial-gradient(
+      circle at 78% 12%,
+      color-mix(
+        in srgb,
+        var(--material-glaze)
+        calc(var(--material-pressure) * 34%),
+        transparent
+      ),
+      transparent 32rem
+    );
+  transition: background 420ms ease;
+}
+
+.shopSection[data-material-filter="neutral"] {
+  background: transparent;
+}
+
+.filterBar button[data-active="true"] {
+  background: var(--material-depth);
+  color: var(--material-accent-ink);
+  border-color: var(--material-depth);
+}
+
+.collectionIndex__item {
+  position: relative;
+  background:
+    linear-gradient(
+      105deg,
+      color-mix(in srgb, var(--material-field) 72%, transparent),
+      transparent 62%
+    );
+}
+
+.collectionIndex__item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  inset-block: 0;
+  width: 3px;
+  background: linear-gradient(
+    to bottom,
+    var(--material-glaze),
+    var(--material-clay) 62%,
+    var(--material-depth)
+  );
+}
+
+.materialTrace {
+  width: min(18rem, 72%);
+  height: 4px;
+  display: block;
+  margin: 1.25rem 0 0;
+  background: linear-gradient(
+    to right,
+    var(--material-depth) 0 18%,
+    var(--material-glaze) 18% 68%,
+    var(--material-clay) 68% 100%
+  );
+}
+
+.materialTrace--hero {
+  width: min(22rem, 82%);
+  margin-top: 1.6rem;
+}
+
+.collectionDetail {
+  background:
+    linear-gradient(
+      118deg,
+      color-mix(in srgb, var(--material-field) 58%, var(--field-primary)),
+      var(--field-primary) 50%
+    );
+}
+
+.collectionDetail__lead,
+.collectionProduct__image {
+  /* Images remain source-true. Material state belongs around them. */
+  background: var(--field-raised);
+}
+
+.collectionDetail__facts {
+  background:
+    color-mix(in srgb, var(--material-field) 64%, var(--field-primary));
+}
+
+.productDetail {
+  background:
+    linear-gradient(
+      108deg,
+      color-mix(in srgb, var(--material-field) 52%, var(--field-primary)),
+      var(--field-primary) 58%
+    );
+}
+
+.productDetail__mediaColumn {
+  position: relative;
+  background:
+    color-mix(in srgb, var(--material-field) 62%, var(--field-raised));
+}
+
+.productDetail__mediaColumn::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  inset-inline: 0;
+  bottom: 0;
+  height: 3px;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    var(--material-depth),
+    var(--material-glaze) 54%,
+    var(--material-clay)
+  );
+}
+
+.carryOverlay {
+  border-color:
+    color-mix(in srgb, var(--material-glaze) 42%, var(--line));
+}
+
+/* Reflectivity changes edge energy, never the photograph itself. */
+.productDetail[data-reflectivity="gloss"] .productDetail__mediaColumn::after,
+.collectionDetail[data-reflectivity="gloss"] .materialTrace,
+.collectionIndex__item[data-reflectivity="gloss"] .materialTrace {
+  box-shadow:
+    0 0 18px color-mix(in srgb, var(--material-glaze) 16%, transparent);
+}
+
+.productDetail[data-reflectivity="matte"] .productDetail__mediaColumn::after,
+.collectionDetail[data-reflectivity="matte"] .materialTrace,
+.collectionIndex__item[data-reflectivity="matte"] .materialTrace {
+  opacity: .72;
+}
+
+/* SETTLE WITH INTENT: material inheritance is deliberately reduced in commit. */
+.siteShell[data-intent="commit"],
+.siteShell[data-intent="transaction"] {
+  --material-pressure: .02;
+}
+
+.siteShell[data-intent="commit"] .cartPage,
+.siteShell[data-intent="transaction"] main {
+  background: var(--field-commit);
+}
+
+@media (max-width: 820px) {
+  .shopSection {
+    background:
+      linear-gradient(
+        to bottom,
+        color-mix(in srgb, var(--material-field) 46%, transparent),
+        transparent 28rem
+      );
+  }
+
+  .homeObject__product::before,
+  .productCard::before,
+  .collectionProduct::before,
+  .collectionIndex__item::before {
+    width: 2px;
+  }
+
+  .materialTrace {
+    width: min(14rem, 78%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shopSection {
+    transition: none;
+  }
+}

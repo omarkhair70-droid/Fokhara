@@ -11,13 +11,15 @@ type Props = {
   className?: string;
   returnState?: () => Record<string, unknown>;
   children?: React.ReactNode;
+  style?: React.CSSProperties;
 };
 
 export function CarryProductLink({
   product,
   className = "",
   returnState,
-  children
+  children,
+  style
 }: Props) {
   const mediaRef = useRef<HTMLDivElement>(null);
   const { beginProductCarry, isCarrying } = useCarry();
@@ -28,6 +30,7 @@ export function CarryProductLink({
     <a
       className={className}
       href={href}
+      style={style}
       onClick={(event) => {
         track("product_open", {
           productId: product.id,

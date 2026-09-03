@@ -4,6 +4,7 @@ import { CarryProductLink } from "@/components/CarryProductLink";
 import type { Product } from "@/lib/products";
 import { formatEgp } from "@/lib/products";
 import { TrackedLink } from "@/components/TrackedLink";
+import { materialStateCssVars } from "@/lib/visual/material-state";
 
 export function HomeObjectEntry({ product }: { product: Product }) {
   return (
@@ -37,7 +38,11 @@ export function HomeObjectEntry({ product }: { product: Product }) {
         </div>
       </div>
 
-      <CarryProductLink product={product} className="homeObject__product">
+      <CarryProductLink
+        product={product}
+        className="homeObject__product"
+        style={materialStateCssVars(product.collection)}
+      >
         <div className="objectCaption">
           <span>{product.collection}</span>
           <strong>{product.name}</strong>

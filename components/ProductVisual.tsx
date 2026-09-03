@@ -1,4 +1,8 @@
 import type { Product } from "@/lib/products";
+import {
+  materialStateCssVars,
+  materialStateForCollection
+} from "@/lib/visual/material-state";
 
 type ProductVisualProps = {
   product: Product;
@@ -12,14 +16,18 @@ export function ProductVisual({
   label = false
 }: ProductVisualProps) {
   const hasMedia = Boolean(product.image?.src);
+  const material = materialStateForCollection(product.collection);
 
   return (
     <div
       className={`productVisual ${className}`}
       data-form={product.form}
       data-has-media={hasMedia}
+      data-material={material.id}
+      data-reflectivity={material.reflectivity}
       style={
         {
+          ...materialStateCssVars(product.collection),
           "--object-accent": product.accent,
           "--object-ink": product.accentInk
         } as React.CSSProperties

@@ -3,6 +3,10 @@ import Link from "next/link";
 import { getCeramicProducts } from "@/lib/commerce/woo";
 import { formatEgp } from "@/lib/products";
 import { groupProductsByCollection } from "@/lib/collections";
+import {
+  materialStateCssVars,
+  materialStateForCollection
+} from "@/lib/visual/material-state";
 
 export const metadata: Metadata = {
   title: "Collections",
@@ -40,11 +44,16 @@ export default async function CollectionsPage() {
             collection.products.find((product) => product.image) ??
             collection.products[0];
 
+          const material = materialStateForCollection(collection.name);
+
           return (
             <Link
               href={"/collections/" + collection.slug}
               className="collectionIndex__item"
               key={collection.slug}
+              data-material={material.id}
+              data-reflectivity={material.reflectivity}
+              style={materialStateCssVars(collection.name)}
             >
               <span className="collectionIndex__number">
                 {String(index + 1).padStart(2, "0")}
@@ -57,6 +66,7 @@ export default async function CollectionsPage() {
               <div className="collectionIndex__copy">
                 <p className="eyebrow">Material state</p>
                 <h2>{collection.name}</h2>
+                <span className="materialTrace" aria-hidden="true" />
                 <dl>
                   <div>
                     <dt>Forms</dt>
